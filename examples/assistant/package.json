@@ -1,0 +1,7 @@
+{
+	"name": "example-assistant",
+	"type": "module",
+	"scripts": {
+		"start": "duck dev"
+	}
+}

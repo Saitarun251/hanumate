@@ -1,0 +1,39 @@
+# Cloudflare Workers Configuration
+# https://developers.cloudflare.com/workers/wrangler/
+
+name = "rubberduck-runtime"
+main = "dist/worker.mjs"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Build output
+build_command = "node build.js cfw"
+
+# Cloudflare KV namespace for session storage (optional)
+# [[kv_namespaces]]
+# binding = "SESSIONS"
+# id = "your-kv-namespace-id"
+
+# Environment variables
+[vars]
+NODE_ENV = "production"
+
+# Development settings
+[dev]
+port = 8787
+local_protocol = "http"
+
+# Production environment
+[env.production]
+# Enable strict minification for production
+minify = true
+
+# Durable Objects for session persistence (optional)
+# [[env.production.durable_objects]]
+# binding = "SESSION_DO"
+# class_name = "SessionDO"
+
+# Memory and CPU limits
+# [env.production.limits]
+# cpu_ms = 50
+# memory_mb = 128

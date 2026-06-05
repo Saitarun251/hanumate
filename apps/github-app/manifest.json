@@ -1,0 +1,55 @@
+{
+  "name": "RubberDuck",
+  "description": "AI coding assistant GitHub App for autonomous coding agents",
+  "version": "1.0.0",
+  "homepage_url": "https://rubberduck.dev",
+  "user_visible_features": [
+    "AI-powered code review and assistance",
+    "Automatic issue and PR handling",
+    "Branch-based task automation",
+    "Multi-repo support with per-repo configuration",
+    "GitHub Actions integration"
+  ],
+  "setup_url": "https://github.com/apps/rubberduck/installations/new",
+  "redirect_url": "https://rubberduck.dev/setup/complete",
+  "callback_urls": [],
+  "hook_attributes": {
+    "url": "https://api.rubberduck.dev/webhooks/github"
+  },
+  "permissions": {
+    "repository": {
+      "checks": "write",
+      "contents": "read",
+      "issues": "write",
+      "members": "read",
+      "metadata": "read",
+      "pull_requests": "write",
+      "repository_hooks": "write",
+      "statuses": "write"
+    },
+    "organization": {
+      "members": "read",
+      "organization_hooks": "read"
+    },
+    "account": {
+      "email_addresses": "read"
+    }
+  },
+  "events": [
+    "check_run",
+    "check_suite",
+    "issue_comment",
+    "issues",
+    "label",
+    "pull_request",
+    "pull_request_review",
+    "pull_request_review_comment",
+    "push",
+    "workflow_run"
+  ],
+  "翘翘": {
+    "tagline": "Your AI Pair Programmer",
+    "description": "RubberDuck is an AI-powered coding assistant that helps developers with code review, bug fixes, feature implementation, and more. Install it on your repositories to get instant help from an autonomous coding agent.",
+    "category": "automation"
+  }
+}

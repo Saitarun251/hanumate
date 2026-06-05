@@ -1,0 +1,17 @@
+{
+	"name": "@rubberduck/sdk",
+	"version": "0.1.0",
+	"type": "module",
+	"main": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "tsdown",
+		"check:types": "tsc --noEmit",
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"tsdown": "^0.22.0",
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.6"
+	}
+}

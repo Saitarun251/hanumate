@@ -1,0 +1,70 @@
+{
+  "name": "@rubberduck/github-app",
+  "version": "1.0.0",
+  "description": "GitHub App for RubberDuck autonomous coding agents",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./handlers": {
+      "import": "./dist/handlers/index.js",
+      "types": "./dist/handlers/index.d.ts"
+    },
+    "./services": {
+      "import": "./dist/services/index.js",
+      "types": "./dist/services/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:ci": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "github",
+    "github-app",
+    "probot",
+    "autonomous",
+    "coding",
+    "ai",
+    "agent",
+    "rubberduck"
+  ],
+  "author": "RubberDuck Team",
+  "license": "MIT",
+  "dependencies": {
+    "@hono/node-server": "^2.0.4",
+    "@octokit/rest": "^20.1.0",
+    "@octokit/webhooks-types": "^7.5.1",
+    "hono": "^4.12.23",
+    "probot": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "tsx": "^4.10.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "manifest.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rubberduck/rubberduck"
+  }
+}

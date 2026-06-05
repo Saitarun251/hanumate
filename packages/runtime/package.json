@@ -1,0 +1,39 @@
+{
+	"name": "@rubberduck/runtime",
+	"version": "0.1.0",
+	"type": "module",
+	"main": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"scripts": {
+		"build": "tsdown",
+		"check:types": "tsc --noEmit",
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"@earendil-works/pi-agent-core": "^0.78.0",
+		"@earendil-works/pi-ai": "^0.78.0",
+		"@modelcontextprotocol/sdk": "^1.29.0",
+		"@opentelemetry/api": "^1.9.0",
+		"@opentelemetry/exporter-trace-otlp-http": "^0.218.0",
+		"@opentelemetry/resources": "^1.30.1",
+		"@opentelemetry/sdk-trace-base": "^1.30.1",
+		"@opentelemetry/sdk-trace-node": "^1.30.1",
+		"@opentelemetry/semantic-conventions": "^1.30.1",
+		"hono": "^4.8.3",
+		"just-bash": "^3.0.1",
+		"valibot": "^1.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^25.9.1",
+		"tsdown": "^0.22.0",
+		"tsx": "^4.22.4",
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.6"
+	}
+}

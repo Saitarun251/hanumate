@@ -1,0 +1,28 @@
+---
+title: Welcome to RubberDuck
+description: The Agent Harness Framework
+---
+
+# RubberDuck
+
+The Agent Harness Framework for building autonomous code agents.
+
+## What is RubberDuck?
+
+RubberDuck is a framework for building autonomous code agents. Inspired by Claude Code but designed to be headless, programmable, and deployable anywhere.
+
+## Key Features
+
+- **Autonomous Agents**: Built-in agent loop that perceives, thinks, and acts
+- **Tool System**: Extensible tools for bash, read, write, grep, and more
+- **Sandbox Options**: Virtual, local, or container-based execution
+- **Skills**: Markdown-defined reusable capabilities
+- **Multi-target**: Deploy to Node.js, Cloudflare Workers, CI/CD pipelines
+
+## Architecture
+
+```
+Agent -> Harness -> Session -> Tools/Sandbox
+```
+
+An **agent** is the brain. A **harness** is the runtime environment. A **session** maintains conversation state. **Tools** and **sandboxes** provide execution context.

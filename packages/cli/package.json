@@ -1,0 +1,28 @@
+{
+	"name": "@rubberduck/cli",
+	"version": "0.1.0",
+	"type": "module",
+	"bin": {
+		"duck": "./bin/duck.mjs"
+	},
+	"scripts": {
+		"build": "tsdown && mv dist/index.mjs dist/duck.js",
+		"build:node": "tsx src/build/node.ts",
+		"build:cloudflare": "tsx src/build/cloudflare.ts",
+		"build:all": "npm run build:node && npm run build:cloudflare",
+		"check:types": "tsc --noEmit",
+		"test": "node --test"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.13.7",
+		"@rubberduck/runtime": "file:../runtime",
+		"hono": "^4.8.3",
+		"ws": "^8.20.0"
+	},
+	"devDependencies": {
+		"esbuild": "^0.24.0",
+		"tsdown": "^0.22.0",
+		"tsx": "^4.19.2",
+		"typescript": "^6.0.3"
+	}
+}

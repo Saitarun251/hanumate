@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Test
+coverage/
+*.test.js
+
+# Temporary
+.tmp/
+.temp/
+
+# Private keys
+*.pem
+*.key
+
+# pnpm
+.pnpm-approve-builds.json

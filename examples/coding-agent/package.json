@@ -1,0 +1,7 @@
+{
+	"name": "example-coding-agent",
+	"type": "module",
+	"scripts": {
+		"start": "duck dev"
+	}
+}

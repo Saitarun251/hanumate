@@ -1,0 +1,20 @@
+{
+	"name": "rubberduck",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "turbo dev",
+		"build": "turbo build",
+		"test": "turbo test"
+	},
+	"devDependencies": {
+		"esbuild": "^0.28.0",
+		"tsx": "^4.22.4",
+		"turbo": "^2.3.3",
+		"typescript": "^6.0.3"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.29.0",
+		"ws": "^8.21.0"
+	}
+}
