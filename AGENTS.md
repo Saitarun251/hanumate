@@ -1,113 +1,315 @@
-# RubberDuck Project Memory
+# RubberDuck Agent Architecture
 
-## CLI Architecture
+This document describes the agent architecture in RubberDuck framework.
 
-### Workflow Runner Implementation (2026-06-04)
-Type: Implementation Pattern
+## Overview
 
-Key decisions and patterns discovered when implementing the workflow runner:
+RubberDuck uses a **multi-agent orchestration pattern** where specialized agents work together to handle complex tasks.
 
-1. **Typed Error Classes Pattern**
-   - Created specialized error classes extending a base `WorkflowLoaderError`
-   - Each error has an `errorType` field for programmatic handling
-   - Enables proper HTTP status code mapping (400/404/422/500)
+```
+User Request
+     ↓
+┌────────────────────────────────────────┐
+│           Orchestrator Agent            │
+│  - Analyzes task                       │
+│  - Determines which agents to invoke   │
+│  - Coordinates execution               │
+└────────────────────────────────────────┘
+     ↓
+┌─────────────┐        ┌─────────────────┐
+│  Coder      │        │    Reviewer     │
+│  Agent      │        │    Agent        │
+│             │        │                 │
+│ - Write code │        │ - Security      │
+│ - Refactor   │        │ - Quality       │
+│ - Implement  │        │ - Performance   │
+└─────────────┘        └─────────────────┘
+```
 
-2. **Error Type to HTTP Status Mapping**
-   | Error Type | HTTP Status |
-   |-------------|-------------|
-   | VALIDATION_ERROR | 400 |
-   | NOT_FOUND | 404 |
-   | INVALID_WORKFLOW | 422 |
-   | EXECUTION_ERROR | 500 |
+## Agent Types
 
-3. **JSON Payload Validation**
-   - `parsePayload()` validates JSON syntax AND ensures payload is an object
-   - Rejects arrays and primitives as invalid payloads
-   - Throws `InvalidPayloadError` with clear message
+### 1. Orchestrator Agent
 
-4. **Workflow Loading Pattern**
-   - Workflows located at `.rubberduck/workflows/:name.ts`
-   - Directory search walks up to 10 levels from cwd
-   - Dynamic `import()` with validation of `run()` function export
+The orchestrator is the central coordinator that:
+- Receives tasks
+- Analyzes requirements
+- Dispatches to specialist agents
+- Collects and aggregates results
 
-5. **CLI vs HTTP Error Handling**
-   - CLI: exits with code 1 on failure, prints error to stderr
-   - HTTP: returns JSON with `errorType` field for programmatic handling
-   - Both share the same `executeWorkflow()` function
+```typescript
+import { AgentRegistry, Dispatcher } from '@rubberduck/runtime';
 
-### Package Structure
-- `packages/cli/` - Command-line interface
-- `packages/runtime/` - Core agent runtime
-- Workflows stored in project `.rubberduck/workflows/`
-- Example workflows in `examples/*/`
+const registry = new AgentRegistry();
+const dispatcher = new Dispatcher(registry);
 
-### Dependencies Added
-- `@hono/node-server` - For serving Hono app in dev command
-- `hono` - Web framework for HTTP endpoints
+// Register agents
+registry.register('orchestrator', orchestratorAgent, ['coordinate']);
+registry.register('coder', coderAgent, ['write_code', 'refactor']);
+registry.register('reviewer', reviewerAgent, ['review_code']);
 
+// Dispatch task
+const result = await dispatcher.dispatch({
+  id: 'task-1',
+  type: 'write_code',
+  payload: { description: 'Implement REST API' }
+});
+```
 
----
+### 2. Coder Agent
 
-## Shell Execution & Filesystem Implementation (2026-06-04)
-Type: Implementation Pattern
+Specializes in code implementation:
+- Writes new code
+- Refactors existing code
+- Implements features
+- Fixes bugs
 
-Key decisions and patterns discovered when implementing shell execution and filesystem operations:
+```typescript
+const coderAgent = createAgent({
+  name: 'coder',
+  model: 'openai/gpt-4o',
+  skills: ['code-generation', 'refactoring']
+});
+```
 
-1. **Module Separation Pattern**
-   - Created separate `shell.ts` and `fs.ts` modules for shell execution and filesystem operations
-   - Each module has its own test file (`shell.test.ts`, `fs.test.ts`)
-   - Enables independent testing and better code organization
+### 3. Reviewer Agent
 
-2. **Environment Variable Inheritance**
-   - Use `getDefaultEnv()` to capture system environment variables at agent creation
-   - Merge custom env vars with defaults: `{ ...defaultEnv, ...customEnv }`
-   - Custom values override system defaults (intentional design)
+Specializes in code quality:
+- Security scanning
+- Performance analysis
+- Code style review
+- Best practices check
 
-3. **Shell Execution Options Interface**
-   ```typescript
-   interface ExecOptions {
-     cwd?: string;
-     env?: Record<string, string>;
-     timeout?: number;        // Default: 30000ms
-     maxOutput?: number;      // Default: 1MB
-     shell?: string;          // Platform-specific default
-   }
-   ```
+```typescript
+const reviewerAgent = createAgent({
+  name: 'reviewer',
+  model: 'anthropic/claude-sonnet-4-6',
+  skills: ['security-audit', 'code-review']
+});
+```
 
-4. **Large Output Handling**
-   - Track cumulative output size
-   - Truncate at maxOutput with warning message in stderr
-   - For unlimited output, use `execStream()` with callbacks
+## Core Components
 
-5. **Filesystem Error Handling Pattern**
-   - Custom `FSError` class with `code` property for error codes
-   - Handle ENOENT (file not found), EACCES (permission denied), EISDIR (is directory), etc.
-   - Consistent error messages with path included
+### Agent Harness (`packages/runtime/src/harness.ts`)
 
-6. **Glob Pattern Implementation**
-   - Convert glob to regex with proper `**` handling (recursive)
-   - Handle `**` before `*` to avoid double conversion
-   - Skip hidden files by default unless `includeHidden: true`
-   - Use `relative()` from node:path for proper path comparison
+The foundation for creating agents:
 
-7. **Vitest Test Configuration**
-   - Use `{ environment: 'node' }` in vitest.config.ts
-   - Use `tmpdir()` for test files to avoid conflicts
-   - Mock `@earendil-works/pi-agent-core` to avoid external API calls in tests
+```typescript
+import { createAgent, type RubberDuckAgent, type Session } from '@rubberduck/runtime';
 
-8. **Session Interface Extension Pattern**
-   - Add new methods to Session interface in `harness.ts`
-   - Implement methods by delegating to shell/fs modules
-   - Pass merged environment and timeout config to shell operations
+// Create agent
+const agent = createAgent({
+  name: 'my-agent',
+  model: 'openai/gpt-4o',
+  providerId: 'openai',
+  tools: [shellTool, fsTool],
+  skills: ['coding', 'debugging']
+});
 
-### Files Created
-- `packages/runtime/src/shell.ts` - Shell execution module
-- `packages/runtime/src/fs.ts` - Filesystem operations module
-- `packages/runtime/test/shell.test.ts` - 15 shell tests
-- `packages/runtime/test/fs.test.ts` - 31 filesystem tests
-- `packages/runtime/test/harness.test.ts` - 17 harness integration tests
+// Create session
+const session: Session = await agent.createSession();
 
-### Dependencies (existing)
-- `just-bash` - Was already in package.json for shell operations
-- `node:child_process` - Built-in Node.js module for process spawning
-- `node:fs/promises` - Built-in Node.js module for filesystem operations
+// Prompt agent
+const response = await session.prompt('Write a hello world function');
+
+// Execute shell
+const shellResult = await session.shell('echo "hello"');
+
+// File operations
+await session.writeFile('/tmp/test.ts', 'const x = 1;');
+const content = await session.readFile('/tmp/test.ts');
+```
+
+### Session Interface
+
+Each agent session provides:
+
+```typescript
+interface Session {
+  // AI interaction
+  prompt(message: string): Promise<string>;
+  runSkill(skillName: string, context?: Record<string, unknown>): Promise<string>;
+  getSkillInstructions(skillName: string): Promise<string>;
+  listSkills(): Promise<string[]>;
+  
+  // Shell execution
+  shell(command: string, cwd?: string): Promise<ExecResult>;
+  
+  // Filesystem operations
+  readFile(path: string, options?: ReadOptions): Promise<string | Buffer>;
+  writeFile(path: string, content: string | Buffer, options?: WriteOptions): Promise<void>;
+  mkdir(path: string, options?: { recursive?: boolean; mode?: number }): Promise<string | undefined>;
+  readDir(path: string, options?: { withFileTypes?: boolean }): Promise<string[] | FileInfo[]>;
+  pathExists(path: string): boolean;
+  glob(pattern: string, options?: GlobOptions): Promise<string[]>;
+}
+```
+
+### Multi-Agent Dispatch
+
+```typescript
+import { dispatch, dispatchAsync, dispatchSequential } from '@rubberduck/runtime';
+
+// Parallel dispatch
+const results = await dispatchAsync([
+  { agent: 'coder', task: { type: 'write', payload: {...} } },
+  { agent: 'reviewer', task: { type: 'review', payload: {...} } }
+]);
+
+// Sequential dispatch (with shared context)
+const sequentialResults = await dispatchSequential(
+  ['coder', 'reviewer'],
+  { initialContext: { task: 'Implement API' } }
+);
+```
+
+## Tools
+
+Agents have access to tools:
+
+### Shell Tool
+
+```typescript
+const result = await session.shell('npm run build', { cwd: '/project' });
+// Returns: { stdout, stderr, exitCode, timedOut }
+```
+
+### Filesystem Tool
+
+```typescript
+// Read file
+const content = await session.readFile('/project/src/index.ts');
+
+// Write file
+await session.writeFile('/project/src/new.ts', 'const x = 1;');
+
+// Check existence
+if (await session.pathExists('/project/src/index.ts')) {
+  // ...
+}
+
+// Glob
+const files = await session.glob('**/*.test.ts', { cwd: '/project' });
+```
+
+## Skills System
+
+Skills extend agent capabilities:
+
+```typescript
+// Load specific skills
+const skills = await loadAgentSkills(['coding', 'debugging'], '/project/.rubberduck/skills');
+
+// List available skills
+const skillNames = await session.listSkills();
+
+// Get skill instructions
+const instructions = await session.getSkillInstructions('coding');
+
+// Run skill
+const result = await session.runSkill('code-review', { code: myCode });
+```
+
+## Sandbox Integration
+
+Agents can use different sandbox types for code execution:
+
+```typescript
+import { createSandbox, createAgent } from '@rubberduck/runtime';
+
+// Local sandbox (default)
+const localSandbox = createSandbox('local');
+
+// Virtual sandbox (for testing)
+const virtualSandbox = createSandbox('virtual');
+
+// Daytona cloud sandbox
+const daytonaSandbox = createSandbox('daytona', { 
+  apiKey: process.env.DAYTONA_API_KEY 
+});
+
+// E2B secure sandbox
+const e2bSandbox = createSandbox('e2b', { 
+  apiKey: process.env.E2B_API_KEY,
+  template: 'typescript'
+});
+
+// Use sandbox with agent
+const agent = createAgent({
+  name: 'isolated-coder',
+  model: 'openai/gpt-4o',
+  sandbox: e2bSandbox
+});
+```
+
+## Event Streaming
+
+Agents support real-time event streaming:
+
+```typescript
+const agent = new Agent({
+  model: getModel('anthropic', 'claude-sonnet-4-6'),
+  initialState: {
+    systemPrompt: 'You are a coding assistant.'
+  }
+});
+
+agent.subscribe((event) => {
+  switch (event.type) {
+    case 'message_update':
+      // Streaming response
+      process.stdout.write(event.delta);
+      break;
+    case 'toolcall':
+      // Tool execution
+      console.log(`Calling tool: ${event.toolName}`);
+      break;
+  }
+});
+
+await agent.prompt('Write a REST API in TypeScript');
+```
+
+## Error Handling
+
+```typescript
+try {
+  const result = await session.prompt('Write code');
+} catch (error) {
+  if (error instanceof AgentError) {
+    console.error(`Agent error: ${error.code}`);
+  }
+}
+```
+
+## Configuration
+
+### Agent Configuration
+
+```typescript
+interface RubberDuckConfig {
+  name?: string;
+  model?: string;
+  apiKey?: string;
+  baseUrl?: string;
+  providerId?: string;
+  env?: Record<string, string>;
+  shellTimeout?: number;
+  skills?: string[];
+  basePath?: string;
+  mcpServers?: MCPServerConfig[];
+  sandbox?: {
+    type: SandboxConnectorType;
+    apiKey?: string;
+    baseUrl?: string;
+  };
+  telemetry?: TelemetryConfig;
+}
+```
+
+## Examples
+
+See `examples/` directory for complete implementations:
+- `orchestrator-agent/` - Multi-agent coordination
+- `coding-agent/` - Code generation agent
+- `support-bot/` - Support bot with skills
+- `ci-triage/` - CI workflow automation
