@@ -1,5 +1,5 @@
 {
-	"name": "@rubberduck/opentelemetry",
+	"name": "@kishkindhalabs/hanumate-opentelemetry",
 	"version": "0.1.0",
 	"type": "module",
 	"description": "OpenTelemetry setup helpers for RubberDuck",
@@ -30,6 +30,6 @@
 		"vitest": "^4.1.6"
 	},
 	"peerDependencies": {
-		"@rubberduck/runtime": "^0.1.0"
+		"@kishkindhalabs/hanumate-runtime": "^0.1.0"
 	}
 }

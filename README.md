@@ -1,12 +1,12 @@
-**Experimental** — RubberDuck is under active development. APIs may change.
+**Experimental** — Hanumate is under active development. APIs may change.
 
 Looking for `v1.0.x`? This is the initial release.
 
-# RubberDuck
+# Hanumate
 
-RubberDuck is a TypeScript framework for building autonomous coding agents. It gives you a headless, programmable agent harness
+Hanumate is a TypeScript framework for building autonomous coding agents. It gives you a headless, programmable agent harness
 
- RubberDuck agents work the same way as claude code and copilot : they read your codebase, write code, run tests, and handle GitHub workflows. But unlike those tools, RubberDuck is built to be embedded, extended, and deployed anywhere.
+ Hanumate agents work the same way as claude code and copilot : they read your codebase, write code, run tests, and handle GitHub workflows. But unlike those tools, Hanumate is built to be embedded, extended, and deployed anywhere.
 
 ---
 
@@ -47,10 +47,10 @@ RubberDuck comes with a built-in agent harness, multi-agent orchestration, and s
 
 | Package | Description |
 | --- | --- |
-| `@rubberduck/runtime` | Core: agent harness, sessions, tools, sandbox |
-| `@rubberduck/sdk` | TypeScript SDK for building integrations |
-| `@rubberduck/cli` | CLI tool for running agents locally |
-| `@rubberduck/opentelemetry` | Observability adapter for tracing and metrics |
+| `@hanumate/runtime` | Core: agent harness, sessions, tools, sandbox |
+| `@hanumate/sdk` | TypeScript SDK for building integrations |
+| `@hanumate/cli` | CLI tool for running agents locally |
+| `@hanumate/opentelemetry` | Observability adapter for tracing and metrics |
 
 ---
 
@@ -122,7 +122,7 @@ rubberduck/
 ### Create Your First Agent
 
 ```ts
-import { createAgent } from '@rubberduck/runtime';
+import { createAgent } from '@hanumate/runtime';
 
 const agent = createAgent({
   model: 'anthropic/claude-sonnet-4-6',
@@ -246,7 +246,7 @@ RubberDuck's orchestrator coordinates multiple specialist agents for complex tas
 ### Setting Up Agent Registry
 
 ```ts
-import { createAgent, AgentRegistry, dispatch } from '@rubberduck/runtime';
+import { createAgent, AgentRegistry, dispatch } from '@hanumate/runtime';
 
 // Define specialist agents
 const orchestrator = createAgent({
@@ -301,7 +301,7 @@ console.log(result);
 ### Sequential Dispatch
 
 ```ts
-import { dispatchSequential } from '@rubberduck/runtime';
+import { dispatchSequential } from '@hanumate/runtime';
 
 // Run agents sequentially with shared context
 const results = await dispatchSequential(
@@ -321,7 +321,7 @@ const results = await dispatchSequential(
 ### Async Dispatch
 
 ```ts
-import { dispatchAsync } from '@rubberduck/runtime';
+import { dispatchAsync } from '@hanumate/runtime';
 
 // Dispatch to multiple agents and collect results
 const results = await dispatchAsync([
@@ -347,7 +347,7 @@ Agents can execute code in isolated environments for security and consistency.
 Direct filesystem and shell access. Fast but less isolated.
 
 ```ts
-import { createAgent, createSandbox } from '@rubberduck/runtime';
+import { createAgent, createSandbox } from '@hanumate/runtime';
 
 const agent = createAgent({
   sandbox: createSandbox('local'),
@@ -639,7 +639,7 @@ Plug in OpenTelemetry for distributed tracing and metrics.
 ### Basic Setup
 
 ```ts
-import { initTelemetry } from '@rubberduck/opentelemetry';
+import { initTelemetry } from '@hanumate/opentelemetry';
 
 const telemetry = await initTelemetry({
   serviceName: 'rubberduck-agent',
@@ -651,7 +651,7 @@ const telemetry = await initTelemetry({
 ### Custom Tracing
 
 ```ts
-import { trace, SpanKind, SpanStatusCode } from '@rubberduck/opentelemetry';
+import { trace, SpanKind, SpanStatusCode } from '@hanumate/opentelemetry';
 
 const span = trace.startSpan('agent-execution', {
   kind: SpanKind.INTERNAL,
@@ -676,7 +676,7 @@ try {
 ### Metrics
 
 ```ts
-import { metrics } from '@rubberduck/opentelemetry';
+import { metrics } from '@hanumate/opentelemetry';
 
 // Counter
 const requestCounter = metrics.createCounter('agent_requests_total', {
@@ -697,7 +697,7 @@ latencyHistogram.record(duration, { operation: 'prompt' });
 ### Log Integration
 
 ```ts
-import { logger } from '@rubberduck/opentelemetry';
+import { logger } from '@hanumate/opentelemetry';
 
 logger.info('Agent initialized', {
   agent: 'coder',
@@ -932,7 +932,7 @@ npm test
 npm run test:coverage
 
 # Run specific package tests
-npm test --workspace=@rubberduck/runtime
+npm test --workspace=@hanumate/runtime
 
 # Run in CI mode (no watch)
 npm run test:ci

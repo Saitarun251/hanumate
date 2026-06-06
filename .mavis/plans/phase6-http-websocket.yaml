@@ -1,0 +1,189 @@
+version: 1
+plan:
+  name: 'RubberDuck Phase 6: HTTP/WebSocket Server'
+  max_concurrency: 5
+  max_consecutive_failures: 2
+  max_cycles: 8
+
+tasks:
+  - id: http-server
+    title: 'Implement HTTP server with Hono'
+    prompt: |
+      Create packages/runtime/src/server/http-server.ts
+      
+      Requirements:
+      - Use Hono framework (already a dependency)
+      - Export a `createServer()` function that returns an HTTP server
+      - Support agent endpoints: POST /agents/:name/:id/prompt
+      - Support session management: GET /agents/:name/:id/session
+      - Support health check: GET /health
+      - Support WebSocket upgrade: GET /agents/:name/:id/ws
+      - Export `startServer(port)` and `stopServer()` functions
+      
+      Example:
+      ```typescript
+      import { createServer } from './server/http-server.js';
+      
+      const server = createServer({
+        agents: agentRegistry,
+        hooks: hookManager,
+        beads: beadStore,
+      });
+      
+      await server.start(3000);
+      ```
+      
+      Working directory: packages/runtime/
+    assigned_to: developer
+    verified_by: code-reviewer
+    verify_prompt: 'Verify HTTP endpoints respond correctly, WebSocket upgrade works, and TypeScript compiles clean.'
+    timeout_ms: 1200000
+
+  - id: websocket-support
+    title: 'Add WebSocket real-time communication'
+    prompt: |
+      Create packages/runtime/src/server/websocket.ts
+      
+      Requirements:
+      - Implement WebSocket handler for real-time agent communication
+      - Support streaming responses back to client
+      - Handle agent session reconnection
+      - Export `WebSocketHandler` class
+      - Integrate with existing session store
+      
+      Working directory: packages/runtime/
+    assigned_to: developer
+    depends_on: [http-server]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify WebSocket connects, sends messages, and receives streaming responses.'
+    timeout_ms: 1200000
+
+  - id: message-trigger
+    title: 'Create message-driven agent trigger'
+    prompt: |
+      Create packages/runtime/src/server/message-trigger.ts
+      
+      Requirements:
+      - `MessageTrigger` class that receives HTTP/WebSocket messages
+      - Converts messages to agent prompts
+      - Supports dispatch to agent sessions
+      - Integrates with existing Hook system (messages create hooks)
+      - Export `MessageTrigger` class
+      
+      Example:
+      ```typescript
+      const trigger = new MessageTrigger({
+        agents: registry,
+        hooks: hookManager,
+      });
+      
+      // HTTP message → agent prompt
+      await trigger.handleHTTP(req);
+      
+      // WebSocket message → agent prompt  
+      await trigger.handleWebSocket(ws, message);
+      ```
+      
+      Working directory: packages/runtime/
+    assigned_to: developer
+    depends_on: [websocket-support]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify messages are converted to prompts and routed to correct agents.'
+    timeout_ms: 1200000
+
+  - id: workflow-routing
+    title: 'Add workflow routing system'
+    prompt: |
+      Create packages/runtime/src/server/workflow-router.ts
+      
+      Requirements:
+      - Export `WorkflowRouter` class
+      - Support route handlers: GET/POST /workflows/:name
+      - Match incoming requests to workflow handlers
+      - Support middleware (auth, logging)
+      - Integrate with Hono server
+      
+      Working directory: packages/runtime/
+    assigned_to: developer
+    depends_on: [http-server]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify routes are matched correctly and middleware runs.'
+    timeout_ms: 1200000
+
+  - id: cli-server-command
+    title: 'Add duck server CLI command'
+    prompt: |
+      Update packages/runtime/src/cli/commands/server/commands.ts
+      
+      Requirements:
+      - `duck server start` - Start HTTP server
+      - `duck server stop` - Stop server
+      - `duck server status` - Check server status
+      - Support port configuration: `--port 3000`
+      - Support background mode: `--daemon`
+      
+      Working directory: packages/runtime/
+    assigned_to: developer
+    depends_on: [http-server]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify CLI server commands work and server starts/stops correctly.'
+    timeout_ms: 600000
+
+  - id: server-tests
+    title: 'Write HTTP/WebSocket integration tests'
+    prompt: |
+      Create packages/runtime/__tests__/server/server.test.ts
+      
+      Requirements:
+      - Test HTTP endpoints (health, agent prompt, session)
+      - Test WebSocket connection and messaging
+      - Test message trigger routing
+      - Test workflow routing
+      - Target: 30+ tests, all passing
+      
+      Working directory: packages/runtime/
+    assigned_to: tester
+    depends_on: [message-trigger, workflow-routing, cli-server-command]
+    verified_by: code-reviewer
+    verify_prompt: 'Run tests and verify all pass.'
+    timeout_ms: 1200000
+
+  - id: export-updates-p6
+    title: 'Update runtime exports for Phase 6'
+    prompt: |
+      Update packages/runtime/src/index.ts to export server modules:
+      
+      ```typescript
+      // Server - HTTP/WebSocket
+      export { createServer, startServer, stopServer } from './server/http-server.js';
+      export { WebSocketHandler } from './server/websocket.js';
+      export { MessageTrigger } from './server/message-trigger.js';
+      export { WorkflowRouter } from './server/workflow-router.js';
+      ```
+      
+      Verify: npx tsc --noEmit
+      
+      Working directory: packages/runtime/
+    assigned_to: developer
+    depends_on: [server-tests]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify TypeScript compiles clean after adding server exports.'
+    timeout_ms: 300000
+
+  - id: final-verification-p6
+    title: 'Final verification Phase 6'
+    role: verify-as-task
+    prompt: |
+      Run comprehensive verification:
+      
+      1. npm test -- __tests__/server/
+      2. npx tsc --noEmit
+      3. npm run build
+      4. Verify duck server start works (mock test)
+      
+      Report all test pass/fail counts and any TypeScript/build errors.
+      
+      Working directory: packages/runtime/
+    assigned_to: tester
+    depends_on: [export-updates-p6]
+    timeout_ms: 600000

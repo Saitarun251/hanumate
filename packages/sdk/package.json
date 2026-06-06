@@ -1,5 +1,5 @@
 {
-	"name": "@rubberduck/sdk",
+	"name": "@kishkindhalabs/hanumate-sdk",
 	"version": "0.1.0",
 	"type": "module",
 	"main": "./dist/index.mjs",

@@ -1,0 +1,22 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "nudge-client",
+      "verdict": "reject",
+      "reason": "Line 132: typo this.lastHeartbeat should be this.state.lastHeartbeat. Fix the typo and re-submit."
+    }
+  ],
+  "next_cycle": [
+    {
+      "task_id": "nudge-client-fix",
+      "title": "Fix Nudge client typo",
+      "prompt": "Fix the typo in packages/runtime/src/nudge/nudge-client.ts at line 132: change this.lastHeartbeat to this.state.lastHeartbeat. Verify the fix compiles cleanly with npx tsc --noEmit. Write deliverable.md and exit.",
+      "assigned_to": "developer",
+      "verified_by": "verifier",
+      "verify_prompt": "Run npx tsc --noEmit in packages/runtime to verify no TypeScript errors. Check nudge-client.ts line 132 has this.state.lastHeartbeat.",
+      "timeout_ms": 300000
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "Nudge client has a real typo bug. Sent back to fix. Nudge server and Witness are accepted."
+}

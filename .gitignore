@@ -38,4 +38,11 @@ coverage/
 *.key
 
 # pnpm
-.pnpm-approve-builds.json
+.pnpm-approve-builds.json.rubberduck/
+packages/*/.rubberduck/
+node_modules/
+dist/
+.vitepress/cache/
+.vitepress/dist/
+*.log
+packages/*/.rubberduck/

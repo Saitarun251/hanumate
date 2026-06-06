@@ -1,0 +1,43 @@
+{
+	"name": "@kishkindhalabs/hanumate",
+	"version": "0.1.1",
+	"type": "module",
+	"description": "RubberDuck - TypeScript framework for building autonomous coding agents",
+	"main": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"scripts": {
+		"build": "tsdown",
+		"check:types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@kishkindhalabs/hanumate-runtime": "^0.1.0",
+		"@kishkindhalabs/hanumate-cli": "^0.1.0",
+		"@kishkindhalabs/hanumate-sdk": "^0.1.0",
+		"@kishkindhalabs/hanumate-opentelemetry": "^0.1.0"
+	},
+	"devDependencies": {
+		"tsdown": "^0.22.0",
+		"typescript": "^6.0.3"
+	},
+	"keywords": [
+		"ai",
+		"agent",
+		"coding",
+		"autonomous",
+		"llm",
+		"claude",
+		"openai",
+		"anthropic"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Saitarun251/rubberduck"
+	},
+	"license": "MIT"
+}

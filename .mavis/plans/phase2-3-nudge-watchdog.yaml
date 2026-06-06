@@ -1,0 +1,258 @@
+version: 1
+plan:
+  name: 'RubberDuck Phase 2-3: Nudge + Watchdog'
+  max_concurrency: 4
+  max_consecutive_failures: 2
+  max_cycles: 12
+  auto_reject_retries: 1
+  verifier_config:
+    default_verifiers: [verifier]
+    audit_sample_rate: 0.0
+tasks:
+  - id: nudge-types
+    title: 'Define Nudge types and interfaces'
+    prompt: |
+      Create packages/runtime/src/nudge/nudge-types.ts with TypeScript interfaces for Nudge system (real-time agent wake-up via WebSocket).
+
+      Include:
+      - NudgeMessage: id, from, to, type, payload, createdAt
+      - NudgeType enum: 'wake' | 'work' | 'interrupt' | 'heartbeat'
+      - NudgeConfig: server configuration
+      - NudgeHandler: callback interface
+      - NudgeConnection: client connection interface
+
+      Use ID format: 'nudge-xxxxx'. Follow patterns from mail-types.ts for style.
+    assigned_to: developer
+    verified_by: verifier
+    timeout_ms: 600000
+
+  - id: nudge-server
+    title: 'Implement Nudge WebSocket server'
+    prompt: |
+      Create packages/runtime/src/nudge/nudge-server.ts - WebSocket server for real-time agent communication.
+
+      Requirements:
+      - WebSocket-based using Node.js 'ws' package
+      - Agent registration: Map<agentId, WebSocket>
+      - Methods: start(port), stop(), send(to, message), broadcast(message)
+      - Event handlers: onNudge, onConnect, onDisconnect
+      - Heartbeat ping/pong for keep-alive
+      - Handle edge cases: unknown recipient, invalid JSON, connection drops
+
+      Interface:
+      ```typescript
+      export class NudgeServer {
+        constructor(config?: NudgeConfig);
+        async start(port?: number): Promise<void>;
+        async stop(): Promise<void>;
+        onNudge(handler: (nudge: NudgeMessage) => void): void;
+        send(to: string, nudge: NudgeMessage): boolean;
+        getConnectedAgents(): string[];
+      }
+      ```
+    assigned_to: developer
+    depends_on: [nudge-types]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: nudge-client
+    title: 'Implement Nudge WebSocket client'
+    prompt: |
+      Create packages/runtime/src/nudge/nudge-client.ts - WebSocket client for agents.
+
+      Requirements:
+      - Connect to Nudge server
+      - Register agent ID
+      - Send nudges to other agents
+      - Receive nudges via callback
+      - Auto-reconnect with exponential backoff (max 5 attempts)
+      - Heartbeat to keep connection alive
+
+      Interface:
+      ```typescript
+      export class NudgeClient {
+        constructor(config: NudgeClientConfig);
+        async connect(serverUrl: string): Promise<void>;
+        async disconnect(): Promise<void>;
+        send(to: string, type: NudgeType, payload?: unknown): string;
+        onNudge(handler: (nudge: NudgeMessage) => void): void;
+        isConnected(): boolean;
+      }
+      ```
+    assigned_to: developer
+    depends_on: [nudge-types]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: nudge-tests
+    title: 'Write Nudge tests'
+    prompt: |
+      Create tests in packages/runtime/__tests__/nudge/.
+
+      1. nudge-server.test.ts:
+      - Server starts/stops
+      - Client connections register
+      - Messages route correctly
+      - Unknown recipient handling
+      - Disconnect cleanup
+      - Heartbeat works
+      - Multiple clients
+
+      2. nudge-client.test.ts:
+      - Client connects/registers
+      - Client sends/receives messages
+      - Reconnection works
+      - Disconnect works
+
+      Use patterns from __tests__/mail/mail.test.ts. Target: 20+ tests, all passing.
+      Run: npm test -- __tests__/nudge/
+    assigned_to: tester
+    depends_on: [nudge-server, nudge-client]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: watchdog-types
+    title: 'Define Watchdog types and interfaces'
+    prompt: |
+      Create packages/runtime/src/watchdog/watchdog-types.ts with interfaces for Watchdog hierarchy.
+
+      Include:
+      - HealthStatus: 'healthy' | 'degraded' | 'stalled' | 'dead'
+      - WitnessReport: health report from Witness
+      - WitnessConfig: configuration
+      - DeaconReport: patrol report
+      - DeaconConfig: configuration
+      - DogTask: task for dogs
+      - PatrolCycle: patrol result
+
+      ID formats: wit-xxxxx (Witness), dea-xxxxx (Deacon), dog-xxxxx (Dogs)
+    assigned_to: developer
+    verified_by: verifier
+    timeout_ms: 600000
+
+  - id: witness
+    title: 'Implement Witness health monitor'
+    prompt: |
+      Create packages/runtime/src/watchdog/witness.ts - Health monitor for a single agent.
+
+      Interface:
+      ```typescript
+      export class Witness {
+        constructor(config: WitnessConfig);
+        getId(): string;
+        recordHeartbeat(): void;
+        recordProgress(progress: number): void;
+        recordError(error: Error): void;
+        getHealth(): WitnessReport;
+        isHealthy(): boolean;
+        isStalled(): boolean;
+        isDead(): boolean;
+        start(): void;
+        stop(): void;
+        reset(): void;
+      }
+      ```
+
+      Health thresholds:
+      - healthy: heartbeat < 60s, no errors
+      - degraded: heartbeat < 120s or 1-3 errors
+      - stalled: heartbeat < 300s, progress not updating
+      - dead: no heartbeat > 300s or > 5 errors
+    assigned_to: developer
+    depends_on: [watchdog-types]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: deacon
+    title: 'Implement Deacon supervisor'
+    prompt: |
+      Create packages/runtime/src/watchdog/deacon.ts - Background supervisor managing Witnesses.
+
+      Interface:
+      ```typescript
+      export class Deacon {
+        constructor(config?: DeaconConfig);
+        register(agentId: string, witness: Witness): void;
+        unregister(agentId: string): void;
+        async patrol(): Promise<DeaconReport>;
+        async start(): Promise<void>;
+        async stop(): Promise<void>;
+        async dispatchDog(task: DogTask): Promise<void>;
+        getOverallHealth(): 'healthy' | 'degraded' | 'critical';
+      }
+      ```
+
+      Patrol cycle: Check all Witnesses, aggregate health reports, identify stalled/dead agents, dispatch Dogs for recovery. Default patrol interval: 60 seconds.
+    assigned_to: developer
+    depends_on: [watchdog-types, witness]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: dogs
+    title: 'Implement Dogs helpers'
+    prompt: |
+      Create packages/runtime/src/watchdog/dogs/index.ts with infrastructure helpers.
+
+      Export:
+      - runBootDog(deacon): checks Deacon health
+      - runCleanupDog(options): cleans stale sessions
+      - runHealthDog(witnesses): detailed health report
+
+      Each dog: pure function, structured results, error handling, composable.
+    assigned_to: developer
+    depends_on: [watchdog-types, witness]
+    verified_by: verifier
+    timeout_ms: 1200000
+
+  - id: watchdog-tests
+    title: 'Write Watchdog tests'
+    prompt: |
+      Create tests in packages/runtime/__tests__/watchdog/.
+
+      1. witness.test.ts - heartbeat, progress, errors, health status, lifecycle
+      2. deacon.test.ts - registration, patrol, aggregation, dog dispatch, start/stop
+      3. dogs.test.ts - BootDog, CleanupDog, HealthDog
+
+      Target: 30+ tests, all passing. Run: npm test -- __tests__/watchdog/
+    assigned_to: tester
+    depends_on: [witness, deacon, dogs]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: runtime-exports
+    title: 'Update runtime exports'
+    prompt: |
+      Update packages/runtime/src/index.ts to export Phase 2-3 modules:
+
+      ```typescript
+      // Nudge
+      export { NudgeServer } from './nudge/nudge-server.js';
+      export { NudgeClient } from './nudge/nudge-client.js';
+      export type { NudgeMessage, NudgeType, NudgeConfig, NudgeHandler } from './nudge/nudge-types.js';
+
+      // Watchdog
+      export { Witness } from './watchdog/witness.js';
+      export { Deacon } from './watchdog/deacon.js';
+      export { runBootDog, runCleanupDog, runHealthDog } from './watchdog/dogs/index.js';
+      export type { HealthStatus, WitnessReport, DeaconReport, DogTask } from './watchdog/watchdog-types.js';
+      ```
+
+      Verify: npx tsc --noEmit
+    assigned_to: developer
+    depends_on: [nudge-server, nudge-client, witness, deacon, dogs]
+    verified_by: verifier
+    timeout_ms: 600000
+
+  - id: final-tests
+    title: 'Final verification'
+    role: verify-as-task
+    prompt: |
+      Run comprehensive verification:
+
+      1. npm test -- __tests__/nudge/ __tests__/watchdog/
+      2. npx tsc --noEmit
+
+      Report test pass/fail counts and any TypeScript errors.
+    assigned_to: tester
+    depends_on: [runtime-exports, nudge-tests, watchdog-tests]
+    verify_prompt: 'Run tests and TypeScript check, report results.'

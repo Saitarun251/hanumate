@@ -1,0 +1,233 @@
+version: 1
+plan:
+  name: 'RubberDuck Phase 3: Refinery + Escalation + Seance'
+  max_concurrency: 4
+  max_consecutive_failures: 2
+  max_cycles: 15
+  auto_reject_retries: 1
+  verifier_config:
+    default_verifiers: [verifier]
+    audit_sample_rate: 0.0
+tasks:
+  - id: refinery-types
+    title: 'Define Refinery types and interfaces'
+    prompt: |
+      Create packages/runtime/src/refinery/refinery-types.ts with TypeScript interfaces for merge queue system.
+
+      Include:
+      - MergeRequest: id, branch, author, beadId, convoyId, status, createdAt, testResults
+      - MergeStatus: 'pending' | 'testing' | 'passed' | 'failed' | 'merged'
+      - VerificationGate: name, run(mr) → GateResult
+      - GateResult: passed, details, duration
+
+      ID format: 'mr-xxxxx'. Follow patterns from bead-types.ts for style.
+    assigned_to: developer
+    verified_by: verifier
+    timeout_ms: 600000
+
+  - id: refinery-queue
+    title: 'Implement Refinery queue management'
+    prompt: |
+      Create packages/runtime/src/refinery/refinery-queue.ts - Merge queue with batch processing.
+
+      Interface:
+      ```typescript
+      export class RefineryQueue {
+        constructor(options?: QueueOptions);
+        async enqueue(mr: MergeRequest): Promise<void>;
+        async dequeue(): Promise<MergeRequest | null>;
+        async peek(): Promise<MergeRequest | null>;
+        async size(): Promise<number>;
+        async updateStatus(mrId: string, status: MergeStatus): Promise<void>;
+        async getPending(): Promise<MergeRequest[]>;
+      }
+      ```
+
+      Features:
+      - FIFO ordering
+      - Status tracking
+      - Batch processing (process N at a time)
+      - Storage to .rubberduck/refinery/
+    assigned_to: developer
+    depends_on: [refinery-types]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: refinery-core
+    title: 'Implement Refinery merge processor'
+    prompt: |
+      Create packages/runtime/src/refinery/refinery.ts - Core merge queue processor.
+
+      Interface:
+      ```typescript
+      export interface VerificationGate {
+        name: string;
+        run(mr: MergeRequest): Promise<GateResult>;
+      }
+
+      export class Refinery {
+        constructor(config: RefineryConfig);
+        async enqueue(mr: MergeRequest): Promise<void>;
+        async processQueue(): Promise<void>;
+        async verify(mr: MergeRequest): Promise<boolean>;
+        async merge(mr: MergeRequest): Promise<void>;
+        async bisect(mr: MergeRequest): Promise<BisectResult>;
+        addGate(gate: VerificationGate): void;
+        getStatus(): RefineryStatus;
+      }
+      ```
+
+      Default gates:
+      1. ci-gate: CI tests pass
+      2. coverage-gate: Coverage maintained
+      3. lint-gate: Lint/format checks pass
+
+      Features:
+      - Parallel verification of multiple MRs
+      - Bisect on failure (identify breaking commit)
+      - Configurable batch size
+    assigned_to: developer
+    depends_on: [refinery-queue]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: escalation-types
+    title: 'Define Escalation types and interfaces'
+    prompt: |
+      Create packages/runtime/src/escalation/escalation-types.ts with TypeScript interfaces.
+
+      Include:
+      - Severity: 'CRITICAL' | 'HIGH' | 'MEDIUM'
+      - Escalation: id, severity, description, reporter, createdAt, status, route
+      - EscalationStatus: 'open' | 'acknowledged' | 'resolved'
+      - EscalationRoute: 'deacon' | 'mayor' | 'overseer'
+
+      ID format: 'esc-xxxxx'.
+    assigned_to: developer
+    verified_by: verifier
+    timeout_ms: 600000
+
+  - id: escalation-service
+    title: 'Implement Escalation service'
+    prompt: |
+      Create packages/runtime/src/escalation/escalation.ts - Severity-routed issue escalation.
+
+      Interface:
+      ```typescript
+      export class EscalationService {
+        constructor(options?: EscalationOptions);
+        async escalate(severity: Severity, description: string, reporter: string): Promise<Escalation>;
+        async acknowledge(escId: string): Promise<void>;
+        async resolve(escId: string): Promise<void>;
+        async listOpen(): Promise<Escalation[]>;
+        async listBySeverity(severity: Severity): Promise<Escalation[]>;
+        getCriticalCount(): number;
+      }
+      ```
+
+      Features:
+      - Auto-route based on severity (CRITICAL → overseer, HIGH → mayor, MEDIUM → deacon)
+      - Storage to .rubberduck/escalations/
+      - Notification callbacks for each route
+    assigned_to: developer
+    depends_on: [escalation-types]
+    verified_by: verifier
+    timeout_ms: 1200000
+
+  - id: seance-types
+    title: 'Define Seance types and interfaces'
+    prompt: |
+      Create packages/runtime/src/recovery/seance-types.ts with TypeScript interfaces.
+
+      Include:
+      - SessionRecord: id, agentId, startedAt, endedAt, workBeads, events
+      - SessionEvent: type, timestamp, data
+      - SessionEventType: 'start' | 'prompt' | 'tool' | 'complete' | 'error'
+      - SessionQuery: filter options
+
+      ID format: 'session-xxxxx'.
+    assigned_to: developer
+    verified_by: verifier
+    timeout_ms: 600000
+
+  - id: seance-service
+    title: 'Implement Seance session discovery'
+    prompt: |
+      Create packages/runtime/src/recovery/seance.ts - Session discovery and recovery.
+
+      Interface:
+      ```typescript
+      export class Seance {
+        constructor(options?: SeanceOptions);
+        async discover(agentId: string): Promise<SessionRecord[]>;
+        async talk(sessionId: string, question: string): Promise<string>;
+        async ask(sessionId: string, question: string): Promise<string>;
+        async getEvents(sessionId: string): Promise<SessionEvent[]>;
+        async logEvent(sessionId: string, event: SessionEvent): Promise<void>;
+      }
+      ```
+
+      Features:
+      - Query previous sessions by agent ID
+      - Replay session events for context
+      - Storage to .rubberduck/sessions/
+      - Event replay for context recovery
+    assigned_to: developer
+    depends_on: [seance-types]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: phase3-tests
+    title: 'Write Phase 3 tests'
+    prompt: |
+      Create tests in packages/runtime/__tests__/refinery/ and packages/runtime/__tests__/escalation/ and packages/runtime/__tests__/seance/
+
+      Target:
+      - Refinery: 15+ tests (queue, verification, bisect)
+      - Escalation: 10+ tests (create, route, acknowledge, resolve)
+      - Seance: 10+ tests (discover, talk, ask, events)
+
+      Run: npm test -- __tests__/refinery/ __tests__/escalation/ __tests__/seance/
+    assigned_to: tester
+    depends_on: [refinery-core, escalation-service, seance-service]
+    verified_by: verifier
+    timeout_ms: 1800000
+
+  - id: runtime-exports-p3
+    title: 'Update runtime exports for Phase 3'
+    prompt: |
+      Update packages/runtime/src/index.ts to export Phase 3 modules:
+
+      ```typescript
+      // Refinery
+      export { Refinery, RefineryQueue } from './refinery/index.js';
+      export type { MergeRequest, MergeStatus, VerificationGate } from './refinery/refinery-types.js';
+
+      // Escalation
+      export { EscalationService } from './escalation/index.js';
+      export type { Severity, Escalation, EscalationStatus } from './escalation/escalation-types.js';
+
+      // Seance
+      export { Seance } from './recovery/index.js';
+      export type { SessionRecord, SessionEvent } from './recovery/seance-types.js';
+      ```
+
+      Verify: npx tsc --noEmit
+    assigned_to: developer
+    depends_on: [phase3-tests]
+    verified_by: verifier
+    timeout_ms: 600000
+
+  - id: final-verification
+    title: 'Final verification'
+    role: verify-as-task
+    prompt: |
+      Run comprehensive verification:
+
+      1. npm test -- __tests__/refinery/ __tests__/escalation/ __tests__/seance/
+      2. npx tsc --noEmit
+
+      Report test pass/fail counts and any TypeScript errors.
+    assigned_to: tester
+    depends_on: [runtime-exports-p3, phase3-tests]
+    verify_prompt: 'Run tests and TypeScript check, report results.'

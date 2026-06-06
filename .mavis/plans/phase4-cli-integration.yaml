@@ -1,0 +1,151 @@
+version: 1
+plan:
+  name: 'RubberDuck Phase 4: CLI + Integration'
+  max_concurrency: 4
+  max_consecutive_failures: 2
+  max_cycles: 12
+  auto_reject_retries: 1
+  verifier_config:
+    default_verifiers: [code-reviewer]
+    audit_sample_rate: 0.0
+tasks:
+  - id: cli-types
+    title: 'Define CLI types and interfaces'
+    prompt: |
+      Create packages/runtime/src/cli/cli-types.ts with TypeScript types for the duck CLI.
+
+      Include:
+      - Command: name, description, options, handler
+      - CommandRegistry: register, get, list, execute
+      - Option: name, short, type, description, required, default
+      - GlobalOptions: --help, --version, --verbose, --config
+
+      Follow patterns from existing type files in src/types/. Use simple, clean TypeScript.
+    assigned_to: developer
+    verified_by: code-reviewer
+    verify_prompt: 'Verify the types are well-structured and match patterns in the codebase.'
+    timeout_ms: 600000
+
+  - id: cli-commands
+    title: 'Implement CLI command handlers'
+    prompt: |
+      Create packages/runtime/src/cli/commands/ with command handlers.
+
+      Implement these commands:
+      1. hook/commands.ts - hook list, hook assign, hook status
+      2. bead/commands.ts - bead create, bead list, bead show, bead update, bead close
+      3. convoy/commands.ts - convoy create, convoy list, convoy add, convoy land
+      4. mail/commands.ts - mail send, mail inbox, mail read
+      5. refinery/commands.ts - refinery list, refinery status, refinery enqueue
+      6. session/commands.ts - session list, session show
+
+      Each command should:
+      - Parse args using the CLI types
+      - Call the appropriate service/store
+      - Format output as human-readable text
+      - Handle errors gracefully with helpful messages
+
+      Working directory: packages/runtime/src/cli/commands/
+    assigned_to: developer
+    depends_on: [cli-types]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify commands work by reading the implementation. Check for proper error handling and output formatting.'
+    timeout_ms: 1800000
+
+  - id: cli-main
+    title: 'Implement main CLI entry point'
+    prompt: |
+      Create packages/runtime/src/cli/index.ts - the main CLI entry point.
+
+      Requirements:
+      - Export a 'run' function that parses args and dispatches commands
+      - Support 'duck' as the command name (not 'rubberduck')
+      - Load config from .rubberduck/config.json if exists
+      - Print usage when no args or --help
+      - Print version from package.json
+
+      Example usage:
+      ```
+      duck hook list
+      duck bead create --title "Fix bug" --priority P1
+      duck refinery status
+      ```
+
+      Working directory: packages/runtime/src/cli/
+    assigned_to: developer
+    depends_on: [cli-commands]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify the CLI entry point correctly dispatches commands and handles --help/--version.'
+    timeout_ms: 1200000
+
+  - id: integration-tests
+    title: 'Write integration tests for CLI'
+    prompt: |
+      Create packages/runtime/__tests__/cli/cli.test.ts with integration tests.
+
+      Test:
+      1. CLI entry point parses args correctly
+      2. Commands load correct services
+      3. Error handling works for invalid commands
+      4. --help flag shows usage
+      5. Mock the services to test command logic
+
+      Use patterns from existing test files. Target: 15+ tests, all passing.
+    assigned_to: tester
+    depends_on: [cli-main]
+    verified_by: code-reviewer
+    verify_prompt: 'Run the CLI tests and verify they all pass.'
+    timeout_ms: 1200000
+
+  - id: fix-shell-tests
+    title: 'Fix failing shell tests'
+    prompt: |
+      Fix the 2 failing tests in packages/runtime/test/shell.test.ts:
+
+      1. "should pass cwd to shell commands" - cwd is not being passed correctly
+      2. "should execute with custom cwd" - same issue
+
+      Check:
+      - src/shell.ts - how cwd option is handled
+      - test/shell.test.ts - what the test expects
+      - Fix the implementation to correctly pass cwd to child_process
+
+      Working directory: packages/runtime/
+    assigned_to: developer
+    verified_by: code-reviewer
+    verify_prompt: 'Run the shell tests and verify both pass.'
+    timeout_ms: 600000
+
+  - id: runtime-exports-p4
+    title: 'Update runtime exports for Phase 4'
+    prompt: |
+      Update packages/runtime/src/index.ts to export CLI types.
+
+      ```typescript
+      // CLI
+      export type { Command, CommandRegistry, Option, GlobalOptions } from './cli/cli-types.js';
+      export { runCLI } from './cli/index.js';
+      ```
+
+      Verify: npx tsc --noEmit
+    assigned_to: developer
+    depends_on: [cli-main, integration-tests]
+    verified_by: code-reviewer
+    verify_prompt: 'Verify TypeScript compiles clean after adding CLI exports.'
+    timeout_ms: 300000
+
+  - id: final-verification
+    title: 'Final verification'
+    role: verify-as-task
+    prompt: |
+      Run comprehensive verification:
+
+      1. npm test -- __tests__/cli/ __tests__/refinery/ __tests__/escalation/ __tests__/seance/
+      2. npx tsc --noEmit
+      3. Verify CLI can be invoked (mock test)
+
+      Report all test pass/fail counts and any TypeScript errors.
+    assigned_to: tester
+    depends_on: [runtime-exports-p4, fix-shell-tests]
+    verify_prompt: 'Run all tests and report final status.'
+    timeout_ms: 600000

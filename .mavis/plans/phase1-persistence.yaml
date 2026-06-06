@@ -1,0 +1,182 @@
+version: 1
+plan:
+  name: 'RubberDuck Phase 1: Persistence Layer (Hooks, Beads, Convoys)'
+  max_concurrency: 3
+  max_consecutive_failures: 2
+  max_cycles: 10
+  auto_reject_retries: 1
+  verifier_config:
+    default_verifiers: [verifier]
+    audit_sample_rate: 0.0
+tasks:
+  - id: hooks-system
+    title: 'Implement Hook System (persistent work queue)'
+    prompt: |
+      Implement the Hook System for RubberDuck v2. Based on ROADMAP-v2.md in docs/ directory.
+
+      Create these files in packages/runtime/src/hooks/:
+      1. hook-types.ts - Define Hook interface (id, agentId, beadId, status, timestamps, progress)
+      2. hook-store.ts - JSON-based persistence in .rubberduck/hooks/
+      3. hook-manager.ts - Hook assignment, GUPP execution logic
+      4. index.ts - Exports
+
+      Hook status: 'pending' | 'active' | 'completed' | 'stalled'
+      Storage: JSON files in .rubberduck/hooks/ (git-backed)
+      
+      Key methods:
+      - save(hook: Hook): Promise<void>
+      - load(agentId: string): Promise<Hook | null>
+      - list(): Promise<Hook[]>
+      - popWork(agentId: string): Promise<Hook | null> (GUPP principle)
+      - updateStatus(hookId: string, status: string): Promise<void>
+
+      Follow TypeScript patterns from existing harness.ts. Use proper async/await.
+      Include JSDoc comments. No emoji.
+      
+      After implementation, create unit tests in __tests__/hooks/ directory.
+      Run tests to verify: npm run test --workspace=@rubberduck/runtime
+    assigned_to: developer
+    verified_by: verifier
+    verify_prompt: |
+      Verify the Hook System implementation:
+      1. Read packages/runtime/src/hooks/hook-types.ts - confirm Hook interface matches spec
+      2. Read packages/runtime/src/hooks/hook-store.ts - confirm JSON persistence works
+      3. Read packages/runtime/src/hooks/hook-manager.ts - confirm GUPP logic (popWork)
+      4. Run: npm run test --workspace=@rubberduck/runtime -- __tests__/hooks/
+      5. Verify no TypeScript errors: npx tsc --noEmit
+      
+      Focus on: correct interface, persistence works, GUPP principle implemented.
+    timeout_ms: 1800000
+
+  - id: beads-system
+    title: 'Implement Beads (git-backed issue tracking)'
+    prompt: |
+      Implement the Beads System for RubberDuck v2. Based on ROADMAP-v2.md in docs/ directory.
+
+      Create these files in packages/runtime/src/beads/:
+      1. bead-types.ts - Define Bead interface (id, title, description, type, priority, status, createdBy, dependsOn)
+      2. bead-store.ts - JSON-based persistence in .rubberduck/beads/
+      3. bead-commands.ts - CLI command interface (create, list, show, update, close, ready, dep)
+      4. index.ts - Exports
+
+      Bead types: 'task' | 'bug' | 'feature' | 'epic' | 'question' | 'docs'
+      Bead priority: 'P0' | 'P1' | 'P2' | 'P3' | 'P4'
+      Bead status: 'open' | 'in_progress' | 'done' | 'blocked'
+      ID format: rd-xxxxx (5 char alphanumeric, auto-generated)
+      
+      Key methods:
+      - create(bead: Omit<Bead, 'id' | 'createdAt' | 'updatedAt'>): Promise<Bead>
+      - get(beadId: string): Promise<Bead | null>
+      - update(beadId: string, updates: Partial<Bead>): Promise<Bead>
+      - list(filter?: { status?: BeadStatus; assignee?: string }): Promise<Bead[]>
+      - ready(): Promise<Bead[]> (unblocked, ready to work)
+      - dependsOn: string[] (Bead IDs this depends on)
+
+      Auto-generate IDs. Auto-set timestamps. Track dependencies.
+      
+      After implementation, create unit tests in __tests__/beads/ directory.
+      Run tests to verify: npm run test --workspace=@rubberduck/runtime
+    assigned_to: developer
+    verified_by: verifier
+    verify_prompt: |
+      Verify the Beads System implementation:
+      1. Read packages/runtime/src/beads/bead-types.ts - confirm Bead interface with all fields
+      2. Read packages/runtime/src/beads/bead-store.ts - confirm CRUD + ready() method
+      3. Check ID format: rd-xxxxx (5 char alphanumeric)
+      4. Check dependency tracking: dependsOn: string[]
+      5. Run: npm run test --workspace=@rubberduck/runtime -- __tests__/beads/
+      6. Verify no TypeScript errors: npx tsc --noEmit
+      
+      Focus on: correct interface, ID generation, dependency tracking, ready() returns unblocked.
+    timeout_ms: 1800000
+
+  - id: convoys-system
+    title: 'Implement Convoys (work bundling)'
+    prompt: |
+      Implement the Convoys System for RubberDuck v2. Based on ROADMAP-v2.md in docs/ directory.
+
+      Create these files in packages/runtime/src/convoys/:
+      1. convoy-types.ts - Define Convoy interface (id, name, beadIds, status, createdBy, notifyOnComplete)
+      2. convoy-store.ts - JSON-based persistence in .rubberduck/convoys/
+      3. convoy-manager.ts - Convoy operations
+      4. index.ts - Exports
+
+      Convoy status: 'active' | 'completed' | 'landed'
+      ID format: cv-xxxxx (5 char alphanumeric)
+      
+      Key methods:
+      - create(name: string, beadIds: string[], options?: { notify?: string[] }): Promise<Convoy>
+      - get(convoyId: string): Promise<Convoy | null>
+      - addBeads(convoyId: string, beadIds: string[]): Promise<void>
+      - removeBeads(convoyId: string, beadIds: string[]): Promise<void>
+      - list(): Promise<Convoy[]>
+      - land(convoyId: string): Promise<void> (mark completed)
+      
+      Track beads within convoy. Auto-generate IDs.
+      
+      After implementation, create unit tests in __tests__/convoys/ directory.
+      Run tests to verify: npm run test --workspace=@rubberduck/runtime
+    assigned_to: developer
+    verified_by: verifier
+    verify_prompt: |
+      Verify the Convoys System implementation:
+      1. Read packages/runtime/src/convoys/convoy-types.ts - confirm Convoy interface
+      2. Read packages/runtime/src/convoys/convoy-store.ts - confirm CRUD operations
+      3. Check bead tracking: beadIds: string[]
+      4. Check notifyOnComplete: string[] (agent IDs to notify)
+      5. Run: npm run test --workspace=@rubberduck/runtime -- __tests__/convoys/
+      6. Verify no TypeScript errors: npx tsc --noEmit
+      
+      Focus on: correct interface, bead tracking, notification system.
+    timeout_ms: 1800000
+
+  - id: integration-hooks-beads
+    title: 'Integrate Hooks with Beads'
+    prompt: |
+      Integrate Hook System with Beads System. When a bead is assigned to an agent, create a Hook automatically.
+
+      Modify packages/runtime/src/hooks/hook-manager.ts:
+      1. Add assignBead(beadId: string, agentId: string): Promise<Hook>
+      2. When bead.status changes to 'in_progress', create/update Hook
+      3. When bead closes, mark Hook completed
+
+      Modify packages/runtime/src/beads/bead-store.ts:
+      1. Add onAssign callback (optional, for real-time updates)
+
+      Create integration test in __tests__/integration/hooks-beads.test.ts:
+      - Create bead → assign to agent → create hook → complete bead → hook marked completed
+
+      Run tests: npm run test --workspace=@rubberduck/runtime -- __tests__/integration/
+    assigned_to: developer
+    depends_on: [hooks-system, beads-system]
+    verified_by: verifier
+    verify_prompt: |
+      Verify Hook-Beads integration:
+      1. Read modified hook-manager.ts - confirm assignBead() method
+      2. Read integration test __tests__/integration/hooks-beads.test.ts
+      3. Run integration tests: npm run test --workspace=@rubberduck/runtime -- __tests__/integration/hooks-beads
+      
+      Focus on: bead assignment creates hook, bead completion marks hook done.
+    timeout_ms: 1800000
+
+  - id: update-index-exports
+    title: 'Update runtime package exports'
+    prompt: |
+      Update packages/runtime/src/index.ts to export all new modules:
+      - hooks/* (HookStore, HookManager, Hook types)
+      - beads/* (BeadStore, Bead types)
+      - convoys/* (ConvoyManager, Convoy types)
+      
+      Read current index.ts and add new exports following existing pattern.
+      Verify TypeScript compilation: npx tsc --noEmit
+    assigned_to: developer
+    depends_on: [hooks-system, beads-system, convoys-system]
+    verified_by: verifier
+    verify_prompt: |
+      Verify exports in packages/runtime/src/index.ts:
+      1. Read index.ts - confirm hooks, beads, convoys exported
+      2. Run: npx tsc --noEmit --project packages/runtime/tsconfig.json
+      3. Confirm no errors
+      
+      Focus on: all new modules properly exported.
+    timeout_ms: 600000

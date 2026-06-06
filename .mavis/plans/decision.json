@@ -1,0 +1,22 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "hooks-system",
+      "verdict": "manual_retry",
+      "reason": "Fix TypeScript errors in hooks/index.ts: duplicate exports (HookStore and HookManager both as type and class). Remove duplicate type exports or rename classes to avoid naming conflict. Also fix race condition in popWork() by using atomic read-modify-write."
+    }
+  ],
+  "next_cycle": [
+    {
+      "task_id": "hooks-system",
+      "title": "Fix Hook System TypeScript errors",
+      "prompt": "Fix the TypeScript errors in packages/runtime/src/hooks/index.ts:\n\n1. **Duplicate exports**: Remove duplicate type exports (HookStore and HookManager are exported both as types and classes). Either:\n   - Export types with `type` keyword: `export type { HookStore, HookManager }`\n   - Or rename the classes to avoid conflict (e.g., HookStoreClass)\n\n2. **Race condition in popWork()**: The read-modify-write pattern in popWork() is not atomic. Use a lock or atomic file operation to prevent concurrent access issues.\n\nRun `npx tsc --noEmit` to verify TypeScript compiles without errors. All 59 existing tests must still pass.",
+      "assigned_to": "developer",
+      "verified_by": "verifier",
+      "verify_prompt": "1. Run `npx tsc --noEmit` in packages/runtime/ - confirm 0 errors\n2. Run tests: npm run test --workspace=@rubberduck/runtime -- __tests__/hooks/\n3. All 59 tests still pass\n4. Confirm duplicate export conflict is resolved",
+      "timeout_ms": 600000
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "Hook System caught TypeScript errors (duplicate exports). Sending it back to fix — no action needed from you."
+}

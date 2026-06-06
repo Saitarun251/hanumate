@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="duckGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#646cff"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+  </defs>
+  <!-- Duck body -->
+  <ellipse cx="50" cy="60" rx="35" ry="25" fill="url(#duckGrad)"/>
+  <!-- Duck head -->
+  <circle cx="75" cy="40" r="18" fill="url(#duckGrad)"/>
+  <!-- Beak -->
+  <path d="M 90 42 Q 100 45 90 48 Z" fill="#f59e0b"/>
+  <!-- Eye -->
+  <circle cx="80" cy="36" r="4" fill="#1a1a2e"/>
+  <!-- Code symbol -->
+  <text x="35" y="65" font-family="monospace" font-size="16" fill="white" font-weight="bold">&lt;/&gt;</text>
+</svg>

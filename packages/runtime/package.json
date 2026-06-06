@@ -1,5 +1,5 @@
 {
-	"name": "@rubberduck/runtime",
+	"name": "@kishkindhalabs/hanumate-runtime",
 	"version": "0.1.0",
 	"type": "module",
 	"main": "./dist/index.mjs",
