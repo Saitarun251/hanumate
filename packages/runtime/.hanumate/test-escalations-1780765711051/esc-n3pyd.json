@@ -1,0 +1,10 @@
+{
+  "id": "esc-n3pyd",
+  "severity": "HIGH",
+  "description": "High",
+  "reporter": "agent",
+  "createdAt": 1780765711073,
+  "updatedAt": 1780765711073,
+  "status": "open",
+  "route": "mayor"
+}

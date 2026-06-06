@@ -1,0 +1,14 @@
+{
+  "id": "esc-isbeq",
+  "severity": "HIGH",
+  "description": "Bug in feature",
+  "reporter": "test-agent",
+  "createdAt": 1780765523770,
+  "updatedAt": 1780765523770,
+  "status": "open",
+  "route": "mayor",
+  "relatedBeads": [
+    "rd-bug1",
+    "rd-bug2"
+  ]
+}

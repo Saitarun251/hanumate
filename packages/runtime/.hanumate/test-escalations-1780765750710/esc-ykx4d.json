@@ -1,0 +1,10 @@
+{
+  "id": "esc-ykx4d",
+  "severity": "HIGH",
+  "description": "Performance degraded",
+  "reporter": "test-agent",
+  "createdAt": 1780765750717,
+  "updatedAt": 1780765750717,
+  "status": "open",
+  "route": "mayor"
+}

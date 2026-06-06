@@ -1,0 +1,10 @@
+{
+  "id": "esc-blj5s",
+  "severity": "MEDIUM",
+  "description": "Test",
+  "reporter": "agent",
+  "createdAt": 1780765750741,
+  "updatedAt": 1780765750741,
+  "status": "open",
+  "route": "deacon"
+}

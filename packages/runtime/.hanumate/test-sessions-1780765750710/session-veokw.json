@@ -1,0 +1,11 @@
+{
+  "id": "session-veokw",
+  "agentId": "agent-1",
+  "startedAt": 1780765750716,
+  "workBeads": [
+    "rd-task1"
+  ],
+  "events": [],
+  "status": "active",
+  "lastEventAt": 1780765750716
+}

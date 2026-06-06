@@ -1,0 +1,14 @@
+{
+  "id": "esc-umshq",
+  "severity": "HIGH",
+  "description": "Bug in feature",
+  "reporter": "test-agent",
+  "createdAt": 1780765647190,
+  "updatedAt": 1780765647190,
+  "status": "open",
+  "route": "mayor",
+  "relatedBeads": [
+    "rd-bug1",
+    "rd-bug2"
+  ]
+}

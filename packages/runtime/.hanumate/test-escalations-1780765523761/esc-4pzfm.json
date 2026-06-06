@@ -1,0 +1,11 @@
+{
+  "id": "esc-4pzfm",
+  "severity": "LOW",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765523775,
+  "updatedAt": 1780765523776,
+  "status": "resolved",
+  "resolvedBy": "resolver",
+  "resolvedAt": 1780765523776
+}

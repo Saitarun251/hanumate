@@ -1,0 +1,19 @@
+{
+  "id": "session-9szvr",
+  "agentId": "agent-1",
+  "startedAt": 1780765647104,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765647104,
+      "data": {
+        "status": "failed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "failed",
+  "lastEventAt": 1780765647104,
+  "endedAt": 1780765647104
+}

@@ -1,0 +1,11 @@
+{
+  "id": "esc-p74t8",
+  "severity": "LOW",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765647196,
+  "updatedAt": 1780765647196,
+  "status": "resolved",
+  "resolvedBy": "resolver",
+  "resolvedAt": 1780765647196
+}

@@ -1,0 +1,13 @@
+{
+  "queue": [
+    {
+      "id": "mr-qaw70",
+      "branch": "feature/cancel",
+      "author": "test-user",
+      "status": "cancelled",
+      "createdAt": 1780765523903,
+      "updatedAt": 1780765523904
+    }
+  ],
+  "nextSequence": 0
+}

@@ -1,0 +1,10 @@
+{
+  "id": "esc-qvfi6",
+  "severity": "MEDIUM",
+  "description": "Test",
+  "reporter": "agent",
+  "createdAt": 1780765711076,
+  "updatedAt": 1780765711076,
+  "status": "open",
+  "route": "deacon"
+}

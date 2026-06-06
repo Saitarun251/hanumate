@@ -1,0 +1,10 @@
+{
+  "id": "esc-yzy42",
+  "severity": "HIGH",
+  "description": "High 2",
+  "reporter": "agent",
+  "createdAt": 1780765750740,
+  "updatedAt": 1780765750740,
+  "status": "open",
+  "route": "mayor"
+}

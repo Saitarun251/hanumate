@@ -1,0 +1,10 @@
+{
+  "id": "esc-7hpkv",
+  "severity": "MEDIUM",
+  "description": "Medium 2",
+  "reporter": "agent",
+  "createdAt": 1780765711068,
+  "updatedAt": 1780765711068,
+  "status": "open",
+  "route": "deacon"
+}

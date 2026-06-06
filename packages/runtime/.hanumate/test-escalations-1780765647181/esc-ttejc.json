@@ -1,0 +1,10 @@
+{
+  "id": "esc-ttejc",
+  "severity": "MEDIUM",
+  "description": "Medium 1",
+  "reporter": "agent",
+  "createdAt": 1780765647199,
+  "updatedAt": 1780765647199,
+  "status": "open",
+  "route": "deacon"
+}

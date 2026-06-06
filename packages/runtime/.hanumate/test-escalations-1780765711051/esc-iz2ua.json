@@ -1,0 +1,10 @@
+{
+  "id": "esc-iz2ua",
+  "severity": "MEDIUM",
+  "description": "Med",
+  "reporter": "agent",
+  "createdAt": 1780765711072,
+  "updatedAt": 1780765711072,
+  "status": "open",
+  "route": "deacon"
+}

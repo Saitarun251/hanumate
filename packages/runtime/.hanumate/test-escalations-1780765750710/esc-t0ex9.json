@@ -1,0 +1,14 @@
+{
+  "id": "esc-t0ex9",
+  "severity": "HIGH",
+  "description": "Bug in feature",
+  "reporter": "test-agent",
+  "createdAt": 1780765750719,
+  "updatedAt": 1780765750719,
+  "status": "open",
+  "route": "mayor",
+  "relatedBeads": [
+    "rd-bug1",
+    "rd-bug2"
+  ]
+}

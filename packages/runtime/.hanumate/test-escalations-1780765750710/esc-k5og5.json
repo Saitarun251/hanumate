@@ -1,0 +1,10 @@
+{
+  "id": "esc-k5og5",
+  "severity": "MEDIUM",
+  "description": "Test 3",
+  "reporter": "agent",
+  "createdAt": 1780765750729,
+  "updatedAt": 1780765750729,
+  "status": "open",
+  "route": "deacon"
+}

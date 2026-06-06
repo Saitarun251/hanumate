@@ -1,0 +1,10 @@
+{
+  "id": "esc-adbun",
+  "severity": "MEDIUM",
+  "description": "Med",
+  "reporter": "agent",
+  "createdAt": 1780765523784,
+  "updatedAt": 1780765523784,
+  "status": "open",
+  "route": "deacon"
+}

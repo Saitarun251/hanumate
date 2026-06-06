@@ -1,0 +1,10 @@
+{
+  "id": "esc-3osyd",
+  "severity": "CRITICAL",
+  "description": "Crit 2",
+  "reporter": "agent",
+  "createdAt": 1780765750735,
+  "updatedAt": 1780765750735,
+  "status": "open",
+  "route": "overseer"
+}

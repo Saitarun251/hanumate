@@ -1,0 +1,12 @@
+{
+  "id": "esc-1ps7z",
+  "severity": "HIGH",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765647193,
+  "updatedAt": 1780765647193,
+  "status": "acknowledged",
+  "route": "mayor",
+  "acknowledgedBy": "handler1",
+  "acknowledgedAt": 1780765647193
+}

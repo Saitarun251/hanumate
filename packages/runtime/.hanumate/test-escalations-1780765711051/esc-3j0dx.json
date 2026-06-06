@@ -1,0 +1,10 @@
+{
+  "id": "esc-3j0dx",
+  "severity": "MEDIUM",
+  "description": "Medium 1",
+  "reporter": "agent",
+  "createdAt": 1780765711067,
+  "updatedAt": 1780765711067,
+  "status": "open",
+  "route": "deacon"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "esc-lag4k",
+  "severity": "MEDIUM",
+  "description": "Test 3",
+  "reporter": "agent",
+  "createdAt": 1780765711066,
+  "updatedAt": 1780765711066,
+  "status": "open",
+  "route": "deacon"
+}

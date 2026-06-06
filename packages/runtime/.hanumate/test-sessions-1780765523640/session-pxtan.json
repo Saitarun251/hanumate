@@ -1,0 +1,19 @@
+{
+  "id": "session-pxtan",
+  "agentId": "agent-1",
+  "startedAt": 1780765523663,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765523664,
+      "data": {
+        "status": "completed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "completed",
+  "lastEventAt": 1780765523664,
+  "endedAt": 1780765523664
+}

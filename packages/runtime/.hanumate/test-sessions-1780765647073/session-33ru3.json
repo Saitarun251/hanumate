@@ -1,0 +1,19 @@
+{
+  "id": "session-33ru3",
+  "agentId": "agent-1",
+  "startedAt": 1780765647105,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765647106,
+      "data": {
+        "status": "completed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "completed",
+  "lastEventAt": 1780765647106,
+  "endedAt": 1780765647106
+}

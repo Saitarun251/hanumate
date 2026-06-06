@@ -1,0 +1,10 @@
+{
+  "id": "esc-23fap",
+  "severity": "HIGH",
+  "description": "High 2",
+  "reporter": "agent",
+  "createdAt": 1780765523788,
+  "updatedAt": 1780765523788,
+  "status": "open",
+  "route": "mayor"
+}

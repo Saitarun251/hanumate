@@ -1,0 +1,10 @@
+{
+  "id": "esc-ussxf",
+  "severity": "CRITICAL",
+  "description": "Crit 1",
+  "reporter": "agent",
+  "createdAt": 1780765647200,
+  "updatedAt": 1780765647200,
+  "status": "open",
+  "route": "overseer"
+}

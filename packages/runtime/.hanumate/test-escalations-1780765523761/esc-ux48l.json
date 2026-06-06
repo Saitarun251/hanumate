@@ -1,0 +1,10 @@
+{
+  "id": "esc-ux48l",
+  "severity": "HIGH",
+  "description": "Test 2",
+  "reporter": "agent",
+  "createdAt": 1780765523777,
+  "updatedAt": 1780765523777,
+  "status": "open",
+  "route": "mayor"
+}

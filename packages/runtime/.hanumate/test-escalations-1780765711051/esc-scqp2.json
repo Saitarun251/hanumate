@@ -1,0 +1,10 @@
+{
+  "id": "esc-scqp2",
+  "severity": "HIGH",
+  "description": "Test 2",
+  "reporter": "agent",
+  "createdAt": 1780765711065,
+  "updatedAt": 1780765711065,
+  "status": "open",
+  "route": "mayor"
+}

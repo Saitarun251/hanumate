@@ -1,0 +1,13 @@
+{
+  "queue": [
+    {
+      "id": "mr-45fmb",
+      "branch": "feature/cancel",
+      "author": "test-user",
+      "status": "cancelled",
+      "createdAt": 1780765647371,
+      "updatedAt": 1780765647371
+    }
+  ],
+  "nextSequence": 0
+}

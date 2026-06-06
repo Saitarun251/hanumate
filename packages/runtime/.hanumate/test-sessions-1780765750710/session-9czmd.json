@@ -1,0 +1,19 @@
+{
+  "id": "session-9czmd",
+  "agentId": "agent-1",
+  "startedAt": 1780765750748,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765750749,
+      "data": {
+        "status": "completed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "completed",
+  "lastEventAt": 1780765750749,
+  "endedAt": 1780765750749
+}

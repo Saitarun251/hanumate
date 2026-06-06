@@ -1,0 +1,19 @@
+{
+  "id": "session-4uan2",
+  "agentId": "agent-1",
+  "startedAt": 1780765647092,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765647093,
+      "data": {
+        "status": "completed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "completed",
+  "lastEventAt": 1780765647093,
+  "endedAt": 1780765647093
+}

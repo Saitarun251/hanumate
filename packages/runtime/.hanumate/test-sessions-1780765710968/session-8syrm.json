@@ -1,0 +1,28 @@
+{
+  "id": "session-8syrm",
+  "agentId": "agent-1",
+  "startedAt": 1780765710992,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "start",
+      "timestamp": 1780765710992,
+      "data": {},
+      "sequence": 0
+    },
+    {
+      "type": "prompt",
+      "timestamp": 1780765710993,
+      "data": {},
+      "sequence": 1
+    },
+    {
+      "type": "complete",
+      "timestamp": 1780765710993,
+      "data": {},
+      "sequence": 2
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765710993
+}

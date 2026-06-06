@@ -1,0 +1,10 @@
+{
+  "id": "esc-wzf71",
+  "severity": "CRITICAL",
+  "description": "Crit",
+  "reporter": "agent",
+  "createdAt": 1780765523787,
+  "updatedAt": 1780765523787,
+  "status": "open",
+  "route": "overseer"
+}

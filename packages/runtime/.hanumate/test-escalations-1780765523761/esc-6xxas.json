@@ -1,0 +1,12 @@
+{
+  "id": "esc-6xxas",
+  "severity": "CRITICAL",
+  "description": "Test 1",
+  "reporter": "agent",
+  "createdAt": 1780765523777,
+  "updatedAt": 1780765523778,
+  "status": "acknowledged",
+  "route": "overseer",
+  "acknowledgedBy": "handler",
+  "acknowledgedAt": 1780765523778
+}

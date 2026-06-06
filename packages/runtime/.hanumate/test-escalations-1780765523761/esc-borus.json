@@ -1,0 +1,10 @@
+{
+  "id": "esc-borus",
+  "severity": "HIGH",
+  "description": "High",
+  "reporter": "agent",
+  "createdAt": 1780765523782,
+  "updatedAt": 1780765523782,
+  "status": "open",
+  "route": "mayor"
+}

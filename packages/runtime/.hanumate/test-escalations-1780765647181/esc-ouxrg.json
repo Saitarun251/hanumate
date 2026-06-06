@@ -1,0 +1,10 @@
+{
+  "id": "esc-ouxrg",
+  "severity": "HIGH",
+  "description": "Performance degraded",
+  "reporter": "test-agent",
+  "createdAt": 1780765647188,
+  "updatedAt": 1780765647188,
+  "status": "open",
+  "route": "mayor"
+}

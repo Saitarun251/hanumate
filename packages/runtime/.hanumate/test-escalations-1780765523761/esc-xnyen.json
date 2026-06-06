@@ -1,0 +1,10 @@
+{
+  "id": "esc-xnyen",
+  "severity": "HIGH",
+  "description": "High 1",
+  "reporter": "agent",
+  "createdAt": 1780765523788,
+  "updatedAt": 1780765523788,
+  "status": "open",
+  "route": "mayor"
+}

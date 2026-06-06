@@ -1,0 +1,18 @@
+{
+  "id": "session-9re2n",
+  "agentId": "agent-1",
+  "startedAt": 1780765710977,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "prompt",
+      "timestamp": 1780765710978,
+      "data": {
+        "text": "Hello"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765710978
+}

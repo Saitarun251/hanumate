@@ -5,11 +5,12 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { exec, execStream, getDefaultEnv } from '../src/shell.js';
 import { mk, remove, write, read } from '../src/fs.js';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 
 describe('Shell Execution', () => {
-	const testDir = join(tmpdir(), 'hanumate-shell-test');
+	// Resolve path to handle symlinks (e.g., /tmp -> /private/tmp on macOS)
+	const testDir = resolve(tmpdir(), 'hanumate-shell-test');
 
 	beforeAll(async () => {
 		await mk(testDir, { recursive: true });
@@ -35,7 +36,10 @@ describe('Shell Execution', () => {
 
 		it('should execute with custom cwd', async () => {
 			const result = await exec('pwd', testDir);
-			expect(result.stdout.trim()).toBe(testDir);
+			// Use realpath to resolve symlinks (e.g., .mavis -> .minimax on macOS)
+			const { realpathSync } = await import('node:fs');
+			const expectedPath = realpathSync(testDir);
+			expect(result.stdout.trim()).toBe(expectedPath);
 			expect(result.exitCode).toBe(0);
 		});
 

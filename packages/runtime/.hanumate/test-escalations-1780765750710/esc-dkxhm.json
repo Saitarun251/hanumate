@@ -1,0 +1,10 @@
+{
+  "id": "esc-dkxhm",
+  "severity": "CRITICAL",
+  "description": "Critical",
+  "reporter": "agent",
+  "createdAt": 1780765750732,
+  "updatedAt": 1780765750732,
+  "status": "open",
+  "route": "overseer"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "esc-bgdxs",
+  "severity": "MEDIUM",
+  "description": "Minor issue",
+  "reporter": "test-agent",
+  "createdAt": 1780765750718,
+  "updatedAt": 1780765750718,
+  "status": "open",
+  "route": "deacon"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "session-93mhz",
+  "agentId": "agent-1",
+  "startedAt": 1780765750719,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "prompt",
+      "timestamp": 1780765750720,
+      "data": {
+        "text": "Hello"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765750720
+}

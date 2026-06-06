@@ -1,0 +1,10 @@
+{
+  "id": "esc-gizhh",
+  "severity": "HIGH",
+  "description": "High 2",
+  "reporter": "agent",
+  "createdAt": 1780765711075,
+  "updatedAt": 1780765711075,
+  "status": "open",
+  "route": "mayor"
+}

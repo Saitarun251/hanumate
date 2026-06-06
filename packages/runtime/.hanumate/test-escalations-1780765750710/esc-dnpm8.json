@@ -1,0 +1,10 @@
+{
+  "id": "esc-dnpm8",
+  "severity": "MEDIUM",
+  "description": "Medium 1",
+  "reporter": "agent",
+  "createdAt": 1780765750732,
+  "updatedAt": 1780765750732,
+  "status": "open",
+  "route": "deacon"
+}

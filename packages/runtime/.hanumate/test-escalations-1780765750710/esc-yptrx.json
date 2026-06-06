@@ -1,0 +1,10 @@
+{
+  "id": "esc-yptrx",
+  "severity": "CRITICAL",
+  "description": "Crit 2",
+  "reporter": "agent",
+  "createdAt": 1780765750738,
+  "updatedAt": 1780765750738,
+  "status": "open",
+  "route": "overseer"
+}

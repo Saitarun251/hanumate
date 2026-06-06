@@ -1,0 +1,18 @@
+{
+  "id": "session-bfj2t",
+  "agentId": "agent-1",
+  "startedAt": 1780765647085,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "tool",
+      "timestamp": 1780765647086,
+      "data": {
+        "tool": "shell"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765647086
+}

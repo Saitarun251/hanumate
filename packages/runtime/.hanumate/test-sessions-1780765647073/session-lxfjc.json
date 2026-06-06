@@ -1,0 +1,11 @@
+{
+  "id": "session-lxfjc",
+  "agentId": "agent-1",
+  "startedAt": 1780765647079,
+  "workBeads": [
+    "rd-task1"
+  ],
+  "events": [],
+  "status": "active",
+  "lastEventAt": 1780765647079
+}

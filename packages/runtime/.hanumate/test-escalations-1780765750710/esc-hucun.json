@@ -1,0 +1,10 @@
+{
+  "id": "esc-hucun",
+  "severity": "HIGH",
+  "description": "High",
+  "reporter": "agent",
+  "createdAt": 1780765750738,
+  "updatedAt": 1780765750738,
+  "status": "open",
+  "route": "mayor"
+}

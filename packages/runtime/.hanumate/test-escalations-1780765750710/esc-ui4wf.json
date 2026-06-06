@@ -1,0 +1,10 @@
+{
+  "id": "esc-ui4wf",
+  "severity": "HIGH",
+  "description": "Test 2",
+  "reporter": "agent",
+  "createdAt": 1780765750728,
+  "updatedAt": 1780765750728,
+  "status": "open",
+  "route": "mayor"
+}

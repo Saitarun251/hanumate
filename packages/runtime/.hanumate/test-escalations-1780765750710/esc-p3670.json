@@ -1,0 +1,10 @@
+{
+  "id": "esc-p3670",
+  "severity": "CRITICAL",
+  "description": "System down",
+  "reporter": "test-agent",
+  "createdAt": 1780765750715,
+  "updatedAt": 1780765750715,
+  "status": "open",
+  "route": "overseer"
+}

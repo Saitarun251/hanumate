@@ -1,0 +1,12 @@
+{
+  "id": "esc-k1u8c",
+  "severity": "CRITICAL",
+  "description": "Test 1",
+  "reporter": "agent",
+  "createdAt": 1780765711065,
+  "updatedAt": 1780765711066,
+  "status": "acknowledged",
+  "route": "overseer",
+  "acknowledgedBy": "handler",
+  "acknowledgedAt": 1780765711066
+}

@@ -1,0 +1,19 @@
+{
+  "id": "session-g23os",
+  "agentId": "agent-1",
+  "startedAt": 1780765523680,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765523680,
+      "data": {
+        "status": "completed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "completed",
+  "lastEventAt": 1780765523680,
+  "endedAt": 1780765523680
+}

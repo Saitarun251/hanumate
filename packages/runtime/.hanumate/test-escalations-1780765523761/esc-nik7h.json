@@ -1,0 +1,10 @@
+{
+  "id": "esc-nik7h",
+  "severity": "HIGH",
+  "description": "Performance degraded",
+  "reporter": "test-agent",
+  "createdAt": 1780765523768,
+  "updatedAt": 1780765523768,
+  "status": "open",
+  "route": "mayor"
+}

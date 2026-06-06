@@ -1,0 +1,10 @@
+{
+  "id": "esc-gvboo",
+  "severity": "MEDIUM",
+  "description": "Med",
+  "reporter": "agent",
+  "createdAt": 1780765647204,
+  "updatedAt": 1780765647204,
+  "status": "open",
+  "route": "deacon"
+}

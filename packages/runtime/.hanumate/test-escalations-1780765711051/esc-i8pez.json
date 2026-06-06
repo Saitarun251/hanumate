@@ -1,0 +1,11 @@
+{
+  "id": "esc-i8pez",
+  "severity": "LOW",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765711064,
+  "updatedAt": 1780765711064,
+  "status": "resolved",
+  "resolvedBy": "resolver",
+  "resolvedAt": 1780765711064
+}

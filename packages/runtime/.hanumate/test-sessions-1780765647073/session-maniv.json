@@ -1,0 +1,11 @@
+{
+  "id": "session-maniv",
+  "agentId": "agent-2",
+  "startedAt": 1780765647109,
+  "workBeads": [
+    "rd-task2"
+  ],
+  "events": [],
+  "status": "active",
+  "lastEventAt": 1780765647109
+}

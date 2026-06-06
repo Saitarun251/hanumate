@@ -1,0 +1,11 @@
+{
+  "id": "session-p1w9f",
+  "agentId": "agent-1",
+  "startedAt": 1780765647109,
+  "workBeads": [
+    "rd-task1"
+  ],
+  "events": [],
+  "status": "active",
+  "lastEventAt": 1780765647109
+}

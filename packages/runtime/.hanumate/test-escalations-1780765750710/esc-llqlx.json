@@ -1,0 +1,10 @@
+{
+  "id": "esc-llqlx",
+  "severity": "CRITICAL",
+  "description": "Crit",
+  "reporter": "agent",
+  "createdAt": 1780765750739,
+  "updatedAt": 1780765750739,
+  "status": "open",
+  "route": "overseer"
+}

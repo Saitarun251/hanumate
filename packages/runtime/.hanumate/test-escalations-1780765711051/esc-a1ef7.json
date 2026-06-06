@@ -1,0 +1,10 @@
+{
+  "id": "esc-a1ef7",
+  "severity": "HIGH",
+  "description": "High",
+  "reporter": "agent",
+  "createdAt": 1780765711070,
+  "updatedAt": 1780765711070,
+  "status": "open",
+  "route": "mayor"
+}

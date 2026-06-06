@@ -1,0 +1,10 @@
+{
+  "id": "esc-3q724",
+  "severity": "CRITICAL",
+  "description": "Test 1",
+  "reporter": "agent",
+  "createdAt": 1780765523790,
+  "updatedAt": 1780765523790,
+  "status": "open",
+  "route": "overseer"
+}

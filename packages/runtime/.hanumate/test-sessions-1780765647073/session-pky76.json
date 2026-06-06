@@ -1,0 +1,28 @@
+{
+  "id": "session-pky76",
+  "agentId": "agent-1",
+  "startedAt": 1780765647101,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "start",
+      "timestamp": 1780765647101,
+      "data": {},
+      "sequence": 0
+    },
+    {
+      "type": "prompt",
+      "timestamp": 1780765647102,
+      "data": {},
+      "sequence": 1
+    },
+    {
+      "type": "complete",
+      "timestamp": 1780765647102,
+      "data": {},
+      "sequence": 2
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765647102
+}

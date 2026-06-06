@@ -1,0 +1,18 @@
+{
+  "id": "session-16eqw",
+  "agentId": "agent-1",
+  "startedAt": 1780765523658,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "checkpoint",
+      "timestamp": 1780765523658,
+      "data": {
+        "progress": 50
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765523658
+}

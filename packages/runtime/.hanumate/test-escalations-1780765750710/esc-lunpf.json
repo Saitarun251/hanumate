@@ -1,0 +1,12 @@
+{
+  "id": "esc-lunpf",
+  "severity": "CRITICAL",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765750720,
+  "updatedAt": 1780765750721,
+  "status": "acknowledged",
+  "route": "overseer",
+  "acknowledgedBy": "handler-agent",
+  "acknowledgedAt": 1780765750721
+}

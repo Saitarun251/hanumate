@@ -1,0 +1,10 @@
+{
+  "id": "esc-zf14h",
+  "severity": "CRITICAL",
+  "description": "System down",
+  "reporter": "test-agent",
+  "createdAt": 1780765711055,
+  "updatedAt": 1780765711055,
+  "status": "open",
+  "route": "overseer"
+}

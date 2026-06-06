@@ -1,0 +1,10 @@
+{
+  "id": "esc-ynnb4",
+  "severity": "CRITICAL",
+  "description": "Crit 1",
+  "reporter": "agent",
+  "createdAt": 1780765711069,
+  "updatedAt": 1780765711069,
+  "status": "open",
+  "route": "overseer"
+}

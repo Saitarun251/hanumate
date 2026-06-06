@@ -1,0 +1,10 @@
+{
+  "id": "esc-pbca5",
+  "severity": "HIGH",
+  "description": "High 1",
+  "reporter": "agent",
+  "createdAt": 1780765647208,
+  "updatedAt": 1780765647208,
+  "status": "open",
+  "route": "mayor"
+}

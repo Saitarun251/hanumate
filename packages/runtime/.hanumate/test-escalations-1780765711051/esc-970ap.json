@@ -1,0 +1,13 @@
+{
+  "id": "esc-970ap",
+  "severity": "MEDIUM",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765711063,
+  "updatedAt": 1780765711063,
+  "status": "resolved",
+  "route": "deacon",
+  "resolvedBy": "resolver-agent",
+  "resolvedAt": 1780765711063,
+  "resolution": "Fixed the issue"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "session-5x7s4",
+  "agentId": "agent-1",
+  "startedAt": 1780765750740,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765750740,
+      "data": {
+        "status": "failed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "failed",
+  "lastEventAt": 1780765750740,
+  "endedAt": 1780765750740
+}

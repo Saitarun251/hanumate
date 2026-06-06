@@ -1,0 +1,10 @@
+{
+  "id": "esc-rsk5j",
+  "severity": "CRITICAL",
+  "description": "Critical",
+  "reporter": "agent",
+  "createdAt": 1780765711067,
+  "updatedAt": 1780765711067,
+  "status": "open",
+  "route": "overseer"
+}

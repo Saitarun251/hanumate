@@ -1,0 +1,10 @@
+{
+  "id": "esc-pu24h",
+  "severity": "HIGH",
+  "description": "High",
+  "reporter": "agent",
+  "createdAt": 1780765647201,
+  "updatedAt": 1780765647201,
+  "status": "open",
+  "route": "mayor"
+}

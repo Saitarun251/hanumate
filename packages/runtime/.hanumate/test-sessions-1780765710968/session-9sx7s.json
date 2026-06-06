@@ -1,0 +1,18 @@
+{
+  "id": "session-9sx7s",
+  "agentId": "agent-1",
+  "startedAt": 1780765710979,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "tool",
+      "timestamp": 1780765710979,
+      "data": {
+        "tool": "shell"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765710979
+}

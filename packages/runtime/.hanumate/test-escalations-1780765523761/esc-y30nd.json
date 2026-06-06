@@ -1,0 +1,10 @@
+{
+  "id": "esc-y30nd",
+  "severity": "MEDIUM",
+  "description": "Test",
+  "reporter": "agent",
+  "createdAt": 1780765523789,
+  "updatedAt": 1780765523789,
+  "status": "open",
+  "route": "deacon"
+}

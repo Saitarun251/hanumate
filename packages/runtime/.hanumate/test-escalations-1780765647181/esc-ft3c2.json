@@ -1,0 +1,10 @@
+{
+  "id": "esc-ft3c2",
+  "severity": "CRITICAL",
+  "description": "Crit",
+  "reporter": "agent",
+  "createdAt": 1780765647202,
+  "updatedAt": 1780765647202,
+  "status": "open",
+  "route": "overseer"
+}

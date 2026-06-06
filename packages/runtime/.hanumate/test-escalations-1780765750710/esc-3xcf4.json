@@ -1,0 +1,13 @@
+{
+  "id": "esc-3xcf4",
+  "severity": "MEDIUM",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765750725,
+  "updatedAt": 1780765750725,
+  "status": "resolved",
+  "route": "deacon",
+  "resolvedBy": "resolver-agent",
+  "resolvedAt": 1780765750725,
+  "resolution": "Fixed the issue"
+}

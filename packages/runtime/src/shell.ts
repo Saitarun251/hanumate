@@ -46,6 +46,9 @@ export async function exec(
 		...process.env,
 		...options?.env,
 	} as Record<string, string>;
+	
+	// Unset PWD to prevent shell from overriding cwd option
+	delete env.PWD;
 
 	const { shell: _shell, ...restOptions } = {
 		cwd: cwd ?? process.cwd(),

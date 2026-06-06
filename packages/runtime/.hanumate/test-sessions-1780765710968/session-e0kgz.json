@@ -1,0 +1,19 @@
+{
+  "id": "session-e0kgz",
+  "agentId": "agent-1",
+  "startedAt": 1780765710985,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "complete",
+      "timestamp": 1780765710986,
+      "data": {
+        "status": "completed"
+      },
+      "sequence": 0
+    }
+  ],
+  "status": "completed",
+  "lastEventAt": 1780765710986,
+  "endedAt": 1780765710986
+}

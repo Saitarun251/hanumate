@@ -1,0 +1,12 @@
+{
+  "id": "esc-f101q",
+  "severity": "HIGH",
+  "description": "Test",
+  "reporter": "test-agent",
+  "createdAt": 1780765523773,
+  "updatedAt": 1780765523773,
+  "status": "acknowledged",
+  "route": "mayor",
+  "acknowledgedBy": "handler1",
+  "acknowledgedAt": 1780765523773
+}

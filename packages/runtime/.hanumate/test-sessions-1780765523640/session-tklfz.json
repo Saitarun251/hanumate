@@ -1,0 +1,28 @@
+{
+  "id": "session-tklfz",
+  "agentId": "agent-1",
+  "startedAt": 1780765523670,
+  "workBeads": [],
+  "events": [
+    {
+      "type": "start",
+      "timestamp": 1780765523671,
+      "data": {},
+      "sequence": 0
+    },
+    {
+      "type": "prompt",
+      "timestamp": 1780765523671,
+      "data": {},
+      "sequence": 1
+    },
+    {
+      "type": "complete",
+      "timestamp": 1780765523671,
+      "data": {},
+      "sequence": 2
+    }
+  ],
+  "status": "active",
+  "lastEventAt": 1780765523671
+}

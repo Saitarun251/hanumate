@@ -1,0 +1,10 @@
+{
+  "id": "esc-1p4dt",
+  "severity": "MEDIUM",
+  "description": "Medium 1",
+  "reporter": "agent",
+  "createdAt": 1780765523780,
+  "updatedAt": 1780765523780,
+  "status": "open",
+  "route": "deacon"
+}

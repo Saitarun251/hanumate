@@ -1,0 +1,10 @@
+{
+  "id": "esc-m9f5k",
+  "severity": "CRITICAL",
+  "description": "Crit 2",
+  "reporter": "agent",
+  "createdAt": 1780765711073,
+  "updatedAt": 1780765711073,
+  "status": "open",
+  "route": "overseer"
+}

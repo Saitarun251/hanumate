@@ -1,0 +1,10 @@
+{
+  "id": "esc-bw026",
+  "severity": "HIGH",
+  "description": "Test 2",
+  "reporter": "agent",
+  "createdAt": 1780765711078,
+  "updatedAt": 1780765711078,
+  "status": "open",
+  "route": "mayor"
+}

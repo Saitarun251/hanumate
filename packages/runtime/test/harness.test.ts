@@ -3,7 +3,7 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll, vi, beforeEach } from 'vitest';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { rm } from 'node:fs/promises';
 import { mk, write, read } from '../src/fs.js';
@@ -19,7 +19,8 @@ vi.mock('@earendil-works/pi-agent-core', () => ({
 import { createAgent, init, type HanumateConfig } from '../src/harness.js';
 
 describe('Harness Integration', () => {
-	const testDir = join(tmpdir(), 'hanumate-harness-test');
+	// Resolve path to handle symlinks (e.g., /tmp -> /private/tmp on macOS)
+	const testDir = resolve(tmpdir(), 'hanumate-harness-test');
 
 	beforeAll(async () => {
 		await mk(testDir, { recursive: true });
@@ -85,7 +86,10 @@ describe('Harness Integration', () => {
 			const session = harness.session();
 
 			const result = await session.shell('pwd', testDir);
-			expect(result.stdout.trim()).toBe(testDir);
+			// Use realpath to resolve symlinks (e.g., .mavis -> .minimax on macOS)
+			const { realpathSync } = await import('node:fs');
+			const expectedPath = realpathSync(testDir);
+			expect(result.stdout.trim()).toBe(expectedPath);
 		});
 
 		it('should use agent environment in shell', async () => {

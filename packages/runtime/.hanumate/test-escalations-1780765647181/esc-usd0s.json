@@ -1,0 +1,10 @@
+{
+  "id": "esc-usd0s",
+  "severity": "MEDIUM",
+  "description": "Test",
+  "reporter": "agent",
+  "createdAt": 1780765647209,
+  "updatedAt": 1780765647209,
+  "status": "open",
+  "route": "deacon"
+}

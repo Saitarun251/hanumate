@@ -1,0 +1,13 @@
+{
+  "queue": [
+    {
+      "id": "mr-yeom6",
+      "branch": "feature/cancel",
+      "author": "test-user",
+      "status": "cancelled",
+      "createdAt": 1780765711203,
+      "updatedAt": 1780765711203
+    }
+  ],
+  "nextSequence": 0
+}
