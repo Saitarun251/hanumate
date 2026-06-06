@@ -6,13 +6,13 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-#### Core Runtime (@rubberduck/runtime)
+#### Core Runtime (@hanumate/runtime)
 
 - **Skills System**
   - `Session.runSkill()` - Execute skills with full context
   - `Session.getSkillInstructions()` - Get skill instructions for prompt injection
   - `Session.listSkills()` - List available skills
-  - Skills loaded from `.rubberduck/.agents/skills/:skill-name/SKILL.md`
+  - Skills loaded from `.hanumate/.agents/skills/:skill-name/SKILL.md`
   - YAML frontmatter support with name, description, tools metadata
 
 - **MCP (Model Context Protocol) Integration**
@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file.
   - Proper error handling with error codes (ENOENT, EACCES, etc.)
   - Hidden file filtering option
 
-#### OpenTelemetry (@rubberduck/opentelemetry)
+#### OpenTelemetry (@hanumate/opentelemetry)
 
 - `initTelemetry()` - Initialize OpenTelemetry tracing
 - `shutdownTelemetry()` - Graceful shutdown
@@ -66,7 +66,7 @@ All notable changes to this project will be documented in this file.
 - Console and OTLP exporters
 - Configurable sampling
 
-#### CLI (@rubberduck/cli)
+#### CLI (@hanumate/cli)
 
 - `duck dev` - Start development server with WebSocket support
 - `duck run <workflow>` - Execute workflows from CLI

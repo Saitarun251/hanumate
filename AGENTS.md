@@ -1,10 +1,10 @@
-# RubberDuck Agent Architecture
+# Hanumate Agent Architecture
 
-This document describes the agent architecture in RubberDuck framework.
+This document describes the agent architecture in Hanumate framework.
 
 ## Overview
 
-RubberDuck uses a **multi-agent orchestration pattern** where specialized agents work together to handle complex tasks.
+Hanumate uses a **multi-agent orchestration pattern** where specialized agents work together to handle complex tasks.
 
 ```
 User Request
@@ -37,7 +37,7 @@ The orchestrator is the central coordinator that:
 - Collects and aggregates results
 
 ```typescript
-import { AgentRegistry, Dispatcher } from '@rubberduck/runtime';
+import { AgentRegistry, Dispatcher } from '@hanumate/runtime';
 
 const registry = new AgentRegistry();
 const dispatcher = new Dispatcher(registry);
@@ -94,7 +94,7 @@ const reviewerAgent = createAgent({
 The foundation for creating agents:
 
 ```typescript
-import { createAgent, type RubberDuckAgent, type Session } from '@rubberduck/runtime';
+import { createAgent, type HanumateAgent, type Session } from '@hanumate/runtime';
 
 // Create agent
 const agent = createAgent({
@@ -147,7 +147,7 @@ interface Session {
 ### Multi-Agent Dispatch
 
 ```typescript
-import { dispatch, dispatchAsync, dispatchSequential } from '@rubberduck/runtime';
+import { dispatch, dispatchAsync, dispatchSequential } from '@hanumate/runtime';
 
 // Parallel dispatch
 const results = await dispatchAsync([
@@ -197,7 +197,7 @@ Skills extend agent capabilities:
 
 ```typescript
 // Load specific skills
-const skills = await loadAgentSkills(['coding', 'debugging'], '/project/.rubberduck/skills');
+const skills = await loadAgentSkills(['coding', 'debugging'], '/project/.hanumate/skills');
 
 // List available skills
 const skillNames = await session.listSkills();
@@ -214,7 +214,7 @@ const result = await session.runSkill('code-review', { code: myCode });
 Agents can use different sandbox types for code execution:
 
 ```typescript
-import { createSandbox, createAgent } from '@rubberduck/runtime';
+import { createSandbox, createAgent } from '@hanumate/runtime';
 
 // Local sandbox (default)
 const localSandbox = createSandbox('local');
@@ -286,7 +286,7 @@ try {
 ### Agent Configuration
 
 ```typescript
-interface RubberDuckConfig {
+interface HanumateConfig {
   name?: string;
   model?: string;
   apiKey?: string;

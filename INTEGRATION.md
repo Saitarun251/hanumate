@@ -1,12 +1,12 @@
-# RubberDuck Integration Summary
+# Hanumate Integration Summary
 
-This document describes how all components of the RubberDuck system connect together.
+This document describes how all components of the Hanumate system connect together.
 
 ## Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                           RubberDuck                                │
+│                           Hanumate                                │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Harness                                                              │
 │  ├── Agent (pi-agent-core stub)                                      │
@@ -53,8 +53,8 @@ const harness = await init(agent, {
 ```
 
 **Key Interfaces:**
-- `RubberDuckConfig` - Configuration for the harness
-- `RubberDuckAgent` - Agent definition
+- `HanumateConfig` - Configuration for the harness
+- `HanumateAgent` - Agent definition
 - `Harness` - Main interface with `session()`, `shutdown()`
 - `Session` - User-facing API
 
@@ -100,7 +100,7 @@ await session.runSkill("my-skill", { context: "data" });
 OpenTelemetry integration provides distributed tracing:
 
 ```typescript
-import { initTelemetry, shutdownTelemetry } from '@rubberduck/runtime';
+import { initTelemetry, shutdownTelemetry } from '@hanumate/runtime';
 
 // Initialize with configuration
 initTelemetry({
@@ -132,7 +132,7 @@ initTelemetry({
 Sandbox connectors provide isolated execution environments:
 
 ```typescript
-import { createSandbox } from '@rubberduck/runtime';
+import { createSandbox } from '@hanumate/runtime';
 
 // Local sandbox (real shell/fs)
 const localSandbox = createSandbox('local');
@@ -170,7 +170,7 @@ const harness = await init(agent, {
 Skills provide reusable agent capabilities:
 
 ```typescript
-// Skills are stored in .rubberduck/.agents/skills/:skill-name/SKILL.md
+// Skills are stored in .hanumate/.agents/skills/:skill-name/SKILL.md
 // SKILL.md format:
 /*
 ---
@@ -218,7 +218,7 @@ const harness = await init(agent, {
 Session persistence for state management:
 
 ```typescript
-import { InMemorySessionStore } from '@rubberduck/runtime';
+import { InMemorySessionStore } from '@hanumate/runtime';
 
 const harness = await init(agent, {
   config: {
@@ -233,7 +233,7 @@ const harness = await init(agent, {
 ## Configuration Reference
 
 ```typescript
-interface RubberDuckConfig {
+interface HanumateConfig {
   name?: string;                    // Agent name
   model?: string;                   // Model identifier
   apiKey?: string;                  // API key

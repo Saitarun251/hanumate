@@ -32,14 +32,14 @@ Hanumate is a TypeScript framework for building autonomous coding agents. It giv
 
 ## What Makes It Different
 
-Most AI coding tools are applications. RubberDuck is a framework. That means:
+Most AI coding tools are applications. Hanumate is a framework. That means:
 
 - You can build custom agents for your specific use case
 - The agent logic lives in your code, not in some external config
 - Agents can be wired into GitHub Apps, CI systems, Slack bots, or your own product
 - The same agent code runs locally, in containers, or in the cloud
 
-RubberDuck comes with a built-in agent harness, multi-agent orchestration, and sandbox isolation. You bring your own models (OpenAI, Anthropic, MiniMax, Groq, or any OpenAI-compatible API).
+Hanumate comes with a built-in agent harness, multi-agent orchestration, and sandbox isolation. You bring your own models (OpenAI, Anthropic, MiniMax, Groq, or any OpenAI-compatible API).
 
 ---
 
@@ -58,8 +58,8 @@ RubberDuck comes with a built-in agent harness, multi-agent orchestration, and s
 
 ```bash
 # Clone the repository
-git clone https://github.com/Saitarun251/rubberduck.git
-cd rubberduck
+git clone https://github.com/Saitarun251/hanumate.git
+cd hanumate
 
 # Install dependencies
 npm install
@@ -97,7 +97,7 @@ OTLP_ENDPOINT=http://localhost:4318
 ### Package Structure
 
 ```
-rubberduck/
+hanumate/
 ├── packages/
 │   ├── runtime/          # Core agent runtime
 │   │   ├── src/
@@ -177,7 +177,7 @@ await session.skill('code-review', { args: { file: './src/index.ts' } });
 ### Agent Configuration
 
 ```ts
-interface RubberDuckConfig {
+interface HanumateConfig {
   name?: string;              // Agent name for logging
   model?: string;             // Model identifier (e.g., 'anthropic/claude-sonnet-4-6')
   providerId?: string;         // Provider ID (e.g., 'openai', 'anthropic', 'minimax')
@@ -241,7 +241,7 @@ const agent5 = createAgent({
 
 ## Multi-Agent Pipeline
 
-RubberDuck's orchestrator coordinates multiple specialist agents for complex tasks.
+Hanumate's orchestrator coordinates multiple specialist agents for complex tasks.
 
 ### Setting Up Agent Registry
 
@@ -498,7 +498,7 @@ export async function handleIssueComment(payload: WebhookPayload) {
 
 ## Supported Models
 
-RubberDuck works with any LLM provider that supports tool calling.
+Hanumate works with any LLM provider that supports tool calling.
 
 ### Built-in Providers
 
@@ -561,7 +561,7 @@ Skills extend agent capabilities with specialized instructions and workflows.
 
 ### Defining a Skill
 
-Create a skill file at `.rubberduck/.agents/skills/<name>/SKILL.md`:
+Create a skill file at `.hanumate/.agents/skills/<name>/SKILL.md`:
 
 ```markdown
 # Code Review Skill
@@ -613,7 +613,7 @@ const result = await session.skill('code-review', {
 const result2 = await session.skill('triage', {
   args: { issueNumber: 123 },
   context: {
-    repo: 'Saitarun251/rubberduck',
+    repo: 'Saitarun251/hanumate',
     labels: ['bug', 'priority'],
   },
 });
@@ -642,7 +642,7 @@ Plug in OpenTelemetry for distributed tracing and metrics.
 import { initTelemetry } from '@hanumate/opentelemetry';
 
 const telemetry = await initTelemetry({
-  serviceName: 'rubberduck-agent',
+  serviceName: 'hanumate-agent',
   serviceVersion: '1.0.0',
   otlpEndpoint: process.env.OTLP_ENDPOINT || 'http://localhost:4318',
 });
@@ -908,8 +908,8 @@ Contributions are welcome. Please read our contributing guidelines before submit
 
 ```bash
 # Clone and install
-git clone https://github.com/Saitarun251/rubberduck.git
-cd rubberduck
+git clone https://github.com/Saitarun251/hanumate.git
+cd hanumate
 npm install
 
 # Build
