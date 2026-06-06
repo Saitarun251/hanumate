@@ -1,7 +1,7 @@
 /**
  * Convoy Store - JSON-based persistence for Convoys
  *
- * Stores convoy data in `.rubberduck/convoys/` directory using JSON files.
+ * Stores convoy data in `.hanumate/convoys/` directory using JSON files.
  * Each convoy is stored as a separate JSON file named `{convoyId}.json`.
  */
 
@@ -13,7 +13,7 @@ import type { Convoy } from './convoy-types.js';
 /**
  * Default directory for storing convoy data
  */
-export const DEFAULT_CONVOYS_DIR = '.rubberduck/convoys';
+export const DEFAULT_CONVOYS_DIR = '.hanumate/convoys';
 
 /**
  * Error class for convoy store errors

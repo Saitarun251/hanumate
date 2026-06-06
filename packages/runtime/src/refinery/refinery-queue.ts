@@ -28,7 +28,7 @@ export class RefineryQueue {
 	 * Create a new queue
 	 */
 	constructor(options: QueueOptions = {}) {
-		this.storageDir = options.storageDir ?? '.rubberduck/refinery';
+		this.storageDir = options.storageDir ?? '.hanumate/refinery';
 		this.batchSize = options.batchSize ?? 10;
 	}
 

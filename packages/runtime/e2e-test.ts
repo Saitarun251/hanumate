@@ -1,19 +1,19 @@
 /**
- * End-to-end test script for RubberDuck Harness
+ * End-to-end test script for Hanumate Harness
  * Verifies that all components integrate correctly
  */
 
 import { createAgent, init, createLocalSandbox, initTelemetry, shutdownTelemetry } from './src/index.js';
 
 async function runE2ETest() {
-	console.log('=== RubberDuck End-to-End Test ===\n');
+	console.log('=== Hanumate End-to-End Test ===\n');
 
 	try {
 		// 1. Initialize telemetry
 		console.log('1. Initializing telemetry...');
 		initTelemetry({
 			enabled: true,
-			serviceName: 'rubberduck-e2e-test',
+			serviceName: 'hanumate-e2e-test',
 			exporter: 'console'
 		});
 		console.log('   ✓ Telemetry initialized\n');
@@ -52,11 +52,11 @@ async function runE2ETest() {
 
 		// 6. Test filesystem operations
 		console.log('6. Testing session filesystem operations...');
-		const testDir = '/tmp/rubberduck-e2e-test';
+		const testDir = '/tmp/hanumate-e2e-test';
 		await session.mkdir(testDir, { recursive: true });
 		console.log(`   ✓ Created directory: ${testDir}`);
 
-		await session.writeFile(`${testDir}/test.txt`, 'Hello from RubberDuck!');
+		await session.writeFile(`${testDir}/test.txt`, 'Hello from Hanumate!');
 		const content = await session.readFile(`${testDir}/test.txt`);
 		console.log(`   ✓ File content: ${content}`);
 

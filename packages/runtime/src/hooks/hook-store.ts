@@ -1,7 +1,7 @@
 /**
  * Hook Store - JSON-based persistence for hooks
  * 
- * Provides persistent storage for hooks in .rubberduck/hooks/ directory.
+ * Provides persistent storage for hooks in .hanumate/hooks/ directory.
  * Hooks are stored as individual JSON files for git-backup compatibility.
  */
 
@@ -22,10 +22,10 @@ export class HookStore implements HookStoreInterface {
 
 	/**
 	 * Create a new HookStore
-	 * @param hooksDir - Directory to store hook JSON files (default: .rubberduck/hooks)
+	 * @param hooksDir - Directory to store hook JSON files (default: .hanumate/hooks)
 	 */
 	constructor(hooksDir?: string) {
-		this.hooksDir = hooksDir ?? '.rubberduck/hooks';
+		this.hooksDir = hooksDir ?? '.hanumate/hooks';
 		this.ensureDir = async (): Promise<void> => {
 			if (!existsSync(this.hooksDir)) {
 				await mkdir(this.hooksDir, { recursive: true });

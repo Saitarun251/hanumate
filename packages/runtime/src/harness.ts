@@ -118,8 +118,8 @@ import {
 	type DispatchTarget,
 } from './dispatch.js';
 
-export interface RubberDuckConfig {
-	/** Agent name (default: 'rubberduck-agent') */
+export interface HanumateConfig {
+	/** Agent name (default: 'hanumate-agent') */
 	name?: string;
 	model?: string;
 	apiKey?: string;
@@ -177,7 +177,7 @@ export interface Tool {
 	handler: (params: Record<string, unknown>) => Promise<unknown>;
 }
 
-export interface RubberDuckAgent {
+export interface HanumateAgent {
 	/** Agent name */
 	name: string;
 	model: string;
@@ -191,7 +191,7 @@ export interface RubberDuckAgent {
 	mcpConnections: MCPConnection[];
 }
 
-export function createAgent(config: RubberDuckConfig): RubberDuckAgent {
+export function createAgent(config: HanumateConfig): HanumateAgent {
 	// Build environment - inherit defaults and merge custom vars
 	const customEnv = config.env ?? {};
 	const defaultEnv = getDefaultEnv();
@@ -201,7 +201,7 @@ export function createAgent(config: RubberDuckConfig): RubberDuckAgent {
 	const effectiveProviderId = config.providerId ?? config.provider?.id;
 
 	return {
-		name: config.name ?? 'rubberduck-agent',
+		name: config.name ?? 'hanumate-agent',
 		model: config.model ?? 'anthropic/claude-sonnet-4-6',
 		providerId: effectiveProviderId,
 		tools: [],
@@ -223,11 +223,11 @@ export function createAgent(config: RubberDuckConfig): RubberDuckAgent {
  */
 export function createAgentWithId(
 	id: string,
-	config: RubberDuckConfig,
+	config: HanumateConfig,
 	name?: string,
 	tags?: string[]
-): RubberDuckAgent {
-	const effectiveConfig: RubberDuckConfig = {
+): HanumateAgent {
+	const effectiveConfig: HanumateConfig = {
 		...config,
 		name: name ?? config.name ?? id,
 	};
@@ -236,7 +236,7 @@ export function createAgentWithId(
 
 /**
  * Load skills for an agent from the skills directory
- * Skills are loaded from .rubberduck/.agents/skills/:skill-name/SKILL.md
+ * Skills are loaded from .hanumate/.agents/skills/:skill-name/SKILL.md
  * @param skillNames - Array of skill names to load (empty = load all)
  * @param basePath - Base path to search for skills directory
  * @returns Map of skill name to Skill object
@@ -316,7 +316,7 @@ export interface Session {
 }
 
 export interface Harness {
-	agent: RubberDuckAgent;
+	agent: HanumateAgent;
 	/** Get the agent registry for managing subagents */
 	getAgentRegistry(): AgentRegistry;
 	/** Create a new subagent and register it
@@ -325,11 +325,11 @@ export interface Harness {
 	 * @param name - Optional display name
 	 * @param tags - Optional capability tags
 	 */
-	createAgent(id: string, config?: RubberDuckConfig, name?: string, tags?: string[]): RubberDuckAgent;
+	createAgent(id: string, config?: HanumateConfig, name?: string, tags?: string[]): HanumateAgent;
 	/** Get an agent by ID
 	 * @param id - Agent identifier
 	 */
-	getAgent(id: string): RubberDuckAgent | undefined;
+	getAgent(id: string): HanumateAgent | undefined;
 	/** List all registered agent IDs */
 	listAgents(): string[];
 	/** Check if an agent is registered */
@@ -373,8 +373,8 @@ export interface Harness {
 }
 
 export async function init(
-	agent: RubberDuckAgent,
-	options?: { name?: string; config?: RubberDuckConfig }
+	agent: HanumateAgent,
+	options?: { name?: string; config?: HanumateConfig }
 ): Promise<Harness> {
 	// Initialize telemetry if configured
 	const telemetryConfig = options?.config?.telemetry;
@@ -539,7 +539,7 @@ export async function init(
 	return {
 		agent,
 		getAgentRegistry: () => agentRegistry,
-		createAgent: (id: string, config?: RubberDuckConfig, name?: string, tags?: string[]) => {
+		createAgent: (id: string, config?: HanumateConfig, name?: string, tags?: string[]) => {
 			const newAgent = agentRegistry.register(id, config ?? {}, name, tags);
 			sharedContext.set(`agent:${id}`, newAgent.name, 'harness');
 			return newAgent;
@@ -585,8 +585,8 @@ export async function init(
 
 function createSession(
 	piAgent: Agent,
-	duckAgent: RubberDuckAgent,
-	config?: RubberDuckConfig,
+	duckAgent: HanumateAgent,
+	config?: HanumateConfig,
 	sandbox?: Sandbox | null,
 	sessionStore?: SessionStore | null,
 	sessionId?: string

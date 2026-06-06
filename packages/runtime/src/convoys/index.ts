@@ -1,12 +1,12 @@
 /**
- * Convoys Module - Work bundling for RubberDuck
+ * Convoys Module - Work bundling for Hanumate
  *
  * Convoys allow grouping related Beads (work units) together for
  * coordinated tracking and completion.
  *
  * @example
  * ```typescript
- * import { ConvoyManager } from '@rubberduck/runtime';
+ * import { ConvoyManager } from '@hanumate/runtime';
  *
  * const manager = new ConvoyManager();
  * await manager.init();

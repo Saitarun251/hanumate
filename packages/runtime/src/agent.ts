@@ -1,5 +1,5 @@
 // Agent configuration types
-// These complement pi-agent-core with RubberDuck-specific extensions
+// These complement pi-agent-core with Hanumate-specific extensions
 
 export interface AgentConfig {
 	model: string;

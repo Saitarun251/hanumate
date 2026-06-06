@@ -39,7 +39,7 @@ export class MailStore {
   private agentId?: string;
 
   constructor(config?: MailConfig) {
-    this.mailDir = config?.mailDir || '.rubberduck/mail';
+    this.mailDir = config?.mailDir || '.hanumate/mail';
     this.agentId = config?.agentId;
   }
 

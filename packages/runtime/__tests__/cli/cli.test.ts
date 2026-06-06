@@ -494,11 +494,11 @@ describe('printUsage', () => {
 	});
 
 	it('should use custom bin name', () => {
-		const customConfig = { ...TEST_CONFIG, bin: 'rubberduck' };
+		const customConfig = { ...TEST_CONFIG, bin: 'hanumate' };
 		const registry = createMockRegistry();
 		printUsage(registry, customConfig);
 		const output = mockLog.mock.calls.join('\n');
-		expect(output).toContain('rubberduck <command>');
+		expect(output).toContain('hanumate <command>');
 	});
 
 	it('should handle empty command list', () => {

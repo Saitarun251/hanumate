@@ -29,7 +29,7 @@ import { tmpdir } from 'node:os';
 import { rm } from 'node:fs/promises';
 
 describe('Filesystem Operations', () => {
-	const testDir = join(tmpdir(), 'rubberduck-fs-test');
+	const testDir = join(tmpdir(), 'hanumate-fs-test');
 	const testSubDir = join(testDir, 'subdir');
 
 	beforeAll(async () => {

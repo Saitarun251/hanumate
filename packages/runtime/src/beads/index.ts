@@ -2,11 +2,11 @@
  * Beads Module - Git-backed issue tracking system
  * 
  * A lightweight, git-backed work tracking system for agents.
- * Beads are persisted to disk as JSON files in .rubberduck/beads/
+ * Beads are persisted to disk as JSON files in .hanumate/beads/
  * 
  * @example
  * ```typescript
- * import { createBeadStore, createBeadCommands } from '@rubberduck/runtime/beads';
+ * import { createBeadStore, createBeadCommands } from '@hanumate/runtime/beads';
  * 
  * const store = createBeadStore();
  * const commands = createBeadCommands(store);

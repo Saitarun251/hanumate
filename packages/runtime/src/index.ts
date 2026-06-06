@@ -1,8 +1,8 @@
-// @rubberduck/runtime - Core agent engine
+// @hanumate/runtime - Core agent engine
 // Built on top of pi-agent-core (@earendil-works/pi-agent-core)
 
 // Core exports
-export { createAgent, createAgentWithId, type RubberDuckAgent, type Tool, loadAgentSkills } from './harness.js';
+export { createAgent, createAgentWithId, type HanumateAgent, type Tool, loadAgentSkills } from './harness.js';
 export { init, type Harness, type Session } from './harness.js';
 
 // Agent registry for subagent/orchestration
@@ -35,7 +35,7 @@ export * from './types.js';
 export {
 	connectMCP,
 	connectMCPServers,
-	mcpToolsToRubberDuck,
+	mcpToolsToHanumate,
 	type MCPConfig,
 	type MCPServerConfig,
 	type MCPToolDefinition,

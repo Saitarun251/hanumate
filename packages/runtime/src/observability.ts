@@ -1,5 +1,5 @@
 /**
- * OpenTelemetry Observability Utilities for RubberDuck Runtime
+ * OpenTelemetry Observability Utilities for Hanumate Runtime
  * 
  * Provides lightweight wrappers for distributed tracing with OpenTelemetry.
  * These utilities integrate with the existing telemetry.ts module.

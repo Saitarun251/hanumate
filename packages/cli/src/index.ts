@@ -55,7 +55,7 @@ export async function main() {
 }
 
 function printHelp() {
-	console.log('RubberDuck CLI v0.1.0');
+	console.log('Hanumate CLI v0.1.0');
 	console.log('');
 	console.log('Usage: duck <command> [options]');
 	console.log('');
@@ -217,7 +217,7 @@ async function runDev(options: { target?: string; port?: string }) {
 
 	const app = createApp();
 
-	console.log('Starting RubberDuck dev server on port ' + port);
+	console.log('Starting Hanumate dev server on port ' + port);
 	console.log('Target: ' + (options.target ?? 'node'));
 	console.log('');
 	console.log('Available endpoints:');

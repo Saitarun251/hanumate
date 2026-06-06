@@ -478,7 +478,7 @@ export class HookManager implements HookManagerInterface {
 /**
  * Create a hook manager with JSON file storage
  * 
- * @param hooksDir - Directory for hook storage (default: .rubberduck/hooks)
+ * @param hooksDir - Directory for hook storage (default: .hanumate/hooks)
  * @param config - Optional additional configuration
  */
 export function createHookManager(

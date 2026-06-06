@@ -9,7 +9,7 @@ import type { Severity, Escalation } from '../../src/escalation/escalation-types
 
 describe('EscalationService', () => {
 	let service: EscalationService;
-	const testDir = '.rubberduck/test-escalations-' + Date.now();
+	const testDir = '.hanumate/test-escalations-' + Date.now();
 
 	beforeEach(async () => {
 		service = new EscalationService({

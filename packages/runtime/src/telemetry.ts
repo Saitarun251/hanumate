@@ -1,5 +1,5 @@
 /**
- * OpenTelemetry integration for RubberDuck runtime
+ * OpenTelemetry integration for Hanumate runtime
  * Provides distributed tracing for agent execution
  */
 
@@ -19,7 +19,7 @@ import { trace, context as otelContext, SpanKind, SpanStatusCode } from '@opente
 export interface TelemetryConfig {
 	/** Enable/disable telemetry (default: true) */
 	enabled?: boolean;
-	/** Service name for traces (default: 'rubberduck-runtime') */
+	/** Service name for traces (default: 'hanumate-runtime') */
 	serviceName?: string;
 	/** Service version */
 	serviceVersion?: string;
@@ -61,7 +61,7 @@ export function initTelemetry(config: TelemetryConfig = {}): void {
 
 	currentConfig = {
 		enabled: true,
-		serviceName: 'rubberduck-runtime',
+		serviceName: 'hanumate-runtime',
 		serviceVersion: '0.1.0',
 		exporter: 'console',
 		sampling: 'always',

@@ -1,5 +1,5 @@
 /**
- * HTTP Server - Hono-based HTTP server for RubberDuck runtime
+ * HTTP Server - Hono-based HTTP server for Hanumate runtime
  *
  * Provides REST API endpoints for agent management, session handling,
  * health checks, and WebSocket support for real-time communication.

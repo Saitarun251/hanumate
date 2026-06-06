@@ -40,7 +40,7 @@ export interface MCPConnection {
 function createClient(name: string): Client {
 	return new Client(
 		{
-			name: `rubberduck-${name}`,
+			name: `hanumate-${name}`,
 			version: '1.0.0',
 		},
 		{
@@ -139,12 +139,12 @@ export async function connectMCPServers(
 }
 
 /**
- * Convert MCP tool definitions to RubberDuck tool format
+ * Convert MCP tool definitions to Hanumate tool format
  * @param mcpTools - Array of MCP tool definitions
  * @param serverName - Name of the MCP server these tools come from
- * @returns Array of tools in RubberDuck format
+ * @returns Array of tools in Hanumate format
  */
-export function mcpToolsToRubberDuck(
+export function mcpToolsToHanumate(
 	mcpTools: MCPToolDefinition[],
 	serverName: string
 ): Array<{

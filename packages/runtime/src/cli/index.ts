@@ -69,7 +69,7 @@ export class InMemoryCommandRegistry implements CommandRegistry {
 // ============================================================================
 
 /**
- * Configuration loaded from .rubberduck/config.json
+ * Configuration loaded from .hanumate/config.json
  */
 export interface RuntimeConfig {
 	/** Working directory for the CLI */
@@ -92,10 +92,10 @@ const DEFAULT_CONFIG: CliConfig = {
 };
 
 /**
- * Load configuration from .rubberduck/config.json
+ * Load configuration from .hanumate/config.json
  */
 export function loadConfig(cwd: string = process.cwd()): RuntimeConfig {
-	const configPath = resolve(cwd, '.rubberduck', 'config.json');
+	const configPath = resolve(cwd, '.hanumate', 'config.json');
 
 	if (!existsSync(configPath)) {
 		return {};

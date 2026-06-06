@@ -141,7 +141,7 @@ export class Refinery {
 	 * Create a new Refinery instance
 	 */
 	constructor(config: RefineryConfig = {}) {
-		this.storageDir = config.storageDir ?? '.rubberduck/refinery';
+		this.storageDir = config.storageDir ?? '.hanumate/refinery';
 		this.maxConcurrency = config.maxConcurrency ?? 3;
 		this.gitPath = config.gitPath ?? 'git';
 		

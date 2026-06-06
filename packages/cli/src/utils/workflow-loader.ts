@@ -1,4 +1,4 @@
-import { init } from '@rubberduck/runtime';
+import { init } from '@hanumate/runtime';
 import { resolve, join } from 'path';
 import { existsSync } from 'fs';
 
@@ -20,7 +20,7 @@ try {
 
 function getWorkflowTracer() {
 	if (!trace) return null;
-	return trace.getTracer('rubberduck-workflow');
+	return trace.getTracer('hanumate-workflow');
 }
 
 async function traceWorkflowExecution(
@@ -66,7 +66,7 @@ export interface Workflow {
 	run(context: WorkflowContext): Promise<unknown>;
 }
 
-const WORKFLOWS_DIR = '.rubberduck/workflows';
+const WORKFLOWS_DIR = '.hanumate/workflows';
 
 /**
  * Custom error class for workflow-related errors.
@@ -137,7 +137,7 @@ export class InvalidPayloadError extends WorkflowLoaderError {
 }
 
 function findWorkflowDir(): string {
-	// Start from current working directory and walk up looking for .rubberduck/workflows
+	// Start from current working directory and walk up looking for .hanumate/workflows
 	let dir = process.cwd();
 
 	for (let i = 0; i < 10; i++) {

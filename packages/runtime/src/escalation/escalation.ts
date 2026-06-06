@@ -38,7 +38,7 @@ export class EscalationService {
 	 * Create a new escalation service
 	 */
 	constructor(options: EscalationOptions = {}) {
-		this.storageDir = options.storageDir ?? '.rubberduck/escalations';
+		this.storageDir = options.storageDir ?? '.hanumate/escalations';
 		this.autoAcknowledgeMs = options.autoAcknowledgeMs ?? 60000;
 		this.onEscalate = options.onEscalate;
 		this.onAcknowledge = options.onAcknowledge;

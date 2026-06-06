@@ -1,7 +1,7 @@
 /**
  * Bead Store - JSON-based persistence layer for Beads
  * 
- * Stores bead data as JSON files in .rubberduck/beads/ directory.
+ * Stores bead data as JSON files in .hanumate/beads/ directory.
  * Each bead is stored as a separate JSON file named {beadId}.json
  */
 
@@ -21,7 +21,7 @@ import {
 // Constants
 // ============================================================================
 
-const BEADS_DIR = '.rubberduck/beads';
+const BEADS_DIR = '.hanumate/beads';
 
 /**
  * Callback type for bead assignment events
@@ -37,7 +37,7 @@ export type BeadStatusChangeCallback = (beadId: string, oldStatus: string, newSt
  * Default configuration for the bead store
  */
 export interface BeadStoreConfig {
-	/** Base directory for storing beads (defaults to .rubberduck/beads) */
+	/** Base directory for storing beads (defaults to .hanumate/beads) */
 	baseDir?: string;
 	
 	/** Enable automatic git commits on changes */

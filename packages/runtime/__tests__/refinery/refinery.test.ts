@@ -10,7 +10,7 @@ import type { MergeRequest, MergeStatus } from '../../src/refinery/refinery-type
 
 describe('RefineryQueue', () => {
 	let queue: RefineryQueue;
-	const testDir = '.rubberduck/test-refinery-' + Date.now();
+	const testDir = '.hanumate/test-refinery-' + Date.now();
 
 	beforeEach(async () => {
 		queue = new RefineryQueue({
@@ -176,7 +176,7 @@ describe('RefineryQueue', () => {
 
 describe('Refinery', () => {
 	let refinery: Refinery;
-	const testDir = '.rubberduck/test-refinery-core-' + Date.now();
+	const testDir = '.hanumate/test-refinery-core-' + Date.now();
 
 	beforeEach(async () => {
 		refinery = new Refinery({

@@ -26,7 +26,7 @@ function createApp() {
 	// Health check
 	app.get('/', (c) =>
 		c.json({
-			name: 'RubberDuck',
+			name: 'Hanumate',
 			version: '0.1.0',
 			status: 'running',
 			target: 'node',
@@ -134,7 +134,7 @@ async function start() {
 
 	setupWebSocket(server);
 
-	console.log(`Starting RubberDuck Node.js server on ${HOST}:${PORT}`);
+	console.log(`Starting Hanumate Node.js server on ${HOST}:${PORT}`);
 	console.log('');
 	console.log('Available endpoints:');
 	console.log('  GET  /                    - Health check');

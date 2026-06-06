@@ -2,13 +2,13 @@
  * Dispatch System - Orchestrates work across multiple agents
  */
 
-import type { RubberDuckAgent } from './harness.js';
+import type { HanumateAgent } from './harness.js';
 import { AgentRegistry } from './agents.js';
 
 /**
  * Dispatch target - can be an agent ID or agent instance
  */
-export type DispatchTarget = string | RubberDuckAgent;
+export type DispatchTarget = string | HanumateAgent;
 
 /**
  * Dispatch options for single dispatch
@@ -80,7 +80,7 @@ export class Dispatcher {
 
 		// Resolve target to agent
 		const targetId = typeof options.target === 'string' ? options.target : options.target.name;
-		let agent: RubberDuckAgent | undefined;
+		let agent: HanumateAgent | undefined;
 
 		if (typeof options.target === 'string') {
 			agent = this.agentRegistry.get(options.target);
@@ -164,7 +164,7 @@ export class Dispatcher {
 	}
 
 	private async executeWithTimeout(
-		agent: RubberDuckAgent,
+		agent: HanumateAgent,
 		task: string,
 		timeout: number
 	): Promise<unknown> {

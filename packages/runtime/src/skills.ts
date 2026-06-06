@@ -16,7 +16,7 @@ interface FrontmatterResult {
 /**
  * SkillLoader - Loads and parses skills from the filesystem
  *
- * Skills are stored in .rubberduck/.agents/skills/:skill-name/SKILL.md
+ * Skills are stored in .hanumate/.agents/skills/:skill-name/SKILL.md
  * with YAML frontmatter for metadata and markdown for instructions.
  */
 export class SkillLoader {
@@ -24,7 +24,7 @@ export class SkillLoader {
 	private loadedSkills: Map<string, Skill> = new Map();
 
 	constructor(basePath?: string) {
-		this.skillsDir = resolve(basePath ?? process.cwd(), '.rubberduck', '.agents', 'skills');
+		this.skillsDir = resolve(basePath ?? process.cwd(), '.hanumate', '.agents', 'skills');
 	}
 
 	/**

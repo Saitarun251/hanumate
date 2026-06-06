@@ -16,10 +16,10 @@ vi.mock('@earendil-works/pi-agent-core', () => ({
 }));
 
 // Import after mocking
-import { createAgent, init, type RubberDuckConfig } from '../src/harness.js';
+import { createAgent, init, type HanumateConfig } from '../src/harness.js';
 
 describe('Harness Integration', () => {
-	const testDir = join(tmpdir(), 'rubberduck-harness-test');
+	const testDir = join(tmpdir(), 'hanumate-harness-test');
 
 	beforeAll(async () => {
 		await mk(testDir, { recursive: true });
@@ -217,7 +217,7 @@ describe('Harness Integration', () => {
 
 	describe('Config-based shell timeout', () => {
 		it('should use config timeout', async () => {
-			const config: RubberDuckConfig = {
+			const config: HanumateConfig = {
 				shellTimeout: 5000,
 			};
 			const agent = createAgent(config);

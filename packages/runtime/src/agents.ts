@@ -5,7 +5,7 @@
  * Supports registration, lookup, listing, and lifecycle management.
  */
 
-import { type RubberDuckAgent, type RubberDuckConfig, createAgent } from './harness.js';
+import { type HanumateAgent, type HanumateConfig, createAgent } from './harness.js';
 
 /**
  * Agent registration entry with metadata
@@ -14,7 +14,7 @@ export interface AgentRegistration {
 	/** Unique identifier for the agent */
 	id: string;
 	/** Agent instance */
-	agent: RubberDuckAgent;
+	agent: HanumateAgent;
 	/** Creation timestamp */
 	createdAt: number;
 	/** Optional display name override */
@@ -22,7 +22,7 @@ export interface AgentRegistration {
 	/** Agent capabilities/tags for routing */
 	tags?: string[];
 	/** Configuration used to create this agent */
-	config: RubberDuckConfig;
+	config: HanumateConfig;
 }
 
 /**
@@ -84,16 +84,16 @@ export class AgentRegistry {
 	 */
 	register(
 		id: string,
-		config: RubberDuckConfig,
+		config: HanumateConfig,
 		name?: string,
 		tags?: string[]
-	): RubberDuckAgent {
+	): HanumateAgent {
 		if (this.agents.has(id)) {
 			throw new Error(`Agent with ID '${id}' is already registered`);
 		}
 
 		// Create agent with config (optionally override base path)
-		const effectiveConfig: RubberDuckConfig = {
+		const effectiveConfig: HanumateConfig = {
 			...config,
 			basePath: config.basePath ?? this.defaultBasePath,
 		};
@@ -119,7 +119,7 @@ export class AgentRegistry {
 	 * @param id - Agent identifier
 	 * @returns The agent or undefined if not found
 	 */
-	get(id: string): RubberDuckAgent | undefined {
+	get(id: string): HanumateAgent | undefined {
 		return this.agents.get(id)?.agent;
 	}
 
@@ -167,7 +167,7 @@ export class AgentRegistry {
 	 * @param id - Agent identifier
 	 * @returns The unregistered agent or undefined
 	 */
-	unregister(id: string): RubberDuckAgent | undefined {
+	unregister(id: string): HanumateAgent | undefined {
 		const registration = this.agents.get(id);
 		if (registration) {
 			this.agents.delete(id);
@@ -213,14 +213,14 @@ export class AgentRegistry {
 	 * @param config - New configuration
 	 * @returns Updated agent or undefined
 	 */
-	update(id: string, config: Partial<RubberDuckConfig>): RubberDuckAgent | undefined {
+	update(id: string, config: Partial<HanumateConfig>): HanumateAgent | undefined {
 		const registration = this.agents.get(id);
 		if (!registration) {
 			return undefined;
 		}
 
 		// Create updated config
-		const updatedConfig: RubberDuckConfig = {
+		const updatedConfig: HanumateConfig = {
 			...registration.config,
 			...config,
 		};
@@ -263,6 +263,6 @@ export class AgentRegistry {
 	}
 }
 
-// Re-export RubberDuckAgent for convenience
-export type { RubberDuckAgent } from './harness.js';
-export type { RubberDuckConfig } from './harness.js';
+// Re-export HanumateAgent for convenience
+export type { HanumateAgent } from './harness.js';
+export type { HanumateConfig } from './harness.js';

@@ -19,8 +19,8 @@ vi.mock('@earendil-works/pi-agent-core', () => ({
 import { createAgent, init } from '../src/harness.js';
 
 describe('Skills System', () => {
-	const testDir = join(tmpdir(), 'rubberduck-skills-test');
-	const skillsDir = join(testDir, '.rubberduck', '.agents', 'skills');
+	const testDir = join(tmpdir(), 'hanumate-skills-test');
+	const skillsDir = join(testDir, '.hanumate', '.agents', 'skills');
 
 	beforeAll(async () => {
 		// Create skills directory structure

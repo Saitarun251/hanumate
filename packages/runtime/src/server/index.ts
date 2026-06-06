@@ -1,7 +1,7 @@
 /**
  * Server module exports
  *
- * HTTP and WebSocket servers for RubberDuck runtime.
+ * HTTP and WebSocket servers for Hanumate runtime.
  */
 
 export {

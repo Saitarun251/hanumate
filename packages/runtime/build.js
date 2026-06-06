@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build orchestration script for RubberDuck runtime
+ * Build orchestration script for Hanumate runtime
  * Supports multiple build targets: node, cfw (Cloudflare Workers)
  *
  * Usage:
@@ -160,7 +160,7 @@ async function main() {
 		targets.push('node', 'cfw');
 	}
 
-	logSection('RubberDuck Runtime Build');
+	logSection('Hanumate Runtime Build');
 
 	log(`Build targets: ${targets.map((t) => TARGETS[t].name).join(', ')}`);
 	log(`Watch mode: ${watch ? 'enabled' : 'disabled'}\n`);

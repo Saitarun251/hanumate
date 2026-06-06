@@ -40,7 +40,7 @@ export class Seance {
 	 * Create a new Seance instance
 	 */
 	constructor(options: SeanceOptions = {}) {
-		this.storageDir = options.storageDir ?? '.rubberduck/sessions';
+		this.storageDir = options.storageDir ?? '.hanumate/sessions';
 		this.maxEventsPerSession = options.maxEventsPerSession ?? 10000;
 		this.retentionDays = options.retentionDays ?? 30;
 		this.checkpointInterval = options.checkpointIntervalMs ?? 60000;

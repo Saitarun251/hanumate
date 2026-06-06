@@ -1,5 +1,5 @@
 /**
- * tsup configuration for RubberDuck runtime
+ * tsup configuration for Hanumate runtime
  * Builds ESM bundles for Node.js and Cloudflare Workers
  */
 
@@ -36,7 +36,7 @@ const cfwOptions = defineConfig({
 	// Banner needed for ESM modules in CFW
 	banner: {
 		js: `/**
- * RubberDuck Runtime - Cloudflare Workers Compatible Build
+ * Hanumate Runtime - Cloudflare Workers Compatible Build
  * Generated at: ${new Date().toISOString()}
  */
 `,

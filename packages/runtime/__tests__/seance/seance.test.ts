@@ -9,7 +9,7 @@ import type { SessionEvent, SessionRecord } from '../../src/recovery/seance-type
 
 describe('Seance', () => {
 	let seance: Seance;
-	const testDir = '.rubberduck/test-sessions-' + Date.now();
+	const testDir = '.hanumate/test-sessions-' + Date.now();
 
 	beforeEach(async () => {
 		seance = new Seance({

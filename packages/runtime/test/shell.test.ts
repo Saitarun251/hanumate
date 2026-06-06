@@ -9,7 +9,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 describe('Shell Execution', () => {
-	const testDir = join(tmpdir(), 'rubberduck-shell-test');
+	const testDir = join(tmpdir(), 'hanumate-shell-test');
 
 	beforeAll(async () => {
 		await mk(testDir, { recursive: true });

@@ -1,8 +1,8 @@
 /**
- * @rubberduck/opentelemetry - OpenTelemetry setup helpers for RubberDuck
+ * @hanumate/opentelemetry - OpenTelemetry setup helpers for Hanumate
  * 
  * This package provides convenient setup functions for initializing
- * OpenTelemetry tracing in RubberDuck applications.
+ * OpenTelemetry tracing in Hanumate applications.
  */
 
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
@@ -18,7 +18,7 @@ import { trace, type Tracer, type Span, SpanKind, SpanStatusCode } from '@opente
 // ============================================================================
 
 export interface OTelSetupConfig {
-	/** Service name (default: 'rubberduck') */
+	/** Service name (default: 'hanumate') */
 	serviceName?: string;
 	/** Service version (default: '0.1.0') */
 	serviceVersion?: string;
@@ -47,7 +47,7 @@ let isInitialized = false;
  * 
  * @example
  * ```typescript
- * import { setup } from '@rubberduck/opentelemetry';
+ * import { setup } from '@hanumate/opentelemetry';
  * 
  * const tracer = setup({
  *   serviceName: 'my-agent',
@@ -58,12 +58,12 @@ let isInitialized = false;
  */
 export function setup(config: OTelSetupConfig = {}): Tracer {
 	if (isInitialized) {
-		console.warn('[RubberDuck OTel] Already initialized. Call shutdown() first to reinitialize.');
-		return trace.getTracer(config.serviceName ?? 'rubberduck');
+		console.warn('[Hanumate OTel] Already initialized. Call shutdown() first to reinitialize.');
+		return trace.getTracer(config.serviceName ?? 'hanumate');
 	}
 
 	const {
-		serviceName = 'rubberduck',
+		serviceName = 'hanumate',
 		serviceVersion = '0.1.0',
 		otlpEndpoint,
 		consoleExporter = true,
@@ -107,7 +107,7 @@ export function setup(config: OTelSetupConfig = {}): Tracer {
  * 
  * @example
  * ```typescript
- * import { setup, shutdown } from '@rubberduck/opentelemetry';
+ * import { setup, shutdown } from '@hanumate/opentelemetry';
  * 
  * setup({ serviceName: 'my-agent' });
  * 
@@ -159,7 +159,7 @@ export function getTracer(name: string): Tracer {
  * 
  * @example
  * ```typescript
- * import { setup, wrapAsync } from '@rubberduck/opentelemetry';
+ * import { setup, wrapAsync } from '@hanumate/opentelemetry';
  * 
  * const tracer = setup();
  * 

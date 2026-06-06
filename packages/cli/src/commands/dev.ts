@@ -33,7 +33,7 @@ export function createApp() {
 	// Health check endpoint
 	app.get('/', (c) =>
 		c.json({
-			name: 'RubberDuck',
+			name: 'Hanumate',
 			version: '0.1.0',
 			status: 'running',
 		})
