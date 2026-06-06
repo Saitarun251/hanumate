@@ -1,12 +1,12 @@
 # Orchestrator Agent Example
 
-Example demonstrating the orchestrator + subagent workflow pattern in RubberDuck.
+Example demonstrating the orchestrator + subagent workflow pattern in Hanumate.
 
 ## Structure
 
 ```
 orchestrator-agent/
-├── .rubberduck/
+├── .hanumate/
 │   ├── agents/
 │   │   ├── orchestrator.ts  # Main orchestrator agent
 │   │   ├── coder.ts         # Specialist for writing code

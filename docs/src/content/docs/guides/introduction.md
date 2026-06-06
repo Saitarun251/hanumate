@@ -1,13 +1,13 @@
 ---
 title: Introduction
-description: What is RubberDuck and why use it?
+description: What is Hanumate and why use it?
 ---
 
 # Introduction
 
-RubberDuck is The Agent Harness Framework. If you know how to use Claude Code, then you already know the basics of how to build agents with RubberDuck.
+Hanumate is The Agent Harness Framework. If you know how to use Claude Code, then you already know the basics of how to build agents with Hanumate.
 
-## Why RubberDuck?
+## Why Hanumate?
 
 - **You own your agents**: No vendor lock-in, fully customizable
 - **Headless by design**: No TUI, no GUI, just API
@@ -30,7 +30,7 @@ An **agent** is the brain. A **harness** is the runtime environment. A **session
 ## Quick Example
 
 ```ts
-import { createAgent, init } from '@rubberduck/runtime';
+import { createAgent, init } from '@hanumate/runtime';
 
 const agent = createAgent(() => ({
 	model: 'anthropic/claude-sonnet-4-6',
@@ -52,7 +52,7 @@ export async function run({ init: initFn, payload }: any) {
 duck dev --port 3000
 ```
 
-Starts the RubberDuck development server with WebSocket support.
+Starts the Hanumate development server with WebSocket support.
 
 ### Workflow Execution
 
@@ -75,10 +75,10 @@ Build for Node.js or Cloudflare Workers.
 
 ### Provider Configuration
 
-RubberDuck supports multiple AI providers:
+Hanumate supports multiple AI providers:
 
 ```typescript
-import { configureProvider } from '@rubberduck/runtime';
+import { configureProvider } from '@hanumate/runtime';
 
 const provider = await configureProvider({
   providerId: 'openai',
@@ -140,10 +140,10 @@ const harness = await init(agent, {
 Enable tracing and observability:
 
 ```typescript
-import { initTelemetry } from '@rubberduck/opentelemetry';
+import { initTelemetry } from '@hanumate/opentelemetry';
 
 const { traceProvider, shutdown } = await initTelemetry({
-  serviceName: 'rubberduck-agent',
+  serviceName: 'hanumate-agent',
   endpoint: 'http://localhost:4318/v1/traces',
 });
 ```

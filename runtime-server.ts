@@ -1,5 +1,5 @@
 /**
- * RubberDuck Runtime Server
+ * Hanumate Runtime Server
  * Full framework with Orchestrator → Coder → Reviewer pipeline
  * Powered by MiniMax
  */
@@ -19,7 +19,7 @@ const logger = {
       timestamp: new Date().toISOString(),
       level: 'info',
       message: msg,
-      service: 'rubberduck-runtime',
+      service: 'hanumate-runtime',
       ...meta,
     }));
   },
@@ -28,7 +28,7 @@ const logger = {
       timestamp: new Date().toISOString(),
       level: 'warn',
       message: msg,
-      service: 'rubberduck-runtime',
+      service: 'hanumate-runtime',
       ...meta,
     }));
   },
@@ -37,7 +37,7 @@ const logger = {
       timestamp: new Date().toISOString(),
       level: 'error',
       message: msg,
-      service: 'rubberduck-runtime',
+      service: 'hanumate-runtime',
       ...meta,
     }));
   },
@@ -83,7 +83,7 @@ async function callMiniMax(prompt: string): Promise<string> {
           messages: [
             {
               role: 'system',
-              content: `You are RubberDuck, an AI coding assistant built on the RubberDuck framework. Be technical and concise.`,
+              content: `You are Hanumate, an AI coding assistant built on the Hanumate framework. Be technical and concise.`,
             },
             { role: 'user', content: prompt },
           ],
@@ -116,9 +116,9 @@ async function callMiniMax(prompt: string): Promise<string> {
   // If all endpoints fail, return a demo response
   logger.warn(`MiniMax API unavailable (${lastError}), using demo mode`);
 
-  return `## 🦆 RubberDuck Demo Response
+  return `## 🦆 Hanumate Demo Response
 
-This is a **demo response** from the RubberDuck framework.
+This is a **demo response** from the Hanumate framework.
 
 Since the MiniMax API is not accessible with the current credentials, this demonstrates the full framework flow:
 
@@ -128,7 +128,7 @@ Since the MiniMax API is not accessible with the current credentials, this demon
 
 ### Task Details
 - Model: ${MODEL}
-- Framework: RubberDuck v1.0.0
+- Framework: Hanumate v1.0.0
 - Pipeline: Orchestrator → Coder → Reviewer
 
 ### Next Steps
@@ -138,14 +138,14 @@ To enable full AI capabilities:
 3. Update the MINIMAX_API_KEY environment variable
 
 ---
-*Powered by RubberDuck Framework*`;
+*Powered by Hanumate Framework*`;
 }
 
 // Coder Agent
 async function runCoderAgent(task: { id: string; description: string; context?: string }): Promise<string> {
   logger.info(`🦆 Coder Agent: Processing task ${task.id}`);
 
-  const prompt = `You are the **RubberDuck Coder Agent**. You specialize in writing and implementing code.
+  const prompt = `You are the **Hanumate Coder Agent**. You specialize in writing and implementing code.
 
 ## Task
 ${task.description}
@@ -153,7 +153,7 @@ ${task.description}
 ${task.context ? `## Context\n${task.context}` : ''}
 
 ## Your Role
-As the Coder Agent in the RubberDuck framework, you:
+As the Coder Agent in the Hanumate framework, you:
 1. Analyze the task requirements
 2. Propose an implementation approach
 3. Write code with proper formatting
@@ -168,7 +168,7 @@ Provide a detailed response with code examples where applicable.`;
 async function runReviewerAgent(task: { id: string; description: string; context?: string }): Promise<string> {
   logger.info(`🦆 Reviewer Agent: Processing task ${task.id}`);
 
-  const prompt = `You are the **RubberDuck Reviewer Agent**. You specialize in code review and quality assurance.
+  const prompt = `You are the **Hanumate Reviewer Agent**. You specialize in code review and quality assurance.
 
 ## Task
 ${task.description}
@@ -176,7 +176,7 @@ ${task.description}
 ${task.context ? `## Context\n${task.context}` : ''}
 
 ## Your Role
-As the Reviewer Agent in the RubberDuck framework, you:
+As the Reviewer Agent in the Hanumate framework, you:
 1. Review code for security issues
 2. Check for performance problems
 3. Suggest improvements and best practices
@@ -240,10 +240,10 @@ const app = new Hono();
 // Health check
 app.get('/health', (c) => c.json({
   status: 'ok',
-  service: 'rubberduck-runtime',
+  service: 'hanumate-runtime',
   timestamp: new Date().toISOString(),
   version: '1.0.0',
-  framework: 'RubberDuck',
+  framework: 'Hanumate',
   tagline: "India's First Open-Source Autonomous Code Agent Framework",
   agents: {
     orchestrator: { status: 'active', role: 'Coordinates task dispatch to specialist agents' },
@@ -287,7 +287,7 @@ app.post('/tasks', async (c) => {
       success: orchestratorResult.success,
       message: orchestratorResult.result,
       artifacts: {
-        summary: `Processed by RubberDuck Framework: ${orchestratorResult.agents.join(' → ')}`,
+        summary: `Processed by Hanumate Framework: ${orchestratorResult.agents.join(' → ')}`,
       },
       duration,
     };
@@ -310,7 +310,7 @@ app.post('/tasks', async (c) => {
 
 // Agent status endpoint
 app.get('/agents', (c) => c.json({
-  framework: 'RubberDuck',
+  framework: 'Hanumate',
   version: '1.0.0',
   agents: [
     {
@@ -367,10 +367,10 @@ app.get('/capabilities', (c) => c.json({
 const PORT = parseInt(process.env.RUNTIME_PORT || '3001', 10);
 
 console.log('\n' + '='.repeat(60));
-console.log('🦆 RubberDuck Runtime Server');
+console.log('🦆 Hanumate Runtime Server');
 console.log('='.repeat(60));
 console.log(`Version:    1.0.0`);
-console.log(`Framework:  RubberDuck`);
+console.log(`Framework:  Hanumate`);
 console.log(`LLM:       ${MODEL} via MiniMax`);
 console.log(`Port:       ${PORT}`);
 console.log('='.repeat(60) + '\n');

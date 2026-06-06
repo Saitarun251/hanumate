@@ -1,6 +1,6 @@
-# RubberDuck Connectors
+# Hanumate Connectors
 
-Connectors adapt third-party services into RubberDuck.
+Connectors adapt third-party services into Hanumate.
 
 Available connectors:
 - [Daytona](sandbox--daytona.md) - Container-based sandboxes
