@@ -1,4 +1,4 @@
-// @hanumate/runtime - Core agent engine
+// @kishkindhalabs/hanumate-runtime - Core agent engine
 // Built on top of pi-agent-core (@earendil-works/pi-agent-core)
 
 // Core exports

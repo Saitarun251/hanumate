@@ -5,7 +5,7 @@ Agents are the core building blocks of Hanumate.
 ## Create Agent
 
 ```typescript
-import { createAgent } from '@hanumateharness/runtime';
+import { createAgent } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   name: 'coder',
@@ -41,7 +41,7 @@ const result = await session.prompt('Write a REST API');
 ## Multi-Agent
 
 ```typescript
-import { AgentRegistry, Dispatcher } from '@hanumateharness/runtime';
+import { AgentRegistry, Dispatcher } from '@kishkindhalabs/hanumate-runtime';
 
 const registry = new AgentRegistry();
 const dispatcher = new Dispatcher(registry);

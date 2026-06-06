@@ -47,10 +47,10 @@ Hanumate comes with a built-in agent harness, multi-agent orchestration, and san
 
 | Package | Description |
 | --- | --- |
-| `@hanumate/runtime` | Core: agent harness, sessions, tools, sandbox |
-| `@hanumate/sdk` | TypeScript SDK for building integrations |
-| `@hanumate/cli` | CLI tool for running agents locally |
-| `@hanumate/opentelemetry` | Observability adapter for tracing and metrics |
+| `@kishkindhalabs/hanumate-runtime` | Core: agent harness, sessions, tools, sandbox |
+| `@kishkindhalabs/hanumate-sdk` | TypeScript SDK for building integrations |
+| `@kishkindhalabs/hanumate-cli` | CLI tool for running agents locally |
+| `@kishkindhalabs/hanumate-opentelemetry` | Observability adapter for tracing and metrics |
 
 ---
 
@@ -122,7 +122,7 @@ hanumate/
 ### Create Your First Agent
 
 ```ts
-import { createAgent } from '@hanumate/runtime';
+import { createAgent } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   model: 'anthropic/claude-sonnet-4-6',
@@ -246,7 +246,7 @@ Hanumate's orchestrator coordinates multiple specialist agents for complex tasks
 ### Setting Up Agent Registry
 
 ```ts
-import { createAgent, AgentRegistry, dispatch } from '@hanumate/runtime';
+import { createAgent, AgentRegistry, dispatch } from '@kishkindhalabs/hanumate-runtime';
 
 // Define specialist agents
 const orchestrator = createAgent({
@@ -301,7 +301,7 @@ console.log(result);
 ### Sequential Dispatch
 
 ```ts
-import { dispatchSequential } from '@hanumate/runtime';
+import { dispatchSequential } from '@kishkindhalabs/hanumate-runtime';
 
 // Run agents sequentially with shared context
 const results = await dispatchSequential(
@@ -321,7 +321,7 @@ const results = await dispatchSequential(
 ### Async Dispatch
 
 ```ts
-import { dispatchAsync } from '@hanumate/runtime';
+import { dispatchAsync } from '@kishkindhalabs/hanumate-runtime';
 
 // Dispatch to multiple agents and collect results
 const results = await dispatchAsync([
@@ -347,7 +347,7 @@ Agents can execute code in isolated environments for security and consistency.
 Direct filesystem and shell access. Fast but less isolated.
 
 ```ts
-import { createAgent, createSandbox } from '@hanumate/runtime';
+import { createAgent, createSandbox } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   sandbox: createSandbox('local'),
@@ -639,7 +639,7 @@ Plug in OpenTelemetry for distributed tracing and metrics.
 ### Basic Setup
 
 ```ts
-import { initTelemetry } from '@hanumate/opentelemetry';
+import { initTelemetry } from '@kishkindhalabs/hanumate-opentelemetry';
 
 const telemetry = await initTelemetry({
   serviceName: 'hanumate-agent',
@@ -651,7 +651,7 @@ const telemetry = await initTelemetry({
 ### Custom Tracing
 
 ```ts
-import { trace, SpanKind, SpanStatusCode } from '@hanumate/opentelemetry';
+import { trace, SpanKind, SpanStatusCode } from '@kishkindhalabs/hanumate-opentelemetry';
 
 const span = trace.startSpan('agent-execution', {
   kind: SpanKind.INTERNAL,
@@ -676,7 +676,7 @@ try {
 ### Metrics
 
 ```ts
-import { metrics } from '@hanumate/opentelemetry';
+import { metrics } from '@kishkindhalabs/hanumate-opentelemetry';
 
 // Counter
 const requestCounter = metrics.createCounter('agent_requests_total', {
@@ -697,7 +697,7 @@ latencyHistogram.record(duration, { operation: 'prompt' });
 ### Log Integration
 
 ```ts
-import { logger } from '@hanumate/opentelemetry';
+import { logger } from '@kishkindhalabs/hanumate-opentelemetry';
 
 logger.info('Agent initialized', {
   agent: 'coder',
@@ -932,7 +932,7 @@ npm test
 npm run test:coverage
 
 # Run specific package tests
-npm test --workspace=@hanumate/runtime
+npm test --workspace=@kishkindhalabs/hanumate-runtime
 
 # Run in CI mode (no watch)
 npm run test:ci

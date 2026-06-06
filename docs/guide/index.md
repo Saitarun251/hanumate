@@ -39,11 +39,11 @@ Bors-style merge queue with bisecting. Keep main branch always green.
 
 | Package | Description |
 |---------|-------------|
-| `@hanumateharness/runtime` | Core framework — always needed |
-| `@hanumateharness/cli` | CLI tool for work management |
-| `@hanumateharness/sdk` | TypeScript SDK |
-| `@hanumateharness/opentelemetry` | Observability adapter |
-| `@hanumateharness/all` | All packages bundled |
+| `@kishkindhalabs/hanumate-runtime` | Core framework — always needed |
+| `@kishkindhalabs/hanumate-cli` | CLI tool for work management |
+| `@kishkindhalabs/hanumate-sdk` | TypeScript SDK |
+| `@kishkindhalabs/hanumate-opentelemetry` | Observability adapter |
+| `@kishkindhalabs/hanumate-all` | All packages bundled |
 
 ## Next Steps
 

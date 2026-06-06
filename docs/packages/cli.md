@@ -1,11 +1,11 @@
-# @hanumateharness/cli
+# @kishkindhalabs/hanumate-cli
 
 The `hanumate` command-line tool for managing Hanumate work.
 
 ## Installation
 
 ```bash
-npm install -g @hanumateharness/cli
+npm install -g @kishkindhalabs/hanumate-cli
 ```
 
 ## Commands

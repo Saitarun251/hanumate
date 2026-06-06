@@ -5,13 +5,13 @@ The `hanumate` CLI provides command-line tools for managing Hanumate work.
 ## Installation
 
 ```bash
-npm install -g @hanumateharness/cli
+npm install -g @kishkindhalabs/hanumate-cli
 ```
 
 Or use with npx:
 
 ```bash
-npx @hanumateharness/cli dev
+npx @kishkindhalabs/hanumate-cli dev
 ```
 
 ## Commands

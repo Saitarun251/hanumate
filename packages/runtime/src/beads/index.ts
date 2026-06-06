@@ -6,7 +6,7 @@
  * 
  * @example
  * ```typescript
- * import { createBeadStore, createBeadCommands } from '@hanumate/runtime/beads';
+ * import { createBeadStore, createBeadCommands } from '@kishkindhalabs/hanumate-runtime/beads';
  * 
  * const store = createBeadStore();
  * const commands = createBeadCommands(store);

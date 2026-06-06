@@ -6,30 +6,30 @@ Hanumate is organized as a monorepo with 5 npm packages:
 
 | Package | Install | Description |
 |---------|---------|-------------|
-| `@hanumateharness/all` | `npm install @hanumateharness/all` | All packages bundled |
-| `@hanumateharness/runtime` | `npm install @hanumateharness/runtime` | Core framework |
-| `@hanumateharness/cli` | `npm install @hanumateharness/cli` | CLI tool |
-| `@hanumateharness/sdk` | `npm install @hanumateharness/sdk` | TypeScript SDK |
-| `@hanumateharness/opentelemetry` | `npm install @hanumateharness/opentelemetry` | Observability |
+| `@kishkindhalabs/hanumate-all` | `npm install @kishkindhalabs/hanumate-all` | All packages bundled |
+| `@kishkindhalabs/hanumate-runtime` | `npm install @kishkindhalabs/hanumate-runtime` | Core framework |
+| `@kishkindhalabs/hanumate-cli` | `npm install @kishkindhalabs/hanumate-cli` | CLI tool |
+| `@kishkindhalabs/hanumate-sdk` | `npm install @kishkindhalabs/hanumate-sdk` | TypeScript SDK |
+| `@kishkindhalabs/hanumate-opentelemetry` | `npm install @kishkindhalabs/hanumate-opentelemetry` | Observability |
 
 ## Which Package Do I Need?
 
 ### For Code Generation Only
 
 ```bash
-npm install @hanumateharness/runtime
+npm install @kishkindhalabs/hanumate-runtime
 ```
 
 ### For CLI Work Management
 
 ```bash
-npm install @hanumateharness/cli
+npm install @kishkindhalabs/hanumate-cli
 ```
 
 ### For Everything
 
 ```bash
-npm install @hanumateharness/all
+npm install @kishkindhalabs/hanumate-all
 ```
 
 ## Package Details

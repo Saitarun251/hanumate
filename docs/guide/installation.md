@@ -10,23 +10,23 @@
 ### Core (Recommended)
 
 ```bash
-npm install @hanumateharness/runtime
+npm install @kishkindhalabs/hanumate-runtime
 ```
 
 ### Everything
 
 ```bash
-npm install @hanumateharness/all
+npm install @kishkindhalabs/hanumate-all
 ```
 
 ### Individual Packages
 
 ```bash
 # CLI tool
-npm install @hanumateharness/cli
+npm install @kishkindhalabs/hanumate-cli
 
 # Observability
-npm install @hanumateharness/opentelemetry
+npm install @kishkindhalabs/hanumate-opentelemetry
 ```
 
 ## Environment Setup
@@ -63,7 +63,7 @@ Add to your `tsconfig.json`:
 ## Verify Installation
 
 ```typescript
-import { createAgent } from '@hanumateharness/runtime';
+import { createAgent } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   name: 'test',

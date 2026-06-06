@@ -1,11 +1,11 @@
-# @hanumateharness/sdk
+# @kishkindhalabs/hanumate-sdk
 
 TypeScript SDK for building Hanumate integrations.
 
 ## Installation
 
 ```bash
-npm install @hanumateharness/sdk
+npm install @kishkindhalabs/hanumate-sdk
 ```
 
 ## Usage

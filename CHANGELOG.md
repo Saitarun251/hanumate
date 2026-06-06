@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-#### Core Runtime (@hanumate/runtime)
+#### Core Runtime (@kishkindhalabs/hanumate-runtime)
 
 - **Skills System**
   - `Session.runSkill()` - Execute skills with full context
@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file.
   - Proper error handling with error codes (ENOENT, EACCES, etc.)
   - Hidden file filtering option
 
-#### OpenTelemetry (@hanumate/opentelemetry)
+#### OpenTelemetry (@kishkindhalabs/hanumate-opentelemetry)
 
 - `initTelemetry()` - Initialize OpenTelemetry tracing
 - `shutdownTelemetry()` - Graceful shutdown
@@ -66,7 +66,7 @@ All notable changes to this project will be documented in this file.
 - Console and OTLP exporters
 - Configurable sampling
 
-#### CLI (@hanumate/cli)
+#### CLI (@kishkindhalabs/hanumate-cli)
 
 - `duck dev` - Start development server with WebSocket support
 - `duck run <workflow>` - Execute workflows from CLI

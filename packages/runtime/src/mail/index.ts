@@ -12,7 +12,7 @@ export type { Mail, MailConfig, MailFilter } from './mail-types.js';
  * Quick example:
  * 
  * ```typescript
- * import { createMailStore } from '@hanumate/runtime';
+ * import { createMailStore } from '@kishkindhalabs/hanumate-runtime';
  * 
  * const mail = createMailStore({ agentId: 'orchestrator' });
  * await mail.init();

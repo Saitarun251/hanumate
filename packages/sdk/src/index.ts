@@ -1,4 +1,4 @@
-// @hanumate/sdk - Client SDK
+// @kishkindhalabs/hanumate-sdk - Client SDK
 export interface AgentConnection {
 	prompt(message: string): Promise<string>;
 	close(): void;

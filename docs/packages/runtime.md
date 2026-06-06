@@ -1,17 +1,17 @@
-# @hanumateharness/runtime
+# @kishkindhalabs/hanumate-runtime
 
 The core framework for building autonomous coding agents.
 
 ## Installation
 
 ```bash
-npm install @hanumateharness/runtime
+npm install @kishkindhalabs/hanumate-runtime
 ```
 
 ## Usage
 
 ```typescript
-import { createAgent } from '@hanumateharness/runtime';
+import { createAgent } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   name: 'coder',
@@ -30,7 +30,7 @@ const result = await session.prompt('Write a hello world function');
 Creates a new agent instance.
 
 ```typescript
-import { createAgent } from '@hanumateharness/runtime';
+import { createAgent } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   name: 'my-agent',
@@ -78,7 +78,7 @@ The runtime includes built-in tools:
 Agents can run in isolated sandboxes:
 
 ```typescript
-import { createAgent, createSandbox } from '@hanumateharness/runtime';
+import { createAgent, createSandbox } from '@kishkindhalabs/hanumate-runtime';
 
 // Local sandbox (default)
 const agent = createAgent({ name: 'local', model: 'claude-sonnet-4-6' });

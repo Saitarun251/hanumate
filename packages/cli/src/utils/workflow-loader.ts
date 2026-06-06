@@ -1,4 +1,4 @@
-import { init } from '@hanumate/runtime';
+import { init } from '@kishkindhalabs/hanumate-runtime';
 import { resolve, join } from 'path';
 import { existsSync } from 'fs';
 

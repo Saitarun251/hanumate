@@ -30,7 +30,7 @@ An **agent** is the brain. A **harness** is the runtime environment. A **session
 ## Quick Example
 
 ```ts
-import { createAgent, init } from '@hanumate/runtime';
+import { createAgent, init } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent(() => ({
 	model: 'anthropic/claude-sonnet-4-6',
@@ -78,7 +78,7 @@ Build for Node.js or Cloudflare Workers.
 Hanumate supports multiple AI providers:
 
 ```typescript
-import { configureProvider } from '@hanumate/runtime';
+import { configureProvider } from '@kishkindhalabs/hanumate-runtime';
 
 const provider = await configureProvider({
   providerId: 'openai',
@@ -140,7 +140,7 @@ const harness = await init(agent, {
 Enable tracing and observability:
 
 ```typescript
-import { initTelemetry } from '@hanumate/opentelemetry';
+import { initTelemetry } from '@kishkindhalabs/hanumate-opentelemetry';
 
 const { traceProvider, shutdown } = await initTelemetry({
   serviceName: 'hanumate-agent',

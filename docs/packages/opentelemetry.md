@@ -1,17 +1,17 @@
-# @hanumateharness/opentelemetry
+# @kishkindhalabs/hanumate-opentelemetry
 
 OpenTelemetry integration for tracing and metrics.
 
 ## Installation
 
 ```bash
-npm install @hanumateharness/opentelemetry
+npm install @kishkindhalabs/hanumate-opentelemetry
 ```
 
 ## Setup
 
 ```typescript
-import { initTelemetry } from '@hanumateharness/opentelemetry';
+import { initTelemetry } from '@kishkindhalabs/hanumate-opentelemetry';
 
 // Initialize with your OTLP endpoint
 initTelemetry({
@@ -24,7 +24,7 @@ initTelemetry({
 ## Configuration
 
 ```typescript
-import { initTelemetry, type TelemetryConfig } from '@hanumateharness/opentelemetry';
+import { initTelemetry, type TelemetryConfig } from '@kishkindhalabs/hanumate-opentelemetry';
 
 const config: TelemetryConfig = {
   serviceName: 'hanumate-agent',
@@ -60,7 +60,7 @@ Once initialized, all agent operations are automatically traced:
 Add custom spans to your code:
 
 ```typescript
-import { tracer } from '@hanumateharness/opentelemetry';
+import { tracer } from '@kishkindhalabs/hanumate-opentelemetry';
 
 const span = tracer.startSpan('my-operation');
 
@@ -81,7 +81,7 @@ try {
 Access built-in metrics:
 
 ```typescript
-import { metrics } from '@hanumateharness/opentelemetry';
+import { metrics } from '@kishkindhalabs/hanumate-opentelemetry';
 
 // Counter
 metrics.counter('agent.prompts').add(1);

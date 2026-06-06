@@ -37,7 +37,7 @@ The orchestrator is the central coordinator that:
 - Collects and aggregates results
 
 ```typescript
-import { AgentRegistry, Dispatcher } from '@hanumate/runtime';
+import { AgentRegistry, Dispatcher } from '@kishkindhalabs/hanumate-runtime';
 
 const registry = new AgentRegistry();
 const dispatcher = new Dispatcher(registry);
@@ -94,7 +94,7 @@ const reviewerAgent = createAgent({
 The foundation for creating agents:
 
 ```typescript
-import { createAgent, type HanumateAgent, type Session } from '@hanumate/runtime';
+import { createAgent, type HanumateAgent, type Session } from '@kishkindhalabs/hanumate-runtime';
 
 // Create agent
 const agent = createAgent({
@@ -147,7 +147,7 @@ interface Session {
 ### Multi-Agent Dispatch
 
 ```typescript
-import { dispatch, dispatchAsync, dispatchSequential } from '@hanumate/runtime';
+import { dispatch, dispatchAsync, dispatchSequential } from '@kishkindhalabs/hanumate-runtime';
 
 // Parallel dispatch
 const results = await dispatchAsync([
@@ -214,7 +214,7 @@ const result = await session.runSkill('code-review', { code: myCode });
 Agents can use different sandbox types for code execution:
 
 ```typescript
-import { createSandbox, createAgent } from '@hanumate/runtime';
+import { createSandbox, createAgent } from '@kishkindhalabs/hanumate-runtime';
 
 // Local sandbox (default)
 const localSandbox = createSandbox('local');

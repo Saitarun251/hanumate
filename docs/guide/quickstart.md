@@ -7,7 +7,7 @@ Build your first autonomous coding agent in under 5 minutes.
 ```bash
 mkdir my-agent && cd my-agent
 npm init -y
-npm install @hanumateharness/runtime
+npm install @kishkindhalabs/hanumate-runtime
 ```
 
 ## 2. Create Agent
@@ -15,8 +15,8 @@ npm install @hanumateharness/runtime
 Create `agent.ts`:
 
 ```typescript
-import { createAgent } from '@hanumateharness/runtime';
-import { exists, read, write } from '@hanumateharness/runtime';
+import { createAgent } from '@kishkindhalabs/hanumate-runtime';
+import { exists, read, write } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   name: 'coder',

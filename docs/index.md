@@ -16,7 +16,7 @@ hero:
       link: /guide/
     - theme: alt
       text: npm Package
-      link: https://www.npmjs.com/package/@hanumateharness/runtime
+      link: https://www.npmjs.com/package/@kishkindhalabs/hanumate-runtime
 
 features:
   - icon: ⚡
@@ -58,16 +58,16 @@ features:
 
 ```bash
 # Core package (recommended)
-npm install @hanumateharness/runtime
+npm install @kishkindhalabs/hanumate-runtime
 
 # Everything
-npm install @hanumateharness/all
+npm install @kishkindhalabs/hanumate-all
 ```
 
 ## Quick Example
 
 ```typescript
-import { createAgent } from '@hanumateharness/runtime';
+import { createAgent } from '@kishkindhalabs/hanumate-runtime';
 
 const agent = createAgent({
   name: 'coder',

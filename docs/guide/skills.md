@@ -5,7 +5,7 @@ Skills extend agent capabilities with specialized instructions.
 ## Load Skills
 
 ```typescript
-import { loadAgentSkills } from '@hanumateharness/runtime';
+import { loadAgentSkills } from '@kishkindhalabs/hanumate-runtime';
 
 const skills = await loadAgentSkills(['coding', 'debugging'], '/project/.hanumate/skills');
 ```

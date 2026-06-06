@@ -6,7 +6,7 @@
  *
  * @example
  * ```typescript
- * import { ConvoyManager } from '@hanumate/runtime';
+ * import { ConvoyManager } from '@kishkindhalabs/hanumate-runtime';
  *
  * const manager = new ConvoyManager();
  * await manager.init();

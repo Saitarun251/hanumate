@@ -73,7 +73,7 @@ await session.moveFile('/src.ts', '/dest.ts');
 ## Custom Tools
 
 ```typescript
-import { createAgent, type Tool } from '@hanumateharness/runtime';
+import { createAgent, type Tool } from '@kishkindhalabs/hanumate-runtime';
 
 const customTool: Tool = {
   name: 'my-tool',

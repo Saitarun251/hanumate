@@ -1,5 +1,5 @@
 /**
- * @hanumate/opentelemetry - OpenTelemetry setup helpers for Hanumate
+ * @kishkindhalabs/hanumate-opentelemetry - OpenTelemetry setup helpers for Hanumate
  * 
  * This package provides convenient setup functions for initializing
  * OpenTelemetry tracing in Hanumate applications.
@@ -47,7 +47,7 @@ let isInitialized = false;
  * 
  * @example
  * ```typescript
- * import { setup } from '@hanumate/opentelemetry';
+ * import { setup } from '@kishkindhalabs/hanumate-opentelemetry';
  * 
  * const tracer = setup({
  *   serviceName: 'my-agent',
@@ -107,7 +107,7 @@ export function setup(config: OTelSetupConfig = {}): Tracer {
  * 
  * @example
  * ```typescript
- * import { setup, shutdown } from '@hanumate/opentelemetry';
+ * import { setup, shutdown } from '@kishkindhalabs/hanumate-opentelemetry';
  * 
  * setup({ serviceName: 'my-agent' });
  * 
@@ -159,7 +159,7 @@ export function getTracer(name: string): Tracer {
  * 
  * @example
  * ```typescript
- * import { setup, wrapAsync } from '@hanumate/opentelemetry';
+ * import { setup, wrapAsync } from '@kishkindhalabs/hanumate-opentelemetry';
  * 
  * const tracer = setup();
  * 

@@ -100,7 +100,7 @@ await session.runSkill("my-skill", { context: "data" });
 OpenTelemetry integration provides distributed tracing:
 
 ```typescript
-import { initTelemetry, shutdownTelemetry } from '@hanumate/runtime';
+import { initTelemetry, shutdownTelemetry } from '@kishkindhalabs/hanumate-runtime';
 
 // Initialize with configuration
 initTelemetry({
@@ -132,7 +132,7 @@ initTelemetry({
 Sandbox connectors provide isolated execution environments:
 
 ```typescript
-import { createSandbox } from '@hanumate/runtime';
+import { createSandbox } from '@kishkindhalabs/hanumate-runtime';
 
 // Local sandbox (real shell/fs)
 const localSandbox = createSandbox('local');
@@ -218,7 +218,7 @@ const harness = await init(agent, {
 Session persistence for state management:
 
 ```typescript
-import { InMemorySessionStore } from '@hanumate/runtime';
+import { InMemorySessionStore } from '@kishkindhalabs/hanumate-runtime';
 
 const harness = await init(agent, {
   config: {
