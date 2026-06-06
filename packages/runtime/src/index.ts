@@ -177,3 +177,227 @@ export type {
 	ResultCaptureConfig,
 	ContextTrace,
 } from './shared-context.js';
+
+// Convoys - Work bundling system
+export {
+	ConvoyManager,
+	createConvoyManager,
+	ConvoyStore,
+	ConvoyStoreError,
+	DEFAULT_CONVOYS_DIR,
+} from './convoys/index.js';
+export type {
+	Convoy,
+	ConvoyStatus,
+	CreateConvoyOptions,
+	UpdateConvoyOptions,
+	ListConvoyOptions,
+	ConvoyChangeEvent,
+	ConvoyListener,
+} from './convoys/index.js';
+
+// Hooks - Persistent work queue for agents
+export {
+	HookStore,
+	InMemoryHookStore,
+	HookManager,
+	createHookManager,
+	generateHookId,
+	createHook,
+} from './hooks/index.js';
+export type {
+	Hook,
+	HookStatus,
+	HookCreateOptions,
+	HookUpdateOptions,
+	HookManagerConfig,
+} from './hooks/index.js';
+
+// Beads - Git-backed issue tracking system
+export {
+	type Bead,
+	type BeadType,
+	type BeadPriority,
+	type BeadStatus,
+	type CreateBeadInput,
+	type UpdateBeadInput,
+	type BeadFilter,
+	type BeadStore,
+	type CreateBeadOptions,
+	type UpdateBeadOptions,
+	type ListBeadsOptions,
+	type BeadCommandResult,
+	generateBeadId,
+	isValidBeadId,
+	getDefaultStatus,
+	isBlocked,
+	sortByPriority,
+	formatBead,
+	JsonBeadStore,
+	createBeadStore,
+	createInMemoryBeadStore,
+	BeadCommands,
+	createBeadCommands,
+	formatBeadForCLI,
+	formatBeadList,
+} from './beads/index.js';
+
+// Mail - Persistent agent messaging
+export { MailStore, createMailStore, createInMemoryMailStore } from './mail/index.js';
+export type { Mail, MailConfig, MailFilter } from './mail/index.js';
+
+// Nudge - WebSocket-based real-time agent communication
+export { NudgeClient, NudgeServer } from './nudge/index.js';
+export type {
+	NudgeMessage,
+	NudgeType,
+	NudgePayload,
+	NudgeConfig,
+	NudgeConnection,
+	NudgeClientConfig,
+} from './nudge/index.js';
+
+// Watchdog - Process health monitoring
+export { Witness, createWitness, Deacon, createDeacon } from './watchdog/index.js';
+export { runBootDog, runCleanupDog, runHealthDog } from './watchdog/dogs/index.js';
+export type {
+	WitnessConfig,
+	WitnessConfigOptions,
+	DeaconConfig,
+	DeaconId,
+	WitnessId,
+	DogId,
+	WitnessReport,
+	DeaconReport,
+	DogTask,
+	DogConfig,
+	PatrolCycle,
+	PatrolCallback,
+	DogDispatchCallback,
+	HealthChangeCallback,
+	HealthStatus,
+} from './watchdog/index.js';
+export type {
+	BootCheck,
+	WitnessReportSummary,
+	HealthStats,
+	DogResult,
+	BootDogOptions,
+	BootDogReport,
+	CleanupDogOptions,
+	CleanupDogReport,
+	HealthDogOptions,
+	HealthDogReport,
+} from './watchdog/dogs/index.js';
+
+// Refinery - Bors-style merge queue
+export { Refinery, RefineryQueue, CiGate, LintGate, CoverageGate } from './refinery/index.js';
+export type {
+	MergeRequest,
+	MergeStatus,
+	MergeRequestId,
+	VerificationGate,
+	GateResult,
+	RefineryConfig,
+	RefineryStatus,
+	QueueOptions,
+	TestResult,
+	BisectResult,
+} from './refinery/index.js';
+
+// Escalation - Severity-routed issue escalation
+export { EscalationService } from './escalation/index.js';
+export type {
+	Escalation,
+	EscalationId,
+	Severity,
+	EscalationStatus,
+	EscalationRoute,
+	EscalationOptions,
+} from './escalation/index.js';
+export {
+	SEVERITY_PRIORITY,
+	DEFAULT_ROUTES,
+	isMoreSevere,
+	getHighestSeverity,
+} from './escalation/index.js';
+
+// Seance - Session discovery and recovery
+export { Seance } from './recovery/index.js';
+export type {
+	SessionRecord,
+	SessionId,
+	SessionEvent,
+	SessionEventType,
+	SessionQuery,
+	SeanceOptions,
+	PredecessorQuestion,
+	PredecessorAnswer,
+} from './recovery/index.js';
+export {
+	getSessionDuration,
+	isSessionStale,
+} from './recovery/index.js';
+
+// CLI - Command-line interface
+export type {
+	Command,
+	CommandRegistry,
+	Option,
+	GlobalOptions,
+	ParsedArgs,
+	CliConfig,
+	CommandHandler,
+	OptionType,
+} from './cli/cli-types.js';
+export { run as runCLI, InMemoryCommandRegistry, parseArgs, findCommand } from './cli/index.js';
+
+// HTTP Server - Hono-based HTTP server
+export {
+	createServer,
+	type HttpServerConfig,
+	type HttpServer,
+	type HealthResponse,
+	type AgentPromptRequest,
+	type AgentPromptResponse,
+	type SessionInfoResponse,
+} from './server/index.js';
+
+// WebSocket - Real-time agent communication
+export {
+	WebSocketHandler,
+	createWebSocketHandler,
+	type WebSocketHandlerConfig,
+	type WebSocketMessageType,
+	type WebSocketIncomingMessage,
+	type WebSocketOutgoingMessage,
+	type WebSocketEventHandlers,
+} from './server/index.js';
+
+// Workflow - Workflow routing system
+export {
+	WorkflowRouter,
+	createWorkflowRouter,
+	type WorkflowDefinition,
+	type WorkflowStep,
+	type WorkflowStepHandler,
+	type WorkflowContext,
+	type WorkflowUser,
+	type WorkflowStepResult,
+	type WorkflowResult,
+	type WorkflowRegistration,
+	type Middleware,
+	type AuthMiddlewareOptions,
+	type LoggingMiddlewareOptions,
+	type WorkflowLogEntry,
+	type WorkflowRouterConfig,
+} from './server/index.js';
+
+// Message Trigger - Message-driven agent trigger
+export {
+	MessageTrigger,
+	createMessageTrigger,
+	type MessageTriggerConfig,
+	type IncomingMessage,
+	type RoutingResult,
+} from './server/index.js';

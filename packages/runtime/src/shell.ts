@@ -47,11 +47,10 @@ export async function exec(
 		...options?.env,
 	} as Record<string, string>;
 
-	const spawnOptions: SpawnOptions = {
+	const { shell: _shell, ...restOptions } = {
 		cwd: cwd ?? process.cwd(),
 		env,
-		shell,
-		stdio: ['ignore', 'pipe', 'pipe'],
+		stdio: ['ignore', 'pipe', 'pipe'] as const,
 	};
 
 	return new Promise((resolve) => {
@@ -60,10 +59,7 @@ export async function exec(
 		let timedOut = false;
 		let killed = false;
 
-		const child = spawn(command, [], {
-			...spawnOptions,
-			argv0: undefined,
-		});
+		const child = spawn(shell, ['-c', command], restOptions);
 
 		// Set up timeout
 		const timeoutId = setTimeout(() => {
@@ -144,10 +140,9 @@ export function execStream(
 		...options?.env,
 	} as Record<string, string>;
 
-	const child = spawn(command, [], {
+	const child = spawn(shell, ['-c', command], {
 		cwd: cwd ?? process.cwd(),
 		env,
-		shell,
 		stdio: ['ignore', 'pipe', 'pipe'],
 	});
 

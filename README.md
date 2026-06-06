@@ -721,26 +721,56 @@ Run agents from the command line.
 ### Commands
 
 ```bash
-# Start development mode
-duck dev
+# Agent Management
+duck dev                          # Start development mode
+duck status                        # Check agent status
+duck init my-agent                # Initialize a new agent project
 
-# Run a workflow
-duck run my-workflow --payload '{"key": "value"}'
+# Work Management (Hook System)
+duck hook list                    # List all hooks
+duck hook assign <bead-id> <agent> # Assign work to agent
+duck hook status <agent-id>       # Check agent's hook status
+duck hook unassign <hook-id>      # Remove hook from queue
 
-# Connect to a remote agent
-duck connect my-agent instance-123
+# Issue Tracking (Beads)
+duck bead create --title="Fix bug" --type=bug --priority=P1
+duck bead list --status=open
+duck bead show rd-abc12
+duck bead update rd-abc12 --status=in_progress
+duck bead close rd-abc12
+duck bead ready                   # Show unblocked work
 
-# List available skills
+# Work Bundling (Convoys)
+duck convoy create "Feature X" rd-abc12 rd-def34
+duck convoy list
+duck convoy show cv-abc12
+duck convoy add cv-abc12 rd-ghi56
+duck convoy land cv-abc12
+
+# Messaging (Mail)
+duck mail send <agent-id> -s "Subject" -m "Message"
+duck mail inbox
+duck mail read <mail-id>
+
+# Merge Queue (Refinery)
+duck refinery list
+duck refinery status
+duck refinery enqueue <branch>
+duck refinery show <mr-id>
+
+# Session Management
+duck session list
+duck session show <session-id>
+duck session stats
+
+# Server Mode (HTTP/WebSocket)
+duck server start [--port 3000] [--daemon]
+duck server stop
+duck server status
+
+# Skills
 duck skills list
-
-# Run a skill
 duck skill run code-review --file ./src/index.ts
-
-# Check agent status
-duck status
-
-# Initialize a new agent project
-duck init my-agent
 ```
 
 ### Configuration
@@ -763,7 +793,7 @@ export default {
 ## Architecture
 
 ```
-Request
+Request / Hook Queue
   |
   v
 Harness (init)
@@ -774,31 +804,40 @@ Provider Manager (LLM abstraction)
   v
 Orchestrator (dispatch)
   |
-  +-----+-----+
-  v           v
-Coder      Reviewer
+  +-----+-----+-----+-----+
+  v     v     v     v
+Hook  Bead  Convoy Mail
+  |     |     |     |
+  +-----+-----+-----+
   |           |
   v           v
-Sandbox    Sandbox
-(local|    (local|
-virtual|   virtual|
-daytona|   daytona|
-e2b)       e2b)
+Watchdog    Refinery
+(Health)   (Merge Queue)
   |
   v
-Response
+Response / Seance (Recovery)
 ```
 
 ### Core Components
 
-| Component | File | Description |
+| Component | Directory | Description |
 | --- | --- | --- |
-| Harness | `harness.ts` | Main agent runtime, session management |
-| Dispatcher | `dispatcher.ts` | Multi-agent coordination |
-| Provider Manager | `provider-manager.ts` | LLM provider abstraction |
-| Sandbox Connectors | `connectors/` | Sandboxed code execution |
-| Tools | `tools/` | Built-in agent tools (shell, fs) |
-| Skills | `skills/` | Agent capability extensions |
+| **Harness** | `src/harness.ts` | Main agent runtime, session management |
+| **Dispatcher** | `src/dispatch.ts` | Multi-agent coordination |
+| **Provider Manager** | `src/providers.ts` | LLM provider abstraction |
+| **Hook System** | `src/hooks/` | Persistent work queue (GUPP principle) |
+| **Beads** | `src/beads/` | Git-backed issue tracking |
+| **Convoys** | `src/convoys/` | Work bundling and grouping |
+| **Mail** | `src/mail/` | Persistent agent messaging |
+| **Nudge** | `src/nudge/` | Real-time inter-agent communication |
+| **Watchdog** | `src/watchdog/` | Health monitoring (Witness + Deacon + Dogs) |
+| **Refinery** | `src/refinery/` | Bors-style merge queue with bisecting |
+| **Escalation** | `src/escalation/` | Severity-routed issue escalation |
+| **Seance** | `src/recovery/` | Session discovery and recovery |
+| **HTTP Server** | `src/server/` | Hono-based HTTP/WebSocket server |
+| **Sandbox Connectors** | `src/connectors/` | Sandboxed code execution |
+| **Skills** | `src/skills.ts` | Agent capability extensions |
+| **MCP** | `src/mcp.ts` | Model Context Protocol support |
 
 ### Session Flow
 
