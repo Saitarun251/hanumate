@@ -1,19 +1,19 @@
-// @rubberduckharness - Meta-package bundling all RubberDuck packages
+// @kishkindhalabs/hanumate - Meta-package bundling all Hanumate packages
 // 
 // Usage:
-//   npm install @rubberduckharness  # Everything
-//   npm install @rubberduckharness/runtime  # Just core (recommended)
-//   npm install @rubberduckharness/cli  # Just CLI
+//   npm install @kishkindhalabs/hanumate  # Everything
+//   npm install @kishkindhalabs/hanumate-runtime  # Just core (recommended)
+//   npm install @kishkindhalabs/hanumate-cli  # Just CLI
 //
 // This meta-package re-exports from all sub-packages.
 
-export * from '@rubberduckharness/runtime';
+export * from '@kishkindhalabs/hanumate-runtime';
 
 // CLI re-exports (optional)
-export { createCLI } from '@rubberduckharness/cli';
+export { createCLI } from '@kishkindhalabs/hanumate-cli';
 
 // SDK re-exports (optional)
-export * from '@rubberduckharness/sdk';
+export * from '@kishkindhalabs/hanumate-sdk';
 
 // OpenTelemetry re-exports (optional)
-export * from '@rubberduckharness/opentelemetry';
+export * from '@kishkindhalabs/hanumate-opentelemetry';

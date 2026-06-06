@@ -3,10 +3,10 @@
 	"version": "0.1.0",
 	"type": "module",
 	"bin": {
-		"duck": "./bin/duck.mjs"
+		"hanumate": "./bin/hanumate.mjs"
 	},
 	"scripts": {
-		"build": "tsdown && mv dist/index.mjs dist/duck.js",
+		"build": "tsdown && mv dist/index.mjs dist/hanumate.js",
 		"build:node": "tsx src/build/node.ts",
 		"build:cloudflare": "tsx src/build/cloudflare.ts",
 		"build:all": "npm run build:node && npm run build:cloudflare",

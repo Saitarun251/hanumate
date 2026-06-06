@@ -2,7 +2,7 @@
 	"name": "@kishkindhalabs/hanumate-opentelemetry",
 	"version": "0.1.0",
 	"type": "module",
-	"description": "OpenTelemetry setup helpers for RubberDuck",
+	"description": "OpenTelemetry setup helpers for Hanumate",
 	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"exports": {

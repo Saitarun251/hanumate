@@ -2,7 +2,7 @@
 	"name": "@kishkindhalabs/hanumate",
 	"version": "0.1.1",
 	"type": "module",
-	"description": "RubberDuck - TypeScript framework for building autonomous coding agents",
+	"description": "Hanumate - TypeScript framework for building autonomous coding agents",
 	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"exports": {
@@ -37,7 +37,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Saitarun251/rubberduck"
+		"url": "https://github.com/Saitarun251/hanumate"
 	},
 	"license": "MIT"
 }
