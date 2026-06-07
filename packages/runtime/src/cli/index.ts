@@ -1,7 +1,7 @@
 /**
- * CLI Module - Duck CLI command system
+ * CLI Module - Hanumate CLI command system
  *
- * Main entry point for the duck CLI tool.
+ * Main entry point for the hanumate CLI tool.
  * Provides command registration, argument parsing, and execution.
  */
 
@@ -86,9 +86,9 @@ export interface RuntimeConfig {
  * Default CLI configuration
  */
 const DEFAULT_CONFIG: CliConfig = {
-	name: 'duck',
+	name: 'hanumate',
 	version: '0.1.0',
-	bin: 'duck',
+	bin: 'hanumate',
 };
 
 /**
@@ -128,7 +128,7 @@ export function getVersion(): string {
  * Print usage/help text
  */
 export function printUsage(registry: CommandRegistry, config: CliConfig = DEFAULT_CONFIG): void {
-	const bin = config.bin ?? 'duck';
+	const bin = config.bin ?? 'hanumate';
 
 	console.log(`${config.name} v${config.version}`);
 	console.log('');
@@ -275,8 +275,8 @@ export async function run(
 // ============================================================================
 
 /**
- * Main entry point for the duck CLI
- * Called when running `duck` command directly
+ * Main entry point for the hanumate CLI
+ * Called when running `hanumate` command directly
  */
 if (import.meta.url === `file://${process.argv[1]}`) {
 	// Import and register all commands
@@ -287,9 +287,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 		const exitCode = await run(
 			process.argv.slice(2),
 			{
-				name: 'duck',
+				name: 'hanumate',
 				version: getVersion(),
-				bin: 'duck',
+				bin: 'hanumate',
 			},
 			registry
 		);

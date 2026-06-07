@@ -38,13 +38,13 @@ coverage/
 *.key
 
 # pnpm
-.pnpm-approve-builds.json.rubberduck/
-packages/*/.rubberduck/
+.pnpm-approve-builds.json.hanumate/
+packages/*/.hanumate/
 node_modules/
 dist/
 .vitepress/cache/
 .vitepress/dist/
 *.log
-packages/*/.rubberduck/
+packages/*/.hanumate/
 .hanumate/
 packages/*/.hanumate/

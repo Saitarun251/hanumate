@@ -4,7 +4,7 @@
  */
 
 import type { Logger, AgentTask, TaskResult } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { PRManager } from '../services/pr-manager.js';
 
 // GitHub API types
@@ -128,7 +128,7 @@ export interface ReviewResult {
 // ============================================
 
 export class ReviewerAgent {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private prManager: PRManager;
   private logger: Logger;
   private config: Required<ReviewerConfig>;
@@ -176,12 +176,12 @@ export class ReviewerAgent {
   ];
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     prManager: PRManager,
     config: ReviewerConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this.prManager = prManager;
     this.logger = logger || console;
 
@@ -232,7 +232,7 @@ export class ReviewerAgent {
       this.logger.info(`PR #${prNumber}: ${prData.additions} additions, ${prData.deletions} deletions, ${files.data.length} files`);
 
       // Check if already reviewed by this bot
-      const existingReview = reviews.data.find(r => r.user.login === 'rubberduck[bot]');
+      const existingReview = reviews.data.find(r => r.user.login === 'hanumate[bot]');
       if (existingReview) {
         this.logger.info(`Already reviewed by RubberDuck in PR #${prNumber}`);
         return {
@@ -312,9 +312,9 @@ export class ReviewerAgent {
   ): Promise<ReviewResult> {
     this.logger.info(`ReviewerAgent: PR #${prNumber} opened, starting review`);
 
-    // Add rubberduck label if not already present
+    // Add hanumate label if not already present
     if (octokit) {
-      await this.prManager.addLabels(owner, repo, prNumber, ['rubberduck-review']);
+      await this.prManager.addLabels(owner, repo, prNumber, ['hanumate-review']);
     }
 
     return this.reviewPR(owner, repo, prNumber, octokit);
@@ -331,10 +331,10 @@ export class ReviewerAgent {
   ): Promise<ReviewResult> {
     this.logger.info(`ReviewerAgent: PR #${prNumber} updated, re-reviewing`);
 
-    // Remove old rubberduck review if exists
+    // Remove old hanumate review if exists
     if (octokit) {
       const reviews = await octokit.rest.pulls.listReviews({ owner, repo, pull_number: prNumber });
-      const existingReview = reviews.data.find(r => r.user.login === 'rubberduck[bot]');
+      const existingReview = reviews.data.find(r => r.user.login === 'hanumate[bot]');
       // GitHub doesn't allow deleting reviews, but we can update
     }
 
@@ -727,12 +727,12 @@ export class ReviewerAgent {
 // ============================================
 
 export function createReviewerAgent(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   prManager: PRManager,
   config?: ReviewerConfig,
   logger?: Logger
 ): ReviewerAgent {
-  return new ReviewerAgent(rubberduck, prManager, config, logger);
+  return new ReviewerAgent(hanumate, prManager, config, logger);
 }
 
 // ============================================

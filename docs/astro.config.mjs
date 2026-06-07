@@ -6,7 +6,7 @@ export default {
 			title: 'RubberDuck',
 			tagline: 'The Agent Harness Framework',
 			social: {
-				github: 'https://github.com/rubberduck/rubberduck',
+				github: 'https://github.com/kishkindhalabs/hanumate',
 			},
 			sidebar: [
 				{

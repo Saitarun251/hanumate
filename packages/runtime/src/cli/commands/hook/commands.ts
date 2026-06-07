@@ -192,7 +192,7 @@ async function handleHookStats(
 export const hookListCommand: Command = {
 	name: 'hook list',
 	description: 'List all hooks or filter by status',
-	usage: 'duck hook list [--status <pending|active|completed|stalled>]',
+	usage: 'hanumate hook list [--status <pending|active|completed|stalled>]',
 	options: [
 		{
 			name: 'status',
@@ -209,7 +209,7 @@ export const hookListCommand: Command = {
 export const hookAssignCommand: Command = {
 	name: 'hook assign',
 	description: 'Assign a bead to an agent by creating a hook',
-	usage: 'duck hook assign --beadId <bead-id> --agentId <agent-id>',
+	usage: 'hanumate hook assign --beadId <bead-id> --agentId <agent-id>',
 	options: [
 		{
 			name: 'beadId',
@@ -233,7 +233,7 @@ export const hookAssignCommand: Command = {
 export const hookStatusCommand: Command = {
 	name: 'hook status',
 	description: 'Show detailed status of a hook',
-	usage: 'duck hook status --hookId <hook-id>',
+	usage: 'hanumate hook status --hookId <hook-id>',
 	options: [
 		{
 			name: 'hookId',
@@ -251,7 +251,7 @@ export const hookStatusCommand: Command = {
 export const hookStatsCommand: Command = {
 	name: 'hook stats',
 	description: 'Show hook statistics',
-	usage: 'duck hook stats',
+	usage: 'hanumate hook stats',
 	options: [],
 	handler: handleHookStats,
 };

@@ -1,5 +1,5 @@
 /**
- * CLI Integration Tests - Tests for the duck CLI command system
+ * CLI Integration Tests - Tests for the hanumate CLI command system
  *
  * Tests the core CLI functionality including:
  * - CLI entry point (run function)
@@ -37,9 +37,9 @@ const mockError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
 /** Default CLI configuration for tests */
 const TEST_CONFIG: CliConfig = {
-	name: 'duck',
+	name: 'hanumate',
 	version: '0.1.0',
-	bin: 'duck',
+	bin: 'hanumate',
 };
 
 /** Create a mock registry with sample commands */
@@ -271,7 +271,7 @@ describe('CLI run function', () => {
 			const exitCode = await run(['--version'], TEST_CONFIG, registry);
 			expect(exitCode).toBe(0);
 			const output = mockLog.mock.calls.join('\n');
-			expect(output).toContain('duck');
+			expect(output).toContain('hanumate');
 			expect(output).toContain('0.1.0');
 		});
 
@@ -447,7 +447,7 @@ describe('printUsage', () => {
 		const registry = createMockRegistry();
 		printUsage(registry, TEST_CONFIG);
 		const output = mockLog.mock.calls.join('\n');
-		expect(output).toContain('duck v0.1.0');
+		expect(output).toContain('hanumate v0.1.0');
 	});
 
 	it('should print usage instructions', () => {
@@ -455,7 +455,7 @@ describe('printUsage', () => {
 		printUsage(registry, TEST_CONFIG);
 		const output = mockLog.mock.calls.join('\n');
 		expect(output).toContain('Usage:');
-		expect(output).toContain('duck <command> [options]');
+		expect(output).toContain('hanumate <command> [options]');
 	});
 
 	it('should list registered commands', () => {
@@ -521,7 +521,7 @@ describe('printVersion', () => {
 	it('should print name and version', () => {
 		printVersion(TEST_CONFIG);
 		const output = mockLog.mock.calls.join('\n');
-		expect(output).toContain('duck');
+		expect(output).toContain('hanumate');
 		expect(output).toContain('0.1.0');
 	});
 
@@ -540,7 +540,7 @@ describe('printVersion', () => {
 		printVersion(TEST_CONFIG);
 		const output = mockLog.mock.calls.join('\n');
 		// It should contain the name and some version (from package.json)
-		expect(output).toContain('duck');
+		expect(output).toContain('hanumate');
 	});
 });
 
@@ -709,7 +709,7 @@ describe('Command type', () => {
 		const cmd: Command = {
 			name: 'test',
 			description: 'Test command',
-			usage: 'duck test [--option <value>]',
+			usage: 'hanumate test [--option <value>]',
 			options: [
 				{
 					name: 'option',
@@ -718,7 +718,7 @@ describe('Command type', () => {
 					required: true,
 				},
 			],
-			examples: ['duck test --option value'],
+			examples: ['hanumate test --option value'],
 			handler: async () => {},
 		};
 

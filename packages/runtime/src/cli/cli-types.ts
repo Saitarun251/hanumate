@@ -1,5 +1,5 @@
 /**
- * CLI Types - Type definitions for the duck CLI command system
+ * CLI Types - Type definitions for the hanumate CLI command system
  *
  * Provides a framework for registering and executing CLI commands
  * with support for options, help text, and global flags.
@@ -74,7 +74,7 @@ export interface Command {
 	name: string;
 	/** Short description of what the command does */
 	description: string;
-	/** Usage string (e.g., 'duck init <project-name>') */
+	/** Usage string (e.g., 'hanumate init <project-name>') */
 	usage?: string;
 	/** Array of options accepted by this command */
 	options?: Option[];

@@ -40,7 +40,7 @@ export interface RepoConfig {
   repo: string;
   enabled: boolean;
   triggers: {
-    /** Mention @rubberduck or specific bot username to trigger */
+    /** Mention @hanumate or specific bot username to trigger */
     mention?: boolean;
     /** Trigger on specific labels (configured below) */
     label?: boolean;
@@ -143,8 +143,8 @@ export interface TaskResult {
 // Service Types
 // ============================================
 
-export interface RubberDuckIntegration {
-  /** Submit a task to RubberDuck runtime */
+export interface HanumateIntegration {
+  /** Submit a task to Hanumate runtime */
   submitTask(task: AgentTask): Promise<TaskResult>;
   /** Get current status of a task */
   getTaskStatus(taskId: string): Promise<AgentTask['status']>;

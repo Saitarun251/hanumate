@@ -68,10 +68,10 @@ All notable changes to this project will be documented in this file.
 
 #### CLI (@kishkindhalabs/hanumate-cli)
 
-- `duck dev` - Start development server with WebSocket support
-- `duck run <workflow>` - Execute workflows from CLI
-- `duck build --target <node|cloudflare>` - Build for production
-- `duck connect <name> <id>` - Connect to agent instances
+- `hanumate dev` - Start development server with WebSocket support
+- `hanumate run <workflow>` - Execute workflows from CLI
+- `hanumate build --target <node|cloudflare>` - Build for production
+- `hanumate connect <name> <id>` - Connect to agent instances
 - HTTP endpoints:
   - `GET /` - Health check
   - `GET /agents/:name/:id` - Agent info

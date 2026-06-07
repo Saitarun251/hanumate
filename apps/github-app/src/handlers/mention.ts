@@ -4,7 +4,7 @@
  */
 
 import type { Logger, IssueCommentPayload } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 
 export interface MentionHandlerConfig {
@@ -34,22 +34,22 @@ interface Issue {
 }
 
 export class MentionHandler {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private _repoManager: RepoManager;
   private config: MentionHandlerConfig;
   private logger: Logger;
   private mentionCount: Map<string, number> = new Map();
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     config: MentionHandlerConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this._repoManager = repoManager;
     this.config = {
-      botUsernames: ['rubberduck', 'rubberduck[bot]'],
+      botUsernames: ['hanumate', 'hanumate[bot]'],
       rateLimitPerMinute: 20,
       respondInPRs: true,
       respondInIssues: true,
@@ -109,7 +109,7 @@ export class MentionHandler {
     }
 
     // Extract task from comment
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: isPR ? 'pr' : 'issue',
       trigger: 'mention',
       owner,
@@ -131,7 +131,7 @@ export class MentionHandler {
       priority: this.determinePriority(comment.body),
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
   }
 
   /**
@@ -161,7 +161,7 @@ export class MentionHandler {
 
     if (!mentionedBot) return;
 
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'pr',
       trigger: 'mention',
       owner,
@@ -175,7 +175,7 @@ export class MentionHandler {
       },
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
   }
 
   /**
@@ -256,10 +256,10 @@ I'll update this thread when the task is complete. Feel free to add more details
  * Factory function to create MentionHandler
  */
 export function createMentionHandler(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   config?: MentionHandlerConfig,
   logger?: Logger
 ): MentionHandler {
-  return new MentionHandler(rubberduck, repoManager, config, logger);
+  return new MentionHandler(hanumate, repoManager, config, logger);
 }

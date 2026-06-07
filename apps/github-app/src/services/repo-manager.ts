@@ -107,7 +107,7 @@ export class RepoManager implements RepoManagerService {
 
         // Check if the bot was assigned
         const assignees = (payload.assignees as Array<{ login: string }>) ?? [];
-        const botUsername = config.botUsername || 'rubberduck';
+        const botUsername = config.botUsername || 'hanumate';
         return assignees.some(a => a.login.toLowerCase() === botUsername.toLowerCase());
       }
 
@@ -194,7 +194,7 @@ export class RepoManager implements RepoManagerService {
         branchPattern: undefined,
         workflowDispatch: false,
       },
-      triggerLabels: ['needs-review', 'rubberduck'],
+      triggerLabels: ['needs-review', 'hanumate'],
       welcomeMessage: 'Hello! I am RubberDuck, your coding assistant. How can I help you today?',
       ...overrides,
     };

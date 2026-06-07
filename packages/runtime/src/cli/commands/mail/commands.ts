@@ -216,7 +216,7 @@ async function handleMailCount(
 export const mailSendCommand: Command = {
 	name: 'mail send',
 	description: 'Send a message to an agent',
-	usage: 'duck mail send --to <agent-id> --subject "<subject>" --body "<message>" [--from <agent-id>]',
+	usage: 'hanumate mail send --to <agent-id> --subject "<subject>" --body "<message>" [--from <agent-id>]',
 	options: [
 		{
 			name: 'to',
@@ -251,7 +251,7 @@ export const mailSendCommand: Command = {
 export const mailInboxCommand: Command = {
 	name: 'mail inbox',
 	description: 'List messages in the inbox',
-	usage: 'duck mail inbox --agentId <agent-id> [--from <sender>] [--subject <keyword>] [--includeRead <true|false>]',
+	usage: 'hanumate mail inbox --agentId <agent-id> [--from <sender>] [--subject <keyword>] [--includeRead <true|false>]',
 	options: [
 		{
 			name: 'agentId',
@@ -284,7 +284,7 @@ export const mailInboxCommand: Command = {
 export const mailReadCommand: Command = {
 	name: 'mail read',
 	description: 'Read a specific message',
-	usage: 'duck mail read --mailId <message-id> [--agentId <agent-id>]',
+	usage: 'hanumate mail read --mailId <message-id> [--agentId <agent-id>]',
 	options: [
 		{
 			name: 'mailId',
@@ -307,7 +307,7 @@ export const mailReadCommand: Command = {
 export const mailCountCommand: Command = {
 	name: 'mail count',
 	description: 'Count unread messages in inbox',
-	usage: 'duck mail count --agentId <agent-id>',
+	usage: 'hanumate mail count --agentId <agent-id>',
 	options: [
 		{
 			name: 'agentId',

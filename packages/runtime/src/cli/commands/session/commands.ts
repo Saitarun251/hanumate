@@ -231,7 +231,7 @@ async function handleSessionStats(
 export const sessionListCommand: Command = {
 	name: 'session list',
 	description: 'List all sessions',
-	usage: 'duck session list',
+	usage: 'hanumate session list',
 	options: [],
 	handler: handleSessionList,
 };
@@ -242,7 +242,7 @@ export const sessionListCommand: Command = {
 export const sessionShowCommand: Command = {
 	name: 'session show',
 	description: 'Show detailed information about a session',
-	usage: 'duck session show <session-id>',
+	usage: 'hanumate session show <session-id>',
 	options: [],
 	handler: handleSessionShow,
 };
@@ -253,7 +253,7 @@ export const sessionShowCommand: Command = {
 export const sessionStatsCommand: Command = {
 	name: 'session stats',
 	description: 'Show session statistics',
-	usage: 'duck session stats',
+	usage: 'hanumate session stats',
 	options: [],
 	handler: handleSessionStats,
 };

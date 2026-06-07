@@ -240,7 +240,7 @@ async function handleBeadReady(
 export const beadCreateCommand: Command = {
 	name: 'bead create',
 	description: 'Create a new bead',
-	usage: 'duck bead create <title> [--description "..."] [--type <type>] [--priority <priority>] [--tags <tags>] [--dependsOn <bead-ids>]',
+	usage: 'hanumate bead create <title> [--description "..."] [--type <type>] [--priority <priority>] [--tags <tags>] [--dependsOn <bead-ids>]',
 	options: [
 		{
 			name: 'description',
@@ -284,7 +284,7 @@ export const beadCreateCommand: Command = {
 export const beadListCommand: Command = {
 	name: 'bead list',
 	description: 'List beads with optional filtering',
-	usage: 'duck bead list [--status <status>] [--type <type>] [--priority <priority>] [--assignee <agent>] [--tags <tags>] [--sort <priority|created|updated>]',
+	usage: 'hanumate bead list [--status <status>] [--type <type>] [--priority <priority>] [--assignee <agent>] [--tags <tags>] [--sort <priority|created|updated>]',
 	options: [
 		{
 			name: 'status',
@@ -326,7 +326,7 @@ export const beadListCommand: Command = {
 export const beadShowCommand: Command = {
 	name: 'bead show',
 	description: 'Show detailed information about a bead',
-	usage: 'duck bead show <bead-id>',
+	usage: 'hanumate bead show <bead-id>',
 	options: [],
 	handler: handleBeadShow,
 };
@@ -337,7 +337,7 @@ export const beadShowCommand: Command = {
 export const beadUpdateCommand: Command = {
 	name: 'bead update',
 	description: 'Update bead properties',
-	usage: 'duck bead update <bead-id> [--title "..."] [--status <status>] [--priority <priority>]',
+	usage: 'hanumate bead update <bead-id> [--title "..."] [--status <status>] [--priority <priority>]',
 	options: [
 		{
 			name: 'title',
@@ -389,7 +389,7 @@ export const beadUpdateCommand: Command = {
 export const beadCloseCommand: Command = {
 	name: 'bead close',
 	description: 'Mark a bead as done/closed',
-	usage: 'duck bead close <bead-id>',
+	usage: 'hanumate bead close <bead-id>',
 	options: [],
 	handler: handleBeadClose,
 };
@@ -400,7 +400,7 @@ export const beadCloseCommand: Command = {
 export const beadReadyCommand: Command = {
 	name: 'bead ready',
 	description: 'Show beads ready to work (unblocked, not done)',
-	usage: 'duck bead ready',
+	usage: 'hanumate bead ready',
 	options: [],
 	handler: handleBeadReady,
 };

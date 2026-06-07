@@ -1,6 +1,6 @@
-# RubberDuck GitHub App Deployment Guide
+# Hanumate GitHub App Deployment Guide
 
-This guide walks you through deploying the RubberDuck GitHub App to test it on your repositories.
+This guide walks you through deploying the Hanumate GitHub App to test it on your repositories.
 
 ---
 
@@ -9,8 +9,8 @@ This guide walks you through deploying the RubberDuck GitHub App to test it on y
 1. Go to **GitHub Settings** → **Developer settings** → **GitHub Apps** → **New GitHub App**
 
 2. Fill in the required fields:
-   - **GitHub App name**: `RubberDuck-Test` (or any name you prefer)
-   - **Homepage URL**: `https://rubberduck.dev`
+   - **GitHub App name**: `Hanumate-Test` (or any name you prefer)
+   - **Homepage URL**: `https://hanumate.dev`
    - **Webhook URL**: `https://your-app-url.com/webhooks/github` (we'll update this later)
    - **Webhook secret**: Generate a random string (save this!)
 
@@ -53,7 +53,7 @@ This guide walks you through deploying the RubberDuck GitHub App to test it on y
 
 1. Clone and build:
    ```bash
-   cd rubberduck/apps/github-app
+   cd hanumate/apps/github-app
    npm install
    npm run build
    ```
@@ -91,7 +91,7 @@ This guide walks you through deploying the RubberDuck GitHub App to test it on y
 
 2. Deploy:
    ```bash
-   cd rubberduck/apps/github-app
+   cd hanumate/apps/github-app
    vercel
    ```
 
@@ -106,7 +106,7 @@ This guide walks you through deploying the RubberDuck GitHub App to test it on y
 
 1. Build the image:
    ```bash
-   docker build -t rubberduck-github-app rubberduck/apps/github-app
+   docker build -t hanumate-github-app hanumate/apps/github-app
    ```
 
 2. Run with environment variables:
@@ -115,7 +115,7 @@ This guide walks you through deploying the RubberDuck GitHub App to test it on y
      -e GITHUB_APP_ID=your_app_id \
      -e GITHUB_PRIVATE_KEY="$(cat your-key.pem)" \
      -e WEBHOOK_SECRET=your_secret \
-     rubberduck-github-app
+     hanumate-github-app
    ```
 
 ---
@@ -135,12 +135,12 @@ Create a test repository and try these interactions:
 
 ### Test 1: Issue Comment
 1. Open an issue in the test repo
-2. Comment: `@rubberduck help me with this`
+2. Comment: `@hanumate help me with this`
 3. The app should respond
 
 ### Test 2: PR Review
 1. Create a pull request
-2. Add label `rubberduck-dispatch`
+2. Add label `hanumate-dispatch`
 3. The app should trigger a review
 
 ### Test 3: Auto Reply

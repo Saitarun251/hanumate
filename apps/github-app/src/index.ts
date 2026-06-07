@@ -14,19 +14,19 @@ import 'dotenv/config';
 const logger = {
   debug: (msg: string, meta?: Record<string, unknown>) => {
     if (process.env.LOG_LEVEL !== 'silent') {
-      console.debug(JSON.stringify({ timestamp: new Date().toISOString(), level: 'debug', message: msg, service: 'rubberduck-github-app', ...meta }));
+      console.debug(JSON.stringify({ timestamp: new Date().toISOString(), level: 'debug', message: msg, service: 'hanumate-github-app', ...meta }));
     }
   },
   info: (msg: string, meta?: Record<string, unknown>) => {
     if (process.env.LOG_LEVEL !== 'silent') {
-      console.info(JSON.stringify({ timestamp: new Date().toISOString(), level: 'info', message: msg, service: 'rubberduck-github-app', ...meta }));
+      console.info(JSON.stringify({ timestamp: new Date().toISOString(), level: 'info', message: msg, service: 'hanumate-github-app', ...meta }));
     }
   },
   warn: (msg: string, meta?: Record<string, unknown>) => {
-    console.warn(JSON.stringify({ timestamp: new Date().toISOString(), level: 'warn', message: msg, service: 'rubberduck-github-app', ...meta }));
+    console.warn(JSON.stringify({ timestamp: new Date().toISOString(), level: 'warn', message: msg, service: 'hanumate-github-app', ...meta }));
   },
   error: (msg: string, meta?: Record<string, unknown>) => {
-    console.error(JSON.stringify({ timestamp: new Date().toISOString(), level: 'error', message: msg, service: 'rubberduck-github-app', ...meta }));
+    console.error(JSON.stringify({ timestamp: new Date().toISOString(), level: 'error', message: msg, service: 'hanumate-github-app', ...meta }));
   },
 };
 
@@ -67,7 +67,7 @@ async function main() {
     appId,
     privateKey,
     webhookSecret,
-    rubberduck: {
+    hanumate: {
       apiUrl: process.env.RUBBERDUCK_API_URL || 'http://localhost:3000',
       apiKey: process.env.RUBBERDUCK_API_KEY,
       defaultTimeout: parseInt(process.env.TASK_TIMEOUT || '300000', 10),
@@ -84,7 +84,7 @@ async function main() {
   // Health check
   hono.get('/health', (c) => c.json({
     status: 'ok',
-    service: 'rubberduck-github-app',
+    service: 'hanumate-github-app',
     timestamp: new Date().toISOString(),
     version: '1.0.0',
   }));

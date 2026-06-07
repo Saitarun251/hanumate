@@ -7,7 +7,7 @@ An AI assistant agent with MCP (Model Context Protocol) tool integration.
 This example demonstrates how to configure MCP servers when creating an agent:
 
 ```typescript
-import { createAgent, init } from '@rubberduck/runtime';
+import { createAgent, init } from '@kishkindhalabs/hanumate-runtime';
 
 async function main() {
 	// Create agent with MCP servers
@@ -85,7 +85,7 @@ Use `command` and `args` to spawn local MCP server processes:
 ## Usage
 
 ```bash
-duck dev
+hanumate dev
 ```
 
 ## Tool Naming

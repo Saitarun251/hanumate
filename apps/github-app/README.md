@@ -1,4 +1,4 @@
-# RubberDuck GitHub App
+# Hanumate GitHub App
 
 AI coding assistant GitHub App for autonomous coding agents.
 
@@ -40,8 +40,8 @@ AI coding assistant GitHub App for autonomous coding agents.
 1. Go to GitHub Settings > Developer settings > GitHub Apps
 2. Click "New GitHub App"
 3. Fill in the details:
-   - **GitHub App name**: RubberDuck (or your preferred name)
-   - **Homepage URL**: https://rubberduck.dev
+   - **GitHub App name**: Hanumate (or your preferred name)
+   - **Homepage URL**: https://hanumate.dev
    - **Webhook URL**: Your server URL (e.g., https://your-app.vercel.app)
    - **Webhook secret**: Generate a secure random string
 
@@ -61,8 +61,8 @@ AI coding assistant GitHub App for autonomous coding agents.
 | GITHUB_APP_ID | Yes | Your GitHub App ID |
 | GITHUB_PRIVATE_KEY | Yes | Private key content or path |
 | WEBHOOK_SECRET | Yes | Webhook secret for signature verification |
-| RUBBERDUCK_API_URL | No | RubberDuck API URL (default: http://localhost:3000) |
-| RUBBERDUCK_API_KEY | No | API key for RubberDuck |
+| HANUMATE_API_URL | No | Hanumate API URL (default: http://localhost:3000) |
+| HANUMATE_API_KEY | No | API key for Hanumate |
 | TASK_TIMEOUT | No | Task timeout in ms (default: 300000) |
 | PORT | No | Server port (default: 3000) |
 
@@ -112,10 +112,10 @@ npm run typecheck
 
 ```bash
 # Build image
-docker build -t rubberduck-github-app .
+docker build -t hanumate-github-app .
 
 # Run container
-docker run -p 3000:3000 --env-file .env rubberduck-github-app
+docker run -p 3000:3000 --env-file .env hanumate-github-app
 ```
 
 ## Registering the App
@@ -128,8 +128,8 @@ You can use the manifest.json to quickly create the GitHub App:
    gh api graphql -f query='
      mutation {
        createAppManifest(input: {
-         name: "RubberDuck",
-         url: "https://rubberduck.dev"
+name: "Hanumate",
+          url: "https://hanumate.dev"
        }) {
          manifest
          code
@@ -141,7 +141,7 @@ You can use the manifest.json to quickly create the GitHub App:
 ## Usage
 
 1. Install the app on your repositories
-2. Mention @rubberduck in issues or PRs
+2. Mention @hanumate in issues or PRs
 3. Add labels to trigger automated workflows
 4. The app will respond with AI-powered assistance
 

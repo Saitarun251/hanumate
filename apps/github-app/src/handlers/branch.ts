@@ -4,7 +4,7 @@
  */
 
 import type { Logger } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 
 export interface BranchHandlerConfig {
@@ -30,7 +30,7 @@ export interface BranchEventContext {
 }
 
 export class BranchHandler {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private _repoManager: RepoManager;
   private _config: BranchHandlerConfig;
   private logger: Logger;
@@ -50,12 +50,12 @@ export class BranchHandler {
   ]);
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     config: BranchHandlerConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this._repoManager = repoManager;
     this._config = config;
     this.logger = logger || console;
@@ -117,7 +117,7 @@ export class BranchHandler {
     const branchInfo = this.classifyBranch(branchName);
 
     // Create task for branch
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'branch',
       trigger: 'branch_pattern',
       owner,
@@ -136,7 +136,7 @@ export class BranchHandler {
       priority: branchInfo.priority,
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
 
     // Handle branch lifecycle events
     if (payload.before === '0000000000000000000000000000000000000000') {
@@ -186,7 +186,7 @@ export class BranchHandler {
     if (action === 'opened' || action === 'reopened') {
       this.logger.info(`PR opened from trigger branch: ${branchName}`);
 
-      const task = this.rubberduck.createTask({
+      const task = this.hanumate.createTask({
         type: 'pr',
         trigger: 'branch_pattern',
         owner,
@@ -204,7 +204,7 @@ export class BranchHandler {
         priority: this.classifyBranch(branchName).priority,
       });
 
-      await this.rubberduck.submitTask(task);
+      await this.hanumate.submitTask(task);
     }
   }
 
@@ -284,10 +284,10 @@ export class BranchHandler {
  * Factory function to create BranchHandler
  */
 export function createBranchHandler(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   config?: BranchHandlerConfig,
   logger?: Logger
 ): BranchHandler {
-  return new BranchHandler(rubberduck, repoManager, config, logger);
+  return new BranchHandler(hanumate, repoManager, config, logger);
 }

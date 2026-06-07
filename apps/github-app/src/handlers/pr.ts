@@ -4,7 +4,7 @@
  */
 
 import type { Logger, PREventPayload, PRReviewPayload } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 import type { PRManager } from '../services/pr-manager.js';
 
@@ -43,20 +43,20 @@ interface PRReview {
 }
 
 export class PRHandler {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private repoManager: RepoManager;
   private prManager: PRManager;
   private config: PRHandlerConfig;
   private logger: Logger;
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     prManager: PRManager,
     config: PRHandlerConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this.repoManager = repoManager;
     this.prManager = prManager;
     this.config = config;
@@ -137,7 +137,7 @@ export class PRHandler {
     const config = this.repoManager.getRepoConfig(owner, repo);
 
     // Create task for new PR
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'pr',
       trigger: 'label',
       owner,
@@ -152,17 +152,17 @@ export class PRHandler {
       priority: this.getPriorityFromLabels(pr.labels),
     });
 
-    const result = await this.rubberduck.submitTask(task);
+    const result = await this.hanumate.submitTask(task);
 
     // Auto-comment if enabled
     if (this.config.autoComment && result.success) {
-      const comment = this.rubberduck.buildTaskSummary(result, { ...task, createdAt: new Date() } as any);
+      const comment = this.hanumate.buildTaskSummary(result, { ...task, createdAt: new Date() } as any);
       await this.prManager.createComment(owner, repo, pr.number, comment);
     }
 
     // Auto-request review if enabled
     if (this.config.autoReviewRequest) {
-      const botUsername = config?.botUsername || 'rubberduck';
+      const botUsername = config?.botUsername || 'hanumate';
       await this.prManager.requestReviewers(owner, repo, pr.number, [botUsername]);
     }
   }
@@ -178,7 +178,7 @@ export class PRHandler {
   ): Promise<void> {
     this.logger.info(`PR reopened: ${owner}/${repo}#${pr.number}`);
 
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'pr',
       trigger: 'label',
       owner,
@@ -187,7 +187,7 @@ export class PRHandler {
       payload: { action: 'reopened', pr },
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
   }
 
   /**
@@ -201,7 +201,7 @@ export class PRHandler {
   ): Promise<void> {
     this.logger.info(`PR updated: ${owner}/${repo}#${pr.number}`);
 
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'pr',
       trigger: 'label',
       owner,
@@ -216,7 +216,7 @@ export class PRHandler {
       },
     });
 
-    const _result = await this.rubberduck.submitTask(task);
+    const _result = await this.hanumate.submitTask(task);
 
     // Post summary on sync if enabled
     if (this.config.postSummaryOnSync && pr.additions !== undefined && pr.deletions !== undefined) {
@@ -239,7 +239,7 @@ export class PRHandler {
   ): Promise<void> {
     this.logger.info(`PR ready for review: ${owner}/${repo}#${pr.number}`);
 
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'review',
       trigger: 'label',
       owner,
@@ -253,7 +253,7 @@ export class PRHandler {
       priority: 'high',
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
 
     // Add review label
     await this.prManager.addLabels(owner, repo, pr.number, ['in-review']);
@@ -300,7 +300,7 @@ export class PRHandler {
     _review: PRReview,
     _installationId: number
   ): Promise<void> {
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'pr',
       trigger: 'label',
       owner,
@@ -314,7 +314,7 @@ export class PRHandler {
       priority: 'high',
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
 
     // Add label indicating changes needed
     await this.prManager.addLabels(owner, repo, pr.number, ['changes-requested']);
@@ -358,11 +358,11 @@ export class PRHandler {
  * Factory function to create PRHandler
  */
 export function createPRHandler(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   prManager: PRManager,
   config?: PRHandlerConfig,
   logger?: Logger
 ): PRHandler {
-  return new PRHandler(rubberduck, repoManager, prManager, config, logger);
+  return new PRHandler(hanumate, repoManager, prManager, config, logger);
 }

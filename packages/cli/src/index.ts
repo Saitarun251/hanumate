@@ -57,7 +57,7 @@ export async function main() {
 function printHelp() {
 	console.log('Hanumate CLI v0.1.0');
 	console.log('');
-	console.log('Usage: duck <command> [options]');
+	console.log('Usage: hanumate <command> [options]');
 	console.log('');
 	console.log('Commands:');
 	console.log('  dev       Start development server (default port: 3583)');
@@ -73,9 +73,9 @@ function printHelp() {
 	console.log('  --help                      Show help');
 	console.log('');
 	console.log('Examples:');
-	console.log('  duck run my-workflow');
-	console.log('  duck run my-workflow --payload \'{"key": "value"}\'');
-	console.log('  duck dev --port 3000');
+	console.log('  hanumate run my-workflow');
+	console.log('  hanumate run my-workflow --payload \'{"key": "value"}\'');
+	console.log('  hanumate dev --port 3000');
 }
 
 /**
@@ -242,7 +242,7 @@ async function runDev(options: { target?: string; port?: string }) {
 
 async function runWorkflow(name: string | undefined, options: Record<string, unknown>) {
 	if (!name) {
-		console.error('Workflow name required: duck run <workflow-name>');
+		console.error('Workflow name required: hanumate run <workflow-name>');
 		process.exit(1);
 	}
 
@@ -255,7 +255,7 @@ async function runWorkflow(name: string | undefined, options: Record<string, unk
 	} catch (error) {
 		const errorMessage = error instanceof Error ? error.message : String(error);
 		console.error('Error:', errorMessage);
-		console.error('Usage: duck run <workflow-name> --payload \'{"key": "value"}\'');
+		console.error('Usage: hanumate run <workflow-name> --payload \'{"key": "value"}\'');
 		process.exit(1);
 	}
 
@@ -287,7 +287,7 @@ async function runBuildCmd(options: { target?: string }) {
 
 async function runConnect(agentName: string | undefined, agentId: string | undefined, _options: Record<string, unknown>) {
 	if (!agentName || !agentId) {
-		console.error('Usage: duck connect <agent-name> <agent-id>');
+		console.error('Usage: hanumate connect <agent-name> <agent-id>');
 		process.exit(1);
 	}
 	console.log('Connecting to agent: ' + agentName + '/' + agentId);

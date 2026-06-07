@@ -157,7 +157,7 @@ describe('Integration Scenarios', () => {
         const checkRun = event.payload.check_run;
 
         // Check if it's our check run
-        if (checkRun.name !== 'rubberduck/review') {
+        if (checkRun.name !== 'hanumate/review') {
           return { action: 'ignore', reason: 'Not our check run' };
         }
 
@@ -175,7 +175,7 @@ describe('Integration Scenarios', () => {
         payload: {
           check_run: {
             id: 123,
-            name: 'rubberduck/review',
+            name: 'hanumate/review',
             status: 'completed',
             conclusion: 'success',
           },

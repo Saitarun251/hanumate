@@ -1,5 +1,5 @@
 /**
- * CLI Tests - Tests for the duck CLI types module
+ * CLI Tests - Tests for the hanumate CLI types module
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -102,7 +102,7 @@ describe('Command type', () => {
 		const cmd: Command = {
 			name: 'test',
 			description: 'Test command',
-			usage: 'duck test [--option <value>]',
+			usage: 'hanumate test [--option <value>]',
 			options: [
 				{
 					name: 'option',
@@ -111,7 +111,7 @@ describe('Command type', () => {
 					required: true,
 				},
 			],
-			examples: ['duck test --option value'],
+			examples: ['hanumate test --option value'],
 			handler: async () => {},
 		};
 

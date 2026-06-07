@@ -223,7 +223,7 @@ async function handleServerStatus(
 export const serverStartCommand: Command = {
 	name: 'server start',
 	description: 'Start the HTTP server',
-	usage: 'duck server start [--port <port>] [--daemon]',
+	usage: 'hanumate server start [--port <port>] [--daemon]',
 	options: [
 		{
 			name: 'port',
@@ -239,9 +239,9 @@ export const serverStartCommand: Command = {
 		},
 	],
 	examples: [
-		'duck server start',
-		'duck server start --port 8080',
-		'duck server start --port 3000 --daemon',
+		'hanumate server start',
+		'hanumate server start --port 8080',
+		'hanumate server start --port 3000 --daemon',
 	],
 	handler: handleServerStart,
 };
@@ -252,7 +252,7 @@ export const serverStartCommand: Command = {
 export const serverStopCommand: Command = {
 	name: 'server stop',
 	description: 'Stop the HTTP server',
-	usage: 'duck server stop',
+	usage: 'hanumate server stop',
 	options: [],
 	handler: handleServerStop,
 };
@@ -263,7 +263,7 @@ export const serverStopCommand: Command = {
 export const serverStatusCommand: Command = {
 	name: 'server status',
 	description: 'Check server status',
-	usage: 'duck server status',
+	usage: 'hanumate server status',
 	options: [],
 	handler: handleServerStatus,
 };

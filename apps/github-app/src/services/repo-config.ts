@@ -15,7 +15,7 @@ import { randomUUID } from 'node:crypto';
 export interface RepoSettings {
   /** Repository full name (owner/repo) */
   repo: string;
-  /** Enable RubberDuck for this repo */
+  /** Enable Hanumate for this repo */
   enabled: boolean;
   /** Triggers */
   triggers: TriggerConfig;
@@ -418,7 +418,7 @@ class FileConfigStorage implements ConfigStorage {
         enabled: true,
         triggers: {
           enabled_repos: [],
-          trigger_labels: ['needs-review', 'rubberduck'],
+          trigger_labels: ['needs-review', 'hanumate'],
           trigger_mentions: true,
           trigger_branches: [],
         },
@@ -453,7 +453,7 @@ class GitHubConfigStorage implements ConfigStorage {
   constructor(
     repo: string,
     branch: string = 'main',
-    configPath: string = '.rubberduck/config.json',
+    configPath: string = '.hanumate/config.json',
     octokit?: any
   ) {
     this.repo = repo;
@@ -556,7 +556,7 @@ class GitHubConfigStorage implements ConfigStorage {
         enabled: true,
         triggers: {
           enabled_repos: [],
-          trigger_labels: ['needs-review', 'rubberduck'],
+          trigger_labels: ['needs-review', 'hanumate'],
           trigger_mentions: true,
           trigger_branches: [],
         },
@@ -929,7 +929,7 @@ export class RepoConfigService {
   private createStorage(options: ConfigStorageOptions): ConfigStorage {
     switch (options.type) {
       case 'file':
-        return new FileConfigStorage(options.filePath || '.rubberduck/repo-config.json');
+        return new FileConfigStorage(options.filePath || '.hanumate/repo-config.json');
       
       case 'github':
         return new GitHubConfigStorage(
@@ -971,7 +971,7 @@ export class RepoConfigService {
       enabled: true,
       triggers: {
         enabled_repos: [],
-        trigger_labels: ['needs-review', 'rubberduck'],
+        trigger_labels: ['needs-review', 'hanumate'],
         trigger_mentions: true,
         trigger_branches: [],
       },
@@ -1018,7 +1018,7 @@ export function createFileRepoConfigService(
   return new RepoConfigService({
     storage: {
       type: 'file',
-      filePath: filePath || '.rubberduck/repo-config.json',
+      filePath: filePath || '.hanumate/repo-config.json',
     },
     defaults,
   });
@@ -1039,7 +1039,7 @@ export function createGitHubRepoConfigService(
       type: 'github',
       githubRepo: repo,
       githubBranch: branch || 'main',
-      githubConfigPath: configPath || '.rubberduck/config.json',
+      githubConfigPath: configPath || '.hanumate/config.json',
     },
     defaults,
   });

@@ -210,7 +210,7 @@ async function handleRefineryShow(
 export const refineryListCommand: Command = {
 	name: 'refinery list',
 	description: 'List merge requests in the queue',
-	usage: 'duck refinery list [--status <status>]',
+	usage: 'hanumate refinery list [--status <status>]',
 	options: [
 		{
 			name: 'status',
@@ -227,7 +227,7 @@ export const refineryListCommand: Command = {
 export const refineryStatusCommand: Command = {
 	name: 'refinery status',
 	description: 'Show refinery status',
-	usage: 'duck refinery status',
+	usage: 'hanumate refinery status',
 	options: [],
 	handler: handleRefineryStatus,
 };
@@ -238,7 +238,7 @@ export const refineryStatusCommand: Command = {
 export const refineryEnqueueCommand: Command = {
 	name: 'refinery enqueue',
 	description: 'Add a merge request to the queue',
-	usage: 'duck refinery enqueue --branch <branch-name> --author <author> [--beadId <bead-id>] [--convoyId <convoy-id>]',
+	usage: 'hanumate refinery enqueue --branch <branch-name> --author <author> [--beadId <bead-id>] [--convoyId <convoy-id>]',
 	options: [
 		{
 			name: 'branch',
@@ -272,7 +272,7 @@ export const refineryEnqueueCommand: Command = {
 export const refineryShowCommand: Command = {
 	name: 'refinery show',
 	description: 'Show detailed information about a merge request',
-	usage: 'duck refinery show --mrId <merge-request-id>',
+	usage: 'hanumate refinery show --mrId <merge-request-id>',
 	options: [
 		{
 			name: 'mrId',

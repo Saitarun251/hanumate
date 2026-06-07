@@ -2,7 +2,7 @@
   "name": "RubberDuck",
   "description": "AI coding assistant GitHub App for autonomous coding agents",
   "version": "1.0.0",
-  "homepage_url": "https://rubberduck.dev",
+  "homepage_url": "https://hanumate.dev",
   "user_visible_features": [
     "AI-powered code review and assistance",
     "Automatic issue and PR handling",
@@ -10,11 +10,11 @@
     "Multi-repo support with per-repo configuration",
     "GitHub Actions integration"
   ],
-  "setup_url": "https://github.com/apps/rubberduck/installations/new",
-  "redirect_url": "https://rubberduck.dev/setup/complete",
+  "setup_url": "https://github.com/apps/hanumate/installations/new",
+  "redirect_url": "https://hanumate.dev/setup/complete",
   "callback_urls": [],
   "hook_attributes": {
-    "url": "https://api.rubberduck.dev/webhooks/github"
+    "url": "https://api.hanumate.dev/webhooks/github"
   },
   "permissions": {
     "repository": {

@@ -1,11 +1,11 @@
 /**
- * RubberDuck GitHub App
+ * Hanumate GitHub App
  * Main entry point with Probot/Octokit setup
  */
 
 import { Probot } from 'probot';
 import { createWebhookRouter, type WebhookRouterConfig } from './webhooks.js';
-import { createRubberDuckService, type RubberDuckConfig } from './services/rubberduck.js';
+import { createHanumateService, type HanumateConfig } from './services/hanumate.js';
 import { createRepoManager } from './services/repo-manager.js';
 import { createPRManager } from './services/pr-manager.js';
 import { createIssueHandler } from './handlers/issue.js';
@@ -26,7 +26,7 @@ const logger: Logger = {
         timestamp: new Date().toISOString(),
         level: 'debug',
         message: msg,
-        service: 'rubberduck-github-app',
+        service: 'hanumate-github-app',
         ...meta,
       };
       console.debug(JSON.stringify(entry));
@@ -38,7 +38,7 @@ const logger: Logger = {
         timestamp: new Date().toISOString(),
         level: 'info',
         message: msg,
-        service: 'rubberduck-github-app',
+        service: 'hanumate-github-app',
         ...meta,
       };
       console.info(JSON.stringify(entry));
@@ -49,7 +49,7 @@ const logger: Logger = {
       timestamp: new Date().toISOString(),
       level: 'warn',
       message: msg,
-      service: 'rubberduck-github-app',
+      service: 'hanumate-github-app',
       ...meta,
     };
     console.warn(JSON.stringify(entry));
@@ -59,7 +59,7 @@ const logger: Logger = {
       timestamp: new Date().toISOString(),
       level: 'error',
       message: msg,
-      service: 'rubberduck-github-app',
+      service: 'hanumate-github-app',
       ...meta,
     };
     console.error(JSON.stringify(entry));
@@ -74,8 +74,8 @@ export interface AppConfig {
   privateKey: string;
   /** Webhook secret */
   webhookSecret: string;
-  /** RubberDuck runtime configuration */
-  rubberduck?: Partial<RubberDuckConfig>;
+  /** Hanumate runtime configuration */
+  hanumate?: Partial<HanumateConfig>;
   /** Webhook router configuration */
   webhook?: WebhookRouterConfig;
   /** Development mode (skip verification) */
@@ -90,13 +90,13 @@ export function createApp(options: AppConfig): Probot {
     appId,
     privateKey,
     webhookSecret,
-    rubberduck: rubberduckConfig,
+    hanumate: hanumateConfig,
     webhook: webhookConfig,
     development = false,
   } = options;
 
   // Initialize services
-  const rubberduck = createRubberDuckService(rubberduckConfig);
+  const hanumate = createHanumateService(hanumateConfig);
   const repoManager = createRepoManager({}, logger);
   const webhookRouter = createWebhookRouter(webhookConfig, logger);
 
@@ -111,27 +111,27 @@ export function createApp(options: AppConfig): Probot {
   const prManagerFactory = (octokit: any) => createPRManager(octokit, {}, logger);
   let prManager = prManagerFactory(null as any); // Placeholder
 
-  const issueHandler = createIssueHandler(rubberduck, repoManager, {
+  const issueHandler = createIssueHandler(hanumate, repoManager, {
     autoReply: true,
   }, logger);
 
-  const prHandler = createPRHandler(rubberduck, repoManager, prManager, {
+  const prHandler = createPRHandler(hanumate, repoManager, prManager, {
     autoComment: true,
     postSummaryOnSync: true,
   }, logger);
 
-  const labelHandler = createLabelHandler(rubberduck, repoManager, prManager, {
+  const labelHandler = createLabelHandler(hanumate, repoManager, prManager, {
     autoRemoveTriggerLabel: false,
   }, logger);
 
-  const mentionHandler = createMentionHandler(rubberduck, repoManager, {
+  const mentionHandler = createMentionHandler(hanumate, repoManager, {
     rateLimitPerMinute: 30,
   }, logger);
 
-  const branchHandler = createBranchHandler(rubberduck, repoManager, {}, logger);
+  const branchHandler = createBranchHandler(hanumate, repoManager, {}, logger);
 
-  const actionsHandler = createActionsHandler(rubberduck, repoManager, {
-    triggerWorkflows: ['rubberduck-dispatch', 'ci', 'test'],
+  const actionsHandler = createActionsHandler(hanumate, repoManager, {
+    triggerWorkflows: ['hanumate-dispatch', 'ci', 'test'],
     createTaskOnFailure: true,
   }, logger);
 
@@ -297,10 +297,10 @@ export function createApp(options: AppConfig): Probot {
   // ============================================
 
   /**
-   * Get RubberDuck service instance
+   * Get Hanumate service instance
    */
-  function getRubberDuckService() {
-    return rubberduck;
+  function getHanumateService() {
+    return hanumate;
   }
 
   /**
@@ -318,15 +318,15 @@ export function createApp(options: AppConfig): Probot {
   }
 
   /**
-   * Submit a custom task to RubberDuck
+   * Submit a custom task to Hanumate
    */
   async function submitTask(task: Omit<AgentTask, 'id' | 'createdAt' | 'status'>): Promise<TaskResult> {
-    return rubberduck.submitTask(task as AgentTask);
+    return hanumate.submitTask(task as AgentTask);
   }
 
   // Return app with utility methods
   return Object.assign(app, {
-    getRubberDuckService,
+    getHanumateService,
     getRepoManager,
     getWebhookRouter,
     submitTask,

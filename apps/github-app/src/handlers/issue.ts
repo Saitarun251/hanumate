@@ -4,7 +4,7 @@
  */
 
 import type { Logger } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 
 export interface IssueHandlerConfig {
@@ -31,18 +31,18 @@ interface IssuePayload {
 }
 
 export class IssueHandler {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private repoManager: RepoManager;
   private config: IssueHandlerConfig;
   private logger: Logger;
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     config: IssueHandlerConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this.repoManager = repoManager;
     this.config = config;
     this.logger = logger || console;
@@ -121,7 +121,7 @@ export class IssueHandler {
     if (shouldTrigger) {
       this.logger.info(`Triggering on label: ${label.name}`);
 
-      const task = this.rubberduck.createTask({
+      const task = this.hanumate.createTask({
         type: 'issue',
         trigger: 'label',
         owner,
@@ -135,7 +135,7 @@ export class IssueHandler {
         priority: this.isHighPriorityLabel(label.name) ? 'high' : 'normal',
       });
 
-      await this.rubberduck.submitTask(task);
+      await this.hanumate.submitTask(task);
     }
   }
 
@@ -153,12 +153,12 @@ export class IssueHandler {
 
     // Check if it's assigned to a known bot user
     const config = this.repoManager.getRepoConfig(owner, repo);
-    const botUsername = config?.botUsername || 'rubberduck';
+    const botUsername = config?.botUsername || 'hanumate';
 
     if (assignee.login.toLowerCase() === botUsername.toLowerCase()) {
       this.logger.info(`Issue assigned to bot: ${owner}/${repo}#${issue.number}`);
 
-      const task = this.rubberduck.createTask({
+      const task = this.hanumate.createTask({
         type: 'issue',
         trigger: 'pr_assignment',
         owner,
@@ -168,7 +168,7 @@ export class IssueHandler {
         priority: 'normal',
       });
 
-      await this.rubberduck.submitTask(task);
+      await this.hanumate.submitTask(task);
     }
   }
 
@@ -183,7 +183,7 @@ export class IssueHandler {
   ): Promise<void> {
     this.logger.info(`Issue reopened: ${owner}/${repo}#${issue.number}`);
 
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'issue',
       trigger: 'label',
       owner,
@@ -193,7 +193,7 @@ export class IssueHandler {
       priority: 'normal',
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
   }
 
   /**
@@ -223,7 +223,7 @@ export class IssueHandler {
 To get started:
 - Describe what you're trying to accomplish
 - Share relevant code or error messages
-- Mention @rubberduck if you need immediate attention
+- Mention @hanumate if you need immediate attention
 
 I'll respond as soon as I can!`;
   }
@@ -241,10 +241,10 @@ I'll respond as soon as I can!`;
  * Factory function to create IssueHandler
  */
 export function createIssueHandler(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   config?: IssueHandlerConfig,
   logger?: Logger
 ): IssueHandler {
-  return new IssueHandler(rubberduck, repoManager, config, logger);
+  return new IssueHandler(hanumate, repoManager, config, logger);
 }

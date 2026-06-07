@@ -68,7 +68,7 @@ export class StructuredLogger {
 }
 
 // Create app-level logger
-export const logger = new StructuredLogger('rubberduck-github-app');
+export const logger = new StructuredLogger('hanumate-github-app');
 
 // Metrics helper
 export function logMetric(name: string, value: number, tags?: Record<string, string>): void {
@@ -79,7 +79,7 @@ export function logMetric(name: string, value: number, tags?: Record<string, str
       name,
       value,
       tags,
-      service: 'rubberduck-github-app',
+      service: 'hanumate-github-app',
     }));
   }
 }
@@ -89,7 +89,7 @@ export function createHealthHandler() {
   return {
     status: 'ok',
     timestamp: new Date().toISOString(),
-    service: 'rubberduck-github-app',
+    service: 'hanumate-github-app',
     version: process.env.npm_package_version || '1.0.0',
   };
 }

@@ -5,7 +5,7 @@
 
 import type { Logger } from '../types.js';
 import type { CheckRunPayload, CheckSuitePayload } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 
 export interface ActionsHandlerConfig {
@@ -47,21 +47,21 @@ interface WorkflowRun {
 }
 
 export class ActionsHandler {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private _repoManager: RepoManager;
   private config: ActionsHandlerConfig;
   private logger: Logger;
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     config: ActionsHandlerConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this._repoManager = repoManager;
     this.config = {
-      triggerWorkflows: ['rubberduck-dispatch', 'ci', 'test', 'review'],
+      triggerWorkflows: ['hanumate-dispatch', 'ci', 'test', 'review'],
       autoCommentOnCompletion: true,
       createTaskOnFailure: true,
       ...config,
@@ -193,8 +193,8 @@ export class ActionsHandler {
   ): Promise<void> {
     this.logger.info(`Check run created: ${checkRun.name}`);
 
-    // Could create a task to perform the check if it's a rubberduck check
-    if (checkRun.name.startsWith('rubberduck/')) {
+    // Could create a task to perform the check if it's a hanumate check
+    if (checkRun.name.startsWith('hanumate/')) {
       this.logger.debug(`RubberDuck check run initiated: ${checkRun.name}`);
     }
   }
@@ -235,7 +235,7 @@ export class ActionsHandler {
     this.logger.info(`Check run rerequested: ${checkRun.name}`);
 
     // Re-trigger the associated task
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'comment',
       trigger: 'workflow_dispatch',
       owner,
@@ -249,7 +249,7 @@ export class ActionsHandler {
       priority: 'normal',
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
   }
 
   /**
@@ -265,7 +265,7 @@ export class ActionsHandler {
       this.logger.warn(`Workflow job failed: ${job.name}`);
 
       if (this.config.createTaskOnFailure) {
-        const task = this.rubberduck.createTask({
+        const task = this.hanumate.createTask({
           type: 'comment',
           trigger: 'workflow_dispatch',
           owner,
@@ -280,7 +280,7 @@ export class ActionsHandler {
           priority: 'high',
         });
 
-        await this.rubberduck.submitTask(task);
+        await this.hanumate.submitTask(task);
       }
     }
   }
@@ -334,7 +334,7 @@ export class ActionsHandler {
     extraContext: { checkSuiteId?: number; checkRunName?: string; checkRunUrl?: string },
     installationId: number
   ): Promise<void> {
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: 'comment',
       trigger: 'workflow_dispatch',
       owner,
@@ -347,7 +347,7 @@ export class ActionsHandler {
       priority: 'high',
     });
 
-    await this.rubberduck.submitTask(task);
+    await this.hanumate.submitTask(task);
   }
 
   /**
@@ -375,10 +375,10 @@ export class ActionsHandler {
  * Factory function to create ActionsHandler
  */
 export function createActionsHandler(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   config?: ActionsHandlerConfig,
   logger?: Logger
 ): ActionsHandler {
-  return new ActionsHandler(rubberduck, repoManager, config, logger);
+  return new ActionsHandler(hanumate, repoManager, config, logger);
 }

@@ -1,10 +1,10 @@
 /**
  * GitHub App Coder Agent
- * Implements code changes for GitHub issues and PRs using RubberDuck runtime
+ * Implements code changes for GitHub issues and PRs using Hanumate runtime
  */
 
 import type { Logger, AgentTask, TaskResult } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 import type { PRManager } from '../services/pr-manager.js';
 
@@ -98,28 +98,28 @@ export interface PRResult {
 // ============================================
 
 export class CoderAgent {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private repoManager: RepoManager;
   private prManager: PRManager;
   private logger: Logger;
   private config: Required<CoderAgentConfig>;
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     prManager: PRManager,
     config: CoderAgentConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this.repoManager = repoManager;
     this.prManager = prManager;
     this.logger = logger || console;
 
     this.config = {
       defaultBranch: config.defaultBranch ?? 'main',
-      branchPrefix: config.branchPrefix ?? 'rubberduck/',
-      commitPrefix: config.commitPrefix ?? 'rubberduck',
+      branchPrefix: config.branchPrefix ?? 'hanumate/',
+      commitPrefix: config.commitPrefix ?? 'hanumate',
       autoRetry: config.autoRetry ?? true,
       maxRetries: config.maxRetries ?? 3,
       workingDir: config.workingDir ?? '/tmp/repos',
@@ -150,7 +150,7 @@ export class CoderAgent {
       const agentTask = this.createRubberDuckTask(task, context);
 
       // Submit to RubberDuck runtime
-      const result = await this.rubberduck.submitTask(agentTask);
+      const result = await this.hanumate.submitTask(agentTask);
 
       if (result.success) {
         // Post success comment
@@ -764,13 +764,13 @@ if (Array.isArray(response.data)) {
 // ============================================
 
 export function createCoderAgent(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   prManager: PRManager,
   config?: CoderAgentConfig,
   logger?: Logger
 ): CoderAgent {
-  return new CoderAgent(rubberduck, repoManager, prManager, config, logger);
+  return new CoderAgent(hanumate, repoManager, prManager, config, logger);
 }
 
 // ============================================

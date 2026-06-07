@@ -3,6 +3,6 @@
 	"type": "module",
 	"description": "Example showing orchestrator + subagent workflow pattern",
 	"scripts": {
-		"start": "duck dev"
+		"start": "hanumate dev"
 	}
 }

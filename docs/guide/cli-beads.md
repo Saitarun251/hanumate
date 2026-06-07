@@ -5,48 +5,48 @@ Beads are git-backed issues with unique IDs.
 ## Create Bead
 
 ```bash
-duck bead create --title="Add user auth" --type=feature --priority=P1
+hanumate bead create --title="Add user auth" --type=feature --priority=P1
 ```
 
 ## List Beads
 
 ```bash
 # All beads
-duck bead list
+hanumate bead list
 
 # Filter by status
-duck bead list --status=open
-duck bead list --status=in_progress
-duck bead list --status=closed
+hanumate bead list --status=open
+hanumate bead list --status=in_progress
+hanumate bead list --status=closed
 
 # Filter by type
-duck bead list --type=bug
-duck bead list --type=feature
+hanumate bead list --type=bug
+hanumate bead list --type=feature
 ```
 
 ## Show Bead
 
 ```bash
-duck bead show rd-xyz789
+hanumate bead show rd-xyz789
 ```
 
 ## Update Bead
 
 ```bash
 # Update status
-duck bead update rd-xyz789 --status=in_progress
+hanumate bead update rd-xyz789 --status=in_progress
 
 # Update priority
-duck bead update rd-xyz789 --priority=P2
+hanumate bead update rd-xyz789 --priority=P2
 
 # Add description
-duck bead update rd-xyz789 --description="Added OAuth support"
+hanumate bead update rd-xyz789 --description="Added OAuth support"
 ```
 
 ## Close Bead
 
 ```bash
-duck bead close rd-xyz789
+hanumate bead close rd-xyz789
 ```
 
 ## Bead Properties
@@ -67,8 +67,8 @@ Bead IDs are globally unique and referenced across CLI commands:
 
 ```bash
 # Add to convoy
-duck convoy add cv-abc123 rd-xyz789
+hanumate convoy add cv-abc123 rd-xyz789
 
 # Link to hook
-duck hook link hk-abc123 rd-xyz789
+hanumate hook link hk-abc123 rd-xyz789
 ```

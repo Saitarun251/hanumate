@@ -258,7 +258,7 @@ describe('Reviewer Agent', () => {
           success: true,
           checkRunId: `check-${Date.now()}`,
           status: 'in_progress',
-          name: 'rubberduck/review',
+          name: 'hanumate/review',
           headSha: context.headSha,
         };
       });
@@ -271,7 +271,7 @@ describe('Reviewer Agent', () => {
 
       expect(result.success).toBe(true);
       expect(result.status).toBe('in_progress');
-      expect(result.name).toBe('rubberduck/review');
+      expect(result.name).toBe('hanumate/review');
     });
 
     it('should update check run with results', async () => {

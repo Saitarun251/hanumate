@@ -235,7 +235,7 @@ async function handleConvoyShow(
 export const convoyCreateCommand: Command = {
 	name: 'convoy create',
 	description: 'Create a new convoy',
-	usage: 'duck convoy create <name> [--beads <bead-ids>] [--notify <agent-ids>]',
+	usage: 'hanumate convoy create <name> [--beads <bead-ids>] [--notify <agent-ids>]',
 	options: [
 		{
 			name: 'beads',
@@ -257,7 +257,7 @@ export const convoyCreateCommand: Command = {
 export const convoyListCommand: Command = {
 	name: 'convoy list',
 	description: 'List convoys with optional filtering',
-	usage: 'duck convoy list [--status <status>] [--createdBy <agent>] [--beadId <bead-id>]',
+	usage: 'hanumate convoy list [--status <status>] [--createdBy <agent>] [--beadId <bead-id>]',
 	options: [
 		{
 			name: 'status',
@@ -284,7 +284,7 @@ export const convoyListCommand: Command = {
 export const convoyAddCommand: Command = {
 	name: 'convoy add',
 	description: 'Add beads to a convoy',
-	usage: 'duck convoy add --convoyId <convoy-id> --beads <bead-ids>',
+	usage: 'hanumate convoy add --convoyId <convoy-id> --beads <bead-ids>',
 	options: [
 		{
 			name: 'convoyId',
@@ -308,7 +308,7 @@ export const convoyAddCommand: Command = {
 export const convoyLandCommand: Command = {
 	name: 'convoy land',
 	description: 'Land a convoy (mark as landed)',
-	usage: 'duck convoy land --convoyId <convoy-id>',
+	usage: 'hanumate convoy land --convoyId <convoy-id>',
 	options: [
 		{
 			name: 'convoyId',
@@ -326,7 +326,7 @@ export const convoyLandCommand: Command = {
 export const convoyShowCommand: Command = {
 	name: 'convoy show',
 	description: 'Show detailed information about a convoy',
-	usage: 'duck convoy show <convoy-id>',
+	usage: 'hanumate convoy show <convoy-id>',
 	options: [],
 	handler: handleConvoyShow,
 };

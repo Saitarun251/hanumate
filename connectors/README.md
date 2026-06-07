@@ -10,5 +10,5 @@ Available connectors:
 ## Installing a Connector
 
 ```bash
-duck add <connector-name> | <coding-agent>
+hanumate add <connector-name> | <coding-agent>
 ```

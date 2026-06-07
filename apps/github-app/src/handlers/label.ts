@@ -4,7 +4,7 @@
  */
 
 import type { Logger } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 import type { PRManager } from '../services/pr-manager.js';
 
@@ -27,20 +27,20 @@ interface LabelEventPayload {
 }
 
 export class LabelHandler {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private repoManager: RepoManager;
   private prManager: PRManager;
   private config: LabelHandlerConfig;
   private logger: Logger;
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     prManager: PRManager,
     config: LabelHandlerConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this.repoManager = repoManager;
     this.prManager = prManager;
     this.config = config;
@@ -103,7 +103,7 @@ export class LabelHandler {
     this.logger.info(`Trigger label detected: ${labelName}, creating ${taskType} task`);
 
     // Create task based on whether this is an issue or PR
-    const task = this.rubberduck.createTask({
+    const task = this.hanumate.createTask({
       type: taskType,
       trigger: 'label',
       owner,
@@ -120,7 +120,7 @@ export class LabelHandler {
       priority: this.getPriorityFromLabel(labelName),
     });
 
-    const result = await this.rubberduck.submitTask(task);
+    const result = await this.hanumate.submitTask(task);
 
     // Auto-remove trigger label if configured
     if (this.config.autoRemoveTriggerLabel && result.success) {
@@ -184,7 +184,7 @@ export class LabelHandler {
    */
   private isDefaultTriggerLabel(labelName: string): boolean {
     const defaultTriggers = [
-      'rubberduck',
+      'hanumate',
       'needs-review',
       'needs-help',
       'help-wanted',
@@ -199,11 +199,11 @@ export class LabelHandler {
  * Factory function to create LabelHandler
  */
 export function createLabelHandler(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   prManager: PRManager,
   config?: LabelHandlerConfig,
   logger?: Logger
 ): LabelHandler {
-  return new LabelHandler(rubberduck, repoManager, prManager, config, logger);
+  return new LabelHandler(hanumate, repoManager, prManager, config, logger);
 }

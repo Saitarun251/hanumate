@@ -148,7 +148,7 @@ console.log(response);
 npm run dev
 
 # Or use the CLI
-npx duck dev
+npx hanumate dev
 ```
 
 ### Interactive Session
@@ -722,60 +722,60 @@ Run agents from the command line.
 
 ```bash
 # Agent Management
-duck dev                          # Start development mode
-duck status                        # Check agent status
-duck init my-agent                # Initialize a new agent project
+hanumate dev                          # Start development mode
+hanumate status                        # Check agent status
+hanumate init my-agent                # Initialize a new agent project
 
 # Work Management (Hook System)
-duck hook list                    # List all hooks
-duck hook assign <bead-id> <agent> # Assign work to agent
-duck hook status <agent-id>       # Check agent's hook status
-duck hook unassign <hook-id>      # Remove hook from queue
+hanumate hook list                    # List all hooks
+hanumate hook assign <bead-id> <agent> # Assign work to agent
+hanumate hook status <agent-id>       # Check agent's hook status
+hanumate hook unassign <hook-id>      # Remove hook from queue
 
 # Issue Tracking (Beads)
-duck bead create --title="Fix bug" --type=bug --priority=P1
-duck bead list --status=open
-duck bead show rd-abc12
-duck bead update rd-abc12 --status=in_progress
-duck bead close rd-abc12
-duck bead ready                   # Show unblocked work
+hanumate bead create --title="Fix bug" --type=bug --priority=P1
+hanumate bead list --status=open
+hanumate bead show rd-abc12
+hanumate bead update rd-abc12 --status=in_progress
+hanumate bead close rd-abc12
+hanumate bead ready                   # Show unblocked work
 
 # Work Bundling (Convoys)
-duck convoy create "Feature X" rd-abc12 rd-def34
-duck convoy list
-duck convoy show cv-abc12
-duck convoy add cv-abc12 rd-ghi56
-duck convoy land cv-abc12
+hanumate convoy create "Feature X" rd-abc12 rd-def34
+hanumate convoy list
+hanumate convoy show cv-abc12
+hanumate convoy add cv-abc12 rd-ghi56
+hanumate convoy land cv-abc12
 
 # Messaging (Mail)
-duck mail send <agent-id> -s "Subject" -m "Message"
-duck mail inbox
-duck mail read <mail-id>
+hanumate mail send <agent-id> -s "Subject" -m "Message"
+hanumate mail inbox
+hanumate mail read <mail-id>
 
 # Merge Queue (Refinery)
-duck refinery list
-duck refinery status
-duck refinery enqueue <branch>
-duck refinery show <mr-id>
+hanumate refinery list
+hanumate refinery status
+hanumate refinery enqueue <branch>
+hanumate refinery show <mr-id>
 
 # Session Management
-duck session list
-duck session show <session-id>
-duck session stats
+hanumate session list
+hanumate session show <session-id>
+hanumate session stats
 
 # Server Mode (HTTP/WebSocket)
-duck server start [--port 3000] [--daemon]
-duck server stop
-duck server status
+hanumate server start [--port 3000] [--daemon]
+hanumate server stop
+hanumate server status
 
 # Skills
-duck skills list
-duck skill run code-review --file ./src/index.ts
+hanumate skills list
+hanumate skill run code-review --file ./src/index.ts
 ```
 
 ### Configuration
 
-Create `duck.config.js`:
+Create `hanumate.config.js`:
 
 ```js
 export default {

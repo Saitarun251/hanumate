@@ -231,7 +231,7 @@ describe('Webhook Handlers', () => {
           action: 'requested',
           check_run: {
             id: 789,
-            name: 'rubberduck-review',
+            name: 'hanumate-review',
             status: 'queued',
           },
           repository: {
@@ -251,7 +251,7 @@ describe('Webhook Handlers', () => {
       const result = await handleCheckRun(event);
       
       expect(result.action).toBe('check_run_requested');
-      expect(result.checkName).toBe('rubberduck-review');
+      expect(result.checkName).toBe('hanumate-review');
       expect(result.status).toBe('queued');
     });
   });

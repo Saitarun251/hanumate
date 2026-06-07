@@ -4,7 +4,7 @@
  */
 
 import type { Logger, AgentTask, TaskResult } from '../types.js';
-import type { RubberDuckService } from '../services/rubberduck.js';
+import type { HanumateService } from '../services/hanumate.js';
 import type { RepoManager } from '../services/repo-manager.js';
 import type { PRManager } from '../services/pr-manager.js';
 
@@ -98,7 +98,7 @@ interface PullRequest {
 // ============================================
 
 export class OrchestratorAgent {
-  private rubberduck: RubberDuckService;
+  private hanumate: HanumateService;
   private repoManager: RepoManager;
   private prManager: PRManager;
   private logger: Logger;
@@ -107,13 +107,13 @@ export class OrchestratorAgent {
   private pendingTasks: Map<string, AgentTask> = new Map();
 
   constructor(
-    rubberduck: RubberDuckService,
+    hanumate: HanumateService,
     repoManager: RepoManager,
     prManager: PRManager,
     config: OrchestratorConfig = {},
     logger?: Logger
   ) {
-    this.rubberduck = rubberduck;
+    this.hanumate = hanumate;
     this.repoManager = repoManager;
     this.prManager = prManager;
     this.logger = logger || console;
@@ -344,7 +344,7 @@ export class OrchestratorAgent {
       this.pendingTasks.set(task.id, agentTask);
 
       // Submit to RubberDuck
-      const result = await this.rubberduck.submitTask(agentTask);
+      const result = await this.hanumate.submitTask(agentTask);
 
       // Update task status based on result
       task.status = result.success ? 'completed' : 'failed';
@@ -478,7 +478,7 @@ export class OrchestratorAgent {
       // Notify the agent to rollback
       // In a real implementation, this would involve reverting code changes
       const rollbackTask = this.createRollbackTask(task);
-      await this.rubberduck.submitTask(rollbackTask);
+      await this.hanumate.submitTask(rollbackTask);
 
       task.status = 'rolled_back';
       rollbackEntry.success = true;
@@ -736,11 +736,11 @@ Please review the changes and let me know if you have any feedback!`;
 // ============================================
 
 export function createOrchestratorAgent(
-  rubberduck: RubberDuckService,
+  hanumate: HanumateService,
   repoManager: RepoManager,
   prManager: PRManager,
   config?: OrchestratorConfig,
   logger?: Logger
 ): OrchestratorAgent {
-  return new OrchestratorAgent(rubberduck, repoManager, prManager, config, logger);
+  return new OrchestratorAgent(hanumate, repoManager, prManager, config, logger);
 }

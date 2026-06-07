@@ -6,43 +6,43 @@ Convoys bundle related beads together for coordinated delivery.
 
 ```bash
 # Create with beads
-duck convoy create "User Authentication" rd-abc123 rd-def456
+hanumate convoy create "User Authentication" rd-abc123 rd-def456
 
 # Create empty
-duck convoy create "New Feature"
+hanumate convoy create "New Feature"
 ```
 
 ## List Convoys
 
 ```bash
-duck convoy list
+hanumate convoy list
 
 # Filter by status
-duck convoy list --status=pending
-duck convoy list --status=testing
-duck convoy list --status=landed
+hanumate convoy list --status=pending
+hanumate convoy list --status=testing
+hanumate convoy list --status=landed
 ```
 
 ## Show Convoy
 
 ```bash
-duck convoy show cv-xyz789
+hanumate convoy show cv-xyz789
 ```
 
 ## Add Beads
 
 ```bash
 # Add single bead
-duck convoy add cv-xyz789 rd-ghi123
+hanumate convoy add cv-xyz789 rd-ghi123
 
 # Add multiple
-duck convoy add cv-xyz789 rd-jkl456 rd-mno789
+hanumate convoy add cv-xyz789 rd-jkl456 rd-mno789
 ```
 
 ## Remove Bead
 
 ```bash
-duck convoy remove cv-xyz789 rd-ghi123
+hanumate convoy remove cv-xyz789 rd-ghi123
 ```
 
 ## Land Convoy
@@ -50,7 +50,7 @@ duck convoy remove cv-xyz789 rd-ghi123
 Landing a convoy merges all its beads:
 
 ```bash
-duck convoy land cv-xyz789
+hanumate convoy land cv-xyz789
 ```
 
 ## Convoy Properties
@@ -72,9 +72,9 @@ duck convoy land cv-xyz789
 
 ```bash
 # Example workflow
-duck bead create --title="Add login page"
-duck bead create --title="Add auth API"
-duck convoy create "User Auth" rd-abc123 rd-def456
+hanumate bead create --title="Add login page"
+hanumate bead create --title="Add auth API"
+hanumate convoy create "User Auth" rd-abc123 rd-def456
 # ... work on beads ...
-duck convoy land cv-xyz789
+hanumate convoy land cv-xyz789
 ```

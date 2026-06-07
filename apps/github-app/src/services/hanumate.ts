@@ -1,12 +1,12 @@
 /**
- * RubberDuck Runtime Integration Service
- * Handles communication between GitHub App and RubberDuck runtime
+ * Hanumate Runtime Integration Service
+ * Handles communication between GitHub App and Hanumate runtime
  */
 
-import type { AgentTask, TaskResult, RubberDuckIntegration } from '../types.js';
+import type { AgentTask, TaskResult, HanumateIntegration } from '../types.js';
 import { MiniMaxService, createMiniMaxService } from './llm.js';
 
-export interface RubberDuckConfig {
+export interface HanumateConfig {
   /** Runtime API endpoint */
   apiUrl: string;
   /** API key for authentication */
@@ -17,13 +17,13 @@ export interface RubberDuckConfig {
   maxRetries: number;
 }
 
-export class RubberDuckService implements RubberDuckIntegration {
-  private _config: RubberDuckConfig;
+export class HanumateService implements HanumateIntegration {
+  private _config: HanumateConfig;
   private tasks: Map<string, AgentTask> = new Map();
   private results: Map<string, TaskResult> = new Map();
   private llm: MiniMaxService;
 
-  constructor(config: RubberDuckConfig) {
+  constructor(config: HanumateConfig) {
     this._config = {
       defaultTimeout: config.defaultTimeout || 300000,
       maxRetries: config.maxRetries || 3,
@@ -34,7 +34,7 @@ export class RubberDuckService implements RubberDuckIntegration {
   }
 
   /**
-   * Submit a new task to the RubberDuck runtime
+   * Submit a new task to the Hanumate runtime
    */
   async submitTask(task: AgentTask): Promise<TaskResult> {
     const taskKey = `${task.repository.fullName}:${task.id}`;
@@ -155,7 +155,7 @@ export class RubberDuckService implements RubberDuckIntegration {
    */
   buildTaskSummary(result: TaskResult, task: AgentTask): string {
     const lines: string[] = [
-      '## 🦆 RubberDuck Response',
+      '## 🤖 Hanumate Response',
       '',
       result.message || 'Task completed.',
     ];
@@ -174,13 +174,13 @@ export class RubberDuckService implements RubberDuckIntegration {
       lines.push('', `❌ Error: ${result.error}`);
     }
 
-    lines.push('', '---', '*Powered by RubberDuck Framework + MiniMax*');
+    lines.push('', '---', '*Powered by Hanumate Framework + MiniMax*');
 
     return lines.join('\n');
   }
 
   /**
-   * Process task via RubberDuck Runtime (full framework)
+   * Process task via Hanumate Runtime (full framework)
    */
   private async processTask(task: AgentTask): Promise<{
     success: boolean;
@@ -195,16 +195,16 @@ export class RubberDuckService implements RubberDuckIntegration {
     console.log(JSON.stringify({
       timestamp: new Date().toISOString(),
       level: 'info',
-      message: `Processing task ${task.id} via RubberDuck Runtime`,
-      service: 'rubberduck-github-app',
+      message: `Processing task ${task.id} via Hanumate Runtime`,
+      service: 'hanumate-github-app',
       taskType: task.type,
       trigger: task.trigger,
       repo: task.repository.fullName,
     }));
 
     try {
-      // Call RubberDuck Runtime Server (full framework)
-      const runtimeUrl = process.env.RUBBERDUCK_RUNTIME_URL || 'http://localhost:3001';
+      // Call Hanumate Runtime Server (full framework)
+      const runtimeUrl = process.env.HANUMATE_RUNTIME_URL || 'http://localhost:3001';
       const response = await fetch(`${runtimeUrl}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -240,7 +240,7 @@ export class RubberDuckService implements RubberDuckIntegration {
         success: result.success,
         message: result.message || result.result,
         artifacts: result.artifacts || {
-          summary: `Processed via RubberDuck Runtime for ${task.repository.fullName}`,
+          summary: `Processed via Hanumate Runtime for ${task.repository.fullName}`,
         },
       };
     } catch (error) {
@@ -270,12 +270,12 @@ export class RubberDuckService implements RubberDuckIntegration {
 }
 
 /**
- * Factory function to create RubberDuck service
+ * Factory function to create Hanumate service
  */
-export function createRubberDuckService(config?: Partial<RubberDuckConfig>): RubberDuckService {
-  return new RubberDuckService({
-    apiUrl: config?.apiUrl || process.env.RUBBERDUCK_API_URL || 'http://localhost:3000',
-    apiKey: config?.apiKey || process.env.RUBBERDUCK_API_KEY,
+export function createHanumateService(config?: Partial<HanumateConfig>): HanumateService {
+  return new HanumateService({
+    apiUrl: config?.apiUrl || process.env.HANUMATE_API_URL || 'http://localhost:3000',
+    apiKey: config?.apiKey || process.env.HANUMATE_API_KEY,
     defaultTimeout: config?.defaultTimeout || 300000,
     maxRetries: config?.maxRetries || 3,
   });

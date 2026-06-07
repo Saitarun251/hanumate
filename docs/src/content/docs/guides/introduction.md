@@ -49,7 +49,7 @@ export async function run({ init: initFn, payload }: any) {
 ### Development Server
 
 ```bash
-duck dev --port 3000
+hanumate dev --port 3000
 ```
 
 Starts the Hanumate development server with WebSocket support.
@@ -57,7 +57,7 @@ Starts the Hanumate development server with WebSocket support.
 ### Workflow Execution
 
 ```bash
-duck run my-workflow --payload '{"key": "value"}'
+hanumate run my-workflow --payload '{"key": "value"}'
 ```
 
 Execute a workflow from the command line.
@@ -65,8 +65,8 @@ Execute a workflow from the command line.
 ### Production Build
 
 ```bash
-duck build --target node
-duck build --target cloudflare
+hanumate build --target node
+hanumate build --target cloudflare
 ```
 
 Build for Node.js or Cloudflare Workers.
